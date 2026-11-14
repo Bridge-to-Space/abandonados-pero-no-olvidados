@@ -3,29 +3,45 @@
    MOTOR DEL JUEGO
 ========================================= */
 const SAVE_KEY = "spirit_abandonados_save";
-let gameState = {
-    sceneIndex: 0,
-    energy: 70,
-    science: 20,
-    exploration: 20,
-    condition: 100,
-    trapped: false,
-    wheelFailure: false,
-    dustStorm: false,
-    winter: false,
-    choiceMade: false,
-    gameOver: false,
-    landingStarted: false,
-    landingComplete: false
+
+/* Fuente principal de los datos históricos (NASA Science). */
+const NASA_SPIRIT = {
+    label: "NASA Science — Spirit (MER-A)",
+    url: "https://science.nasa.gov/mission/mer-spirit/"
 };
 
+function createInitialState() {
+    return {
+        sceneIndex: 0,
+        energy: 70,
+        science: 20,
+        exploration: 20,
+        condition: 100,
+        trapped: false,
+        wheelFailure: false,
+        dustStorm: false,
+        winter: false,
+        choiceMade: false,
+        gameOver: false,
+        landing: null,
+        guide: null
+    };
+}
+
+let gameState = createInitialState();
+
+/*
+   Los números de sol se calcularon a partir de las fechas de la ficha
+   de investigación (sol 1 = 4 de enero de 2004 UTC, 1 sol ≈ 1.0275 días).
+*/
 const scenes = [
     {
-        sol: 1,
-        label: "2003 / PREPARACIÓN",
+        sol: null,
+        label: "10 JUNIO 2003 / LANZAMIENTO",
         title: "Spirit: rumbo a Marte",
-        text: "Después de años de desarrollo, Spirit está listo para comenzar su viaje hacia Marte.",
-        history: "Spirit fue lanzado el 10 de junio de 2003 y llegó a Marte el 4 de enero de 2004.",
+        text: "¡Hola! Soy Roverchito y hoy te voy a contar la historia de Spirit, un rover que viajó hasta Marte. Estamos en 2003: tras años de trabajo, está listo para despegar. Antes de irnos, ¿qué hacemos?",
+        history: "Spirit fue lanzado el 10 de junio de 2003. Su misión: explorar la superficie de Marte, estudiar distintos tipos de rocas y suelos, y buscar indicios de actividad del agua en el pasado.",
+        source: NASA_SPIRIT,
         choices: [
             {
                 text: "Preparar los sistemas para el viaje",
@@ -43,16 +59,16 @@ const scenes = [
     },
     {
         sol: 1,
-        label: "4 ENERO 2004 / ATERRIZAJE",
+        label: "3 ENERO 2004 / ATERRIZAJE",
         title: "Spirit llega a Marte",
-        text: "Después de meses de viaje, Spirit entra en la atmósfera marciana. Todo depende de una secuencia automática.",
-        history: "Spirit aterrizó en el cráter Gusev el 4 de enero de 2004.",
+        text: "¡Siete meses después, llegamos! Spirit entra en la atmósfera de Marte a toda velocidad. Para aterrizar entero en el cráter Gusev necesito tu ayuda: paracaídas, bolsas de aire y retrocohetes, cada uno en el momento exacto. ¿Listo?",
+        history: "Spirit aterrizó en el cráter Gusev el 3 de enero de 2004 (hora de EE. UU.; 4 de enero en tiempo universal), en la zona llamada Estación Memorial Columbia. Tocó la superficie envuelto en bolsas de aire que rebotaron hasta detenerse.",
+        source: NASA_SPIRIT,
+        landing: true,
         choices: [
             {
-                text: "Esperar la confirmación de aterrizaje",
-                energy: -3, science: 2, exploration: 1, condition: 0,
-                consequence: "La señal confirma que Spirit ha llegado a la superficie.",
-                result: "good"
+                text: "Iniciar el descenso",
+                energy: -3, science: 2, exploration: 1, condition: 0
             }
         ]
     },
@@ -60,8 +76,9 @@ const scenes = [
         sol: 12,
         label: "2004 / PRIMEROS DÍAS",
         title: "Una nueva superficie",
-        text: "Spirit comienza a transmitir imágenes de Marte. El terreno frente al rover se convierte en su nuevo mundo.",
-        history: "Spirit estudió el cráter Gusev y encontró evidencias de que Marte tuvo agua en el pasado.",
+        text: "¡Lo logramos! Spirit ya manda sus primeras fotos a la Tierra. Su misión debía durar solo 90 soles, así que cada día cuenta. ¿Por dónde empezamos?",
+        history: "La misión principal de Spirit estaba planeada para durar 90 soles (días marcianos), hasta aproximadamente el 4 de abril de 2004.",
+        source: NASA_SPIRIT,
         choices: [
             {
                 text: "Explorar el terreno",
@@ -81,8 +98,9 @@ const scenes = [
         sol: 30,
         label: "2004 / INVESTIGACIÓN",
         title: "Huellas de agua",
-        text: "Los instrumentos de Spirit detectan características de las rocas que podrían revelar cómo fue Marte hace mucho tiempo.",
-        history: "Spirit ayudó a encontrar evidencias geológicas de un Marte antiguo con condiciones más húmedas.",
+        text: "Mira esas rocas… Spirit busca pistas de agua del pasado, y las rocas guardan esos secretos. ¿Las estudiamos de cerca o seguimos avanzando?",
+        history: "Spirit encontró pruebas de que en el pasado Marte fue mucho más húmedo de lo que es ahora.",
+        source: NASA_SPIRIT,
         choices: [
             {
                 text: "Examinar una roca",
@@ -100,10 +118,11 @@ const scenes = [
     },
     {
         sol: 120,
-        label: "2005 / EXPLORACIÓN",
+        label: "2004 / EXPLORACIÓN",
         title: "Más allá del cráter",
-        text: "Spirit continúa recorriendo Marte. Cada metro recorrido aumenta el conocimiento sobre el planeta.",
-        history: "Spirit superó ampliamente su misión principal de 90 soles y continuó operando durante años.",
+        text: "¿Sabes qué? Spirit ya superó sus 90 soles y sigue funcionando, así que la NASA le extendió la misión una y otra vez. ¿Qué priorizamos ahora?",
+        history: "Spirit superó su misión principal de 90 soles. Los planificadores formularon una y otra vez misiones extendidas, mucho más allá de su vida útil original.",
+        source: NASA_SPIRIT,
         choices: [
             {
                 text: "Seguir explorando",
@@ -123,8 +142,9 @@ const scenes = [
         sol: 450,
         label: "2005 / TERRENO DIFÍCIL",
         title: "El terreno cambia",
-        text: "El paisaje se vuelve más complicado. Cada movimiento requiere mayor cuidado para evitar daños.",
-        history: "Spirit atravesó terrenos difíciles durante su misión de exploración.",
+        text: "Llegamos a las Colinas Columbia. El terreno se pone difícil y un mal paso podría dañar a Spirit. Tú decides cómo avanzar.",
+        history: "En las Colinas Columbia, Spirit descubrió una variedad de roca madre; algunas de estas rocas mostraban indicios de alteración por agua.",
+        source: NASA_SPIRIT,
         choices: [
             {
                 text: "Avanzar lentamente",
@@ -141,11 +161,12 @@ const scenes = [
         ]
     },
     {
-        sol: 700,
+        sol: 753,
         label: "2006 / DESGASTE",
         title: "Los años empiezan a pesar",
-        text: "Spirit lleva años trabajando en Marte. Sus sistemas siguen funcionando, pero el desgaste comienza a ser parte de la misión.",
-        history: "La misión de Spirit continuó mucho más allá de su duración originalmente prevista.",
+        text: "Ay, malas noticias: la rueda delantera derecha de Spirit dejó de funcionar. Ahora tiene que arrastrarla… aunque eso podría traer una sorpresa. ¿Qué hacemos?",
+        history: "Por la falla de su rueda delantera derecha se canceló el viaje a la zona llamada McCool. Al arrastrarla, la rueda raspó el suelo y dejó ver tierra brillante rica en sílice, señal de contacto con agua.",
+        source: NASA_SPIRIT,
         choices: [
             {
                 text: "Conservar energía",
@@ -162,11 +183,12 @@ const scenes = [
         ]
     },
     {
-        sol: 1400,
-        label: "2008 / TORMENTA",
+        sol: 1241,
+        label: "2007 / TORMENTAS DE POLVO",
         title: "El cielo se oscurece",
-        text: "Una tormenta de polvo cubre gran parte del cielo. La luz solar disminuye y los paneles reciben menos energía.",
-        history: "En 2007, Spirit y Opportunity sobrevivieron a importantes tormentas de polvo marcianas.",
+        text: "¡Cuidado! Una tormenta de polvo tapa el Sol. Spirit funciona con paneles solares, así que menos luz significa menos energía. ¿Cómo lo protegemos?",
+        history: "Durante gran parte del verano de 2007, Spirit y Opportunity enfrentaron grandes tormentas de polvo que redujeron la energía generada por sus paneles solares.",
+        source: NASA_SPIRIT,
         choices: [
             {
                 text: "Reducir las actividades",
@@ -183,11 +205,12 @@ const scenes = [
         ]
     },
     {
-        sol: 1700,
-        label: "2009 / TERRENO",
+        sol: 1893,
+        label: "1 MAYO 2009 / TERRENO",
         title: "Una trampa de arena",
-        text: "Spirit intenta atravesar una zona de terreno blando. Sus ruedas pierden tracción y el rover deja de avanzar como antes.",
-        history: "En 2009, Spirit quedó atrapado en suelo marciano blando cerca de una zona llamada Troy.",
+        text: "Uh-oh… Spirit pasó por un suelo muy blando y sus ruedas empezaron a hundirse. Ya no avanza como antes. ¿Qué intentamos?",
+        history: "El 1 de mayo de 2009, mientras avanzaba hacia el sur junto al borde occidental de una meseta baja, Spirit se atascó en tierra blanda en una zona llamada Troy.",
+        source: NASA_SPIRIT,
         choices: [
             {
                 text: "Intentar salir",
@@ -206,11 +229,12 @@ const scenes = [
         ]
     },
     {
-        sol: 1800,
-        label: "2009 / SPIRIT ATRAPADO",
+        sol: 2098,
+        label: "NOV 2009 / SPIRIT ATRAPADO",
         title: "Troy",
-        text: "Spirit permanece atrapado. El equipo en la Tierra intenta encontrar una forma de liberar al rover mientras continúa recopilando datos.",
-        history: "Spirit quedó atrapado definitivamente en 2009. El equipo intentó varias estrategias para liberarlo.",
+        text: "Spirit sigue atascado en Troy y ahora otra rueda dejó de funcionar. El equipo en la Tierra no se rinde. ¿Seguimos intentando o aprovechamos que está quieto?",
+        history: "El 28 de noviembre de 2009 dejó de funcionar su rueda trasera derecha. A finales de enero de 2010, tras múltiples intentos fallidos, la misión se replanteó como una plataforma científica fija.",
+        source: NASA_SPIRIT,
         choices: [
             {
                 text: "Seguir intentando avanzar",
@@ -227,11 +251,12 @@ const scenes = [
         ]
     },
     {
-        sol: 1900,
+        sol: 2156,
         label: "2010 / INVIERNO MARCIANO",
         title: "El frío llega",
-        text: "Con Spirit inmóvil, llega el invierno marciano. La energía disponible disminuye y mantener los sistemas activos se vuelve cada vez más difícil.",
-        history: "Spirit entró en una situación crítica durante el invierno de 2010 debido a la baja energía disponible.",
+        text: "Brrr… llega el invierno marciano. Spirit está atascado, hay poca luz para sus paneles y sus calentadores necesitan energía para que no se congele. ¿Qué hacemos?",
+        history: "La causa más probable de la pérdida de contacto fue el frío extremo, que volvió ineficaces los calentadores de supervivencia de Spirit.",
+        source: NASA_SPIRIT,
         choices: [
             {
                 text: "Ahorrar toda la energía posible",
@@ -249,10 +274,11 @@ const scenes = [
     },
     {
         sol: 2210,
-        label: "2010 / ÚLTIMA SEÑAL",
+        label: "22 MARZO 2010 / ÚLTIMA SEÑAL",
         title: "La señal se apaga",
-        text: "La comunicación con Spirit se vuelve cada vez más difícil. Desde la Tierra continúan enviándose comandos esperando recuperar el contacto.",
-        history: "La última comunicación de Spirit con la Tierra ocurrió el 22 de marzo de 2010.",
+        text: "Spirit ya casi no responde. Desde la Tierra le mandamos mensajes una y otra vez, esperando escucharlo de nuevo…",
+        history: "Después del 22 de marzo de 2010 la NASA no pudo restablecer contacto con Spirit. Se enviaron más de 1,300 comandos para intentar recuperarlo.",
+        source: NASA_SPIRIT,
         choices: [
             {
                 text: "Enviar una última secuencia de comandos",
@@ -263,14 +289,29 @@ const scenes = [
         ]
     },
     {
-        sol: 2211,
-        label: "EPÍLOGO / 2010",
+        sol: 2210,
+        label: "EPÍLOGO / 2011",
         title: "Abandonado, pero no olvidado",
-        text: "Spirit dejó de comunicarse con la Tierra, pero los datos que consiguió transformaron nuestra comprensión de Marte.",
-        history: "NASA declaró terminada la misión de Spirit el 25 de mayo de 2011.",
+        text: "Spirit dejó de responder, pero lo que descubrió cambió lo que sabemos de Marte. Gracias por acompañarlo. Quedó abandonado… pero nunca olvidado.",
+        history: "La NASA concluyó oficialmente sus esfuerzos de recuperación el 25 de mayo de 2011.",
+        source: NASA_SPIRIT,
         final: true
     }
 ];
+
+/* Etapas reales del descenso, en orden. */
+const LANDING_STAGES = [
+    { name: "PARACAÍDAS", hint: "Abre el paracaídas para frenar la caída." },
+    { name: "BOLSAS DE AIRE", hint: "Infla las bolsas de aire antes del impacto." },
+    { name: "RETROCOHETES", hint: "Enciende los retrocohetes para frenar al final." }
+];
+
+/* Efecto de cada resultado del minijuego en el estado del rover. */
+const LANDING_EFFECT = {
+    perfecto: { condition: 0, science: 2 },
+    bien: { condition: -3, science: 0 },
+    fallo: { condition: -10, science: 0 }
+};
 
 function clamp(value, min = 0, max = 100) {
     return Math.max(min, Math.min(max, value));
@@ -280,25 +321,21 @@ function getElement(id) {
     return document.getElementById(id);
 }
 
+function applyDeltas(delta) {
+    gameState.energy = clamp(gameState.energy + (delta.energy || 0));
+    gameState.science = clamp(gameState.science + (delta.science || 0));
+    gameState.exploration = clamp(gameState.exploration + (delta.exploration || 0));
+    gameState.condition = clamp(gameState.condition + (delta.condition || 0));
+}
+
 function updateStats() {
-    const energyValue = getElement("energy-value");
-    const scienceValue = getElement("science-value");
-    const explorationValue = getElement("exploration-value");
-    const conditionValue = getElement("condition-value");
-    const energyBar = getElement("energy-bar");
-    const scienceBar = getElement("science-bar");
-    const explorationBar = getElement("exploration-bar");
-    const conditionBar = getElement("condition-bar");
-
-    if (energyValue) energyValue.textContent = gameState.energy;
-    if (scienceValue) scienceValue.textContent = gameState.science;
-    if (explorationValue) explorationValue.textContent = gameState.exploration;
-    if (conditionValue) conditionValue.textContent = gameState.condition;
-
-    if (energyBar) energyBar.style.width = `${gameState.energy}%`;
-    if (scienceBar) scienceBar.style.width = `${gameState.science}%`;
-    if (explorationBar) explorationBar.style.width = `${gameState.exploration}%`;
-    if (conditionBar) conditionBar.style.width = `${gameState.condition}%`;
+    const stats = ["energy", "science", "exploration", "condition"];
+    stats.forEach(stat => {
+        const value = getElement(`${stat}-value`);
+        const bar = getElement(`${stat}-bar`);
+        if (value) value.textContent = gameState[stat];
+        if (bar) bar.style.width = `${gameState[stat]}%`;
+    });
 }
 
 function saveGame() {
@@ -315,112 +352,154 @@ function loadGame() {
         if (!saved) return;
         const parsed = JSON.parse(saved);
         if (!parsed || typeof parsed !== "object") return;
-        gameState = { ...gameState, ...parsed };
+        gameState = { ...createInitialState(), ...parsed };
+        /* Partidas guardadas con la versión anterior del aterrizaje */
+        delete gameState.landingStarted;
+        delete gameState.landingComplete;
     } catch (e) {
         console.warn("No se pudo cargar la partida.", e);
     }
 }
 
 /* =========================================
-   ATERRIZAJE
+   ROVERCHITO: reacciones del guía
 ========================================= */
-function startLandingSequence() {
-    const ship = getElement("landing-ship");
-    const rover = getElement("rover-box");
-    if (!ship) return;
+const GUIDE_REACTIONS = {
+    good: [
+        "¡Eso! Muy buena decisión.",
+        "¡Bien hecho! Spirit te lo agradece.",
+        "¡Así se hace! Justo lo que Spirit necesitaba."
+    ],
+    neutral: [
+        "Mmm… funcionó, pero tuvo su costo.",
+        "No está mal, aunque Spirit gastó de más.",
+        "Bueno… pudo salir mejor, pero seguimos."
+    ],
+    bad: [
+        "¡Uy! Eso le dolió a Spirit.",
+        "Ouch… esa no era la mejor idea.",
+        "Eso no salió nada bien. ¡Ánimo, seguimos!"
+    ]
+};
 
-    gameState.landingStarted = true;
-    gameState.landingComplete = false;
+const GUIDE_MOODS = { good: "happy", neutral: "neutral", bad: "sad" };
 
-    if (rover) {
-        rover.style.opacity = "0";
-        rover.classList.remove("greeting");
+/* Roverchito cambia de expresión y comenta. kind: good | neutral | bad */
+function guideSay(kind, text, { save = true } = {}) {
+    const avatar = getElement("guide-avatar");
+    const reaction = getElement("guide-reaction");
+    const line = text || GUIDE_REACTIONS[kind][Math.floor(Math.random() * GUIDE_REACTIONS[kind].length)];
+
+    if (avatar) {
+        Roverchito.setMood(avatar, GUIDE_MOODS[kind] || "neutral");
+        avatar.classList.remove("is-reacting");
+        void avatar.offsetWidth;
+        avatar.classList.add("is-reacting");
     }
-
-    ship.classList.remove("landing-active", "landed");
-    ship.style.animation = "none";
-    ship.style.opacity = "1";
-    ship.style.transform = "translateX(-50%) translateY(-280px) scale(0.78)";
-    void ship.offsetWidth;
-
-    requestAnimationFrame(() => {
-        ship.style.animation = "";
-        ship.classList.add("landing-active");
-    });
-
-    setTimeout(() => {
-        if (gameState.sceneIndex !== 1 || !gameState.landingStarted) return;
-
-        gameState.landingComplete = true;
-        ship.classList.remove("landing-active");
-        ship.classList.add("landed");
-        ship.style.animation = "none";
-        ship.style.opacity = "1";
-        ship.style.transform = "translateX(-50%) translateY(160px) scale(1)";
-
-        const button = document.querySelector(".choice-btn");
-        if (button) {
-            button.disabled = false;
-            button.textContent = "Aterrizar";
-        }
-
-        const consequence = getElement("consequence");
-        if (consequence) {
-            consequence.className = "consequence neutral";
-            consequence.innerHTML = `
-                <strong>ATERRIZAJE CONFIRMADO</strong>
-                <p>La nave ha llegado a la superficie. Ahora debes completar el aterrizaje de Spirit.</p>
-            `;
-            consequence.style.display = "block";
-        }
-        saveGame();
-    }, 4300);
+    if (reaction) {
+        reaction.textContent = line;
+        reaction.className = `guide-reaction is-${kind}`;
+        reaction.hidden = false;
+    }
+    if (save) gameState.guide = { kind, text: line };
 }
 
-function completeLanding() {
-    const ship = getElement("landing-ship");
+function resetGuide() {
+    const avatar = getElement("guide-avatar");
+    const reaction = getElement("guide-reaction");
+    if (avatar) Roverchito.setMood(avatar, "neutral");
+    if (reaction) {
+        reaction.hidden = true;
+        reaction.textContent = "";
+    }
+}
+
+function showConsequence(className, title, text) {
+    const consequence = getElement("consequence");
+    if (!consequence) return;
+    consequence.className = `consequence ${className}`;
+    consequence.innerHTML = "";
+    const strong = document.createElement("strong");
+    strong.textContent = title;
+    const p = document.createElement("p");
+    p.textContent = text;
+    consequence.append(strong, p);
+    consequence.style.display = "block";
+}
+
+/* =========================================
+   ATERRIZAJE (MINIJUEGO DE ANILLOS)
+========================================= */
+function setLanderStage(stage) {
+    const lander = getElement("lander");
+    if (!lander) return;
+    lander.dataset.stage = stage;
+}
+
+function startLanding() {
+    const button = document.querySelector(".choice-btn");
+    if (button) {
+        button.disabled = true;
+        button.textContent = "Descendiendo...";
+    }
+
+    showConsequence(
+        "neutral",
+        "ENTRADA A LA ATMÓSFERA",
+        "Haz clic, toca o presiona la barra espaciadora cuando el anillo coincida con el círculo."
+    );
+
+    setLanderStage("entry");
+    guideSay("neutral", "¡Atento! Haz clic justo cuando el anillo toque el círculo.", { save: false });
+
+    Minijuegos.anillos({
+        container: getElement("minigame"),
+        rounds: LANDING_STAGES,
+        onRound(index, result) {
+            /* Cada acierto o fallo avanza la animación real del descenso */
+            const stages = ["chute", "airbags", "rockets"];
+            setLanderStage(stages[index]);
+            const avatar = getElement("guide-avatar");
+            if (avatar) Roverchito.setMood(avatar, result === "perfecto" ? "happy" : result === "fallo" ? "sad" : "neutral");
+        },
+        onFinish(results) {
+            finishLanding(results);
+        }
+    });
+}
+
+function finishLanding(results) {
+    const lander = getElement("lander");
     const rover = getElement("rover-box");
     const dust = getElement("dust-cloud");
 
-    if (ship) {
-        ship.classList.remove("landing-active", "landed");
-        ship.style.animation = "none";
-        ship.style.opacity = "0";
-    }
+    setLanderStage("bounce");
 
-    if (dust) {
-        dust.classList.remove("on");
-        void dust.offsetWidth;
-        dust.classList.add("on");
-    }
+    const counts = { perfecto: 0, bien: 0, fallo: 0 };
+    const delta = { ...scenes[1].choices[0] };
+    results.forEach(r => {
+        counts[r]++;
+        delta.condition += LANDING_EFFECT[r].condition;
+        delta.science += LANDING_EFFECT[r].science;
+    });
 
-    setTimeout(() => {
-        if (gameState.sceneIndex !== 1) return;
-        if (rover) {
-            rover.style.opacity = "1";
-            rover.style.transform = "translateX(-50%)";
-            rover.classList.remove("greeting");
-            void rover.offsetWidth;
-            rover.classList.add("greeting");
-        }
-    }, 700);
-
+    applyDeltas(delta);
+    gameState.landing = { results };
     gameState.choiceMade = true;
-    const choice = scenes[1].choices[0];
-    gameState.energy = clamp(gameState.energy + (choice.energy || 0));
-    gameState.science = clamp(gameState.science + (choice.science || 0));
-    gameState.exploration = clamp(gameState.exploration + (choice.exploration || 0));
-    gameState.condition = clamp(gameState.condition + (choice.condition || 0));
 
-    const consequence = getElement("consequence");
-    if (consequence) {
-        consequence.className = "consequence good";
-        consequence.innerHTML = `
-            <strong>ATERRIZAJE COMPLETADO</strong>
-            <p>${choice.consequence}</p>
-        `;
-        consequence.style.display = "block";
+    let className = "good";
+    let title = "ATERRIZAJE PERFECTO";
+    let text = "Las bolsas de aire rebotaron sobre el cráter Gusev y Spirit quedó intacto.";
+    if (counts.fallo >= 2) {
+        className = "bad";
+        title = "ATERRIZAJE BRUSCO";
+        text = "Spirit llegó a Marte, pero el impacto fue fuerte y sus sistemas resintieron el golpe.";
+    } else if (counts.fallo === 1 || counts.bien >= 2) {
+        className = "neutral";
+        title = "ATERRIZAJE CONFIRMADO";
+        text = "Spirit llegó a la superficie con algunos golpes. Los sistemas responden.";
     }
+    text += ` Resultado: ${counts.perfecto} perfecto${counts.perfecto === 1 ? "" : "s"}, ${counts.bien} bien, ${counts.fallo} fallo${counts.fallo === 1 ? "" : "s"}.`;
 
     const button = document.querySelector(".choice-btn");
     if (button) {
@@ -428,18 +507,50 @@ function completeLanding() {
         button.textContent = "Aterrizaje completado";
     }
 
-    const nextButton = getElement("next-button");
-    if (nextButton) nextButton.disabled = false;
+    /* Las bolsas rebotan, se desinflan y aparece el rover */
+    setTimeout(() => {
+        if (gameState.sceneIndex !== 1) return;
+        if (dust) {
+            dust.classList.remove("on");
+            void dust.offsetWidth;
+            dust.classList.add("on");
+        }
+        setLanderStage("deflate");
+    }, 1900);
 
-    updateStats();
+    setTimeout(() => {
+        if (gameState.sceneIndex !== 1) return;
+        if (lander) setLanderStage("done");
+        if (rover) {
+            rover.style.opacity = "1";
+            rover.style.transform = "translateX(-50%)";
+            rover.classList.remove("greeting");
+            void rover.offsetWidth;
+            rover.classList.add("greeting");
+        }
+        showConsequence(className, title, text);
+        const landingLines = {
+            good: "¡Aterrizaje perfecto! Eres todo un piloto espacial.",
+            neutral: "Llegamos con algunos golpes, pero Spirit está bien.",
+            bad: "¡Uf! Fue un golpe fuerte… pero Spirit sobrevivió."
+        };
+        guideSay(className, landingLines[className]);
+        saveGame();
+        const nextButton = getElement("next-button");
+        if (nextButton) nextButton.disabled = false;
+        updateStats();
+    }, 2700);
+
     saveGame();
 }
 
+/* =========================================
+   VISUALES DE LA ESCENA
+========================================= */
 function updateVisual(sceneIndex) {
     const scene = getElement("scene");
     const rover = getElement("rover-box");
     const dust = getElement("dust-cloud");
-    const ship = getElement("landing-ship");
     if (!scene || !rover) return;
 
     scene.className = "scene";
@@ -448,35 +559,17 @@ function updateVisual(sceneIndex) {
 
     if (sceneIndex === 1) {
         scene.classList.add("landing");
-        if (!gameState.landingComplete) {
-            rover.style.opacity = "0";
-        } else {
+        if (gameState.choiceMade) {
+            setLanderStage("done");
             rover.style.opacity = "1";
-        }
-
-        if (ship) {
-            if (!gameState.landingStarted) {
-                ship.classList.remove("landing-active", "landed");
-                ship.style.animation = "none";
-                ship.style.opacity = "1";
-                ship.style.transform = "translateX(-50%) translateY(-280px) scale(0.78)";
-            } else if (gameState.landingStarted && !gameState.landingComplete) {
-                ship.style.opacity = "1";
-            } else if (gameState.landingComplete && !gameState.choiceMade) {
-                ship.classList.remove("landing-active");
-                ship.classList.add("landed");
-                ship.style.animation = "none";
-                ship.style.opacity = "1";
-                ship.style.transform = "translateX(-50%) translateY(160px) scale(1)";
-            } else {
-                ship.classList.remove("landing-active", "landed");
-                ship.style.animation = "none";
-                ship.style.opacity = "0";
-            }
+        } else {
+            setLanderStage("ready");
+            rover.style.opacity = "0";
         }
         return;
     }
 
+    setLanderStage("hidden");
     rover.style.opacity = sceneIndex === 0 ? "0" : "1";
     if (gameState.dustStorm || sceneIndex === 7) scene.classList.add("dust-storm");
     if (gameState.winter || sceneIndex === 10) {
@@ -486,6 +579,18 @@ function updateVisual(sceneIndex) {
     if (gameState.wheelFailure || sceneIndex === 6) rover.classList.add("wheel-damage");
     if (gameState.trapped || sceneIndex === 8 || sceneIndex === 9) rover.classList.add("trapped");
     if (gameState.gameOver) scene.classList.add("game-over");
+}
+
+function renderSource(source) {
+    const link = getElement("history-source");
+    if (!link) return;
+    if (!source) {
+        link.hidden = true;
+        return;
+    }
+    link.hidden = false;
+    link.href = source.url;
+    link.textContent = `Fuente: ${source.label}`;
 }
 
 function renderScene() {
@@ -501,11 +606,13 @@ function renderScene() {
     const nextButton = getElement("next-button");
     const solNumber = getElement("sol-number");
 
+    resetGuide();
     if (sceneLabel) sceneLabel.textContent = currentScene.label;
     if (sceneTitle) sceneTitle.textContent = currentScene.title;
     if (sceneText) sceneText.textContent = currentScene.text;
     if (historyText) historyText.textContent = currentScene.history;
-    if (solNumber) solNumber.textContent = currentScene.sol;
+    if (solNumber) solNumber.textContent = currentScene.sol === null ? "—" : currentScene.sol;
+    renderSource(currentScene.source);
 
     if (currentScene.final) {
         renderFinal();
@@ -523,29 +630,25 @@ function renderScene() {
             const button = document.createElement("button");
             button.className = "choice-btn";
             button.type = "button";
+            button.textContent = choice.text;
+            button.disabled = gameState.choiceMade;
 
-            if (gameState.sceneIndex === 1) {
-                if (!gameState.landingStarted) {
-                    button.textContent = "Esperar la confirmación de aterrizaje";
-                    button.disabled = false;
-                } else if (gameState.landingStarted && !gameState.landingComplete) {
-                    button.textContent = "Aterrizando...";
-                    button.disabled = true;
-                } else if (gameState.landingComplete && !gameState.choiceMade) {
-                    button.textContent = "Aterrizar";
-                    button.disabled = false;
-                } else {
-                    button.textContent = "Aterrizaje completado";
-                    button.disabled = true;
-                }
-            } else {
-                button.textContent = choice.text;
-                button.disabled = gameState.choiceMade;
+            if (currentScene.landing && gameState.choiceMade) {
+                button.textContent = "Aterrizaje completado";
             }
 
             button.addEventListener("click", () => makeChoice(index));
             choices.appendChild(button);
         });
+    }
+
+    /* Al recargar, Roverchito repite su última reacción */
+    if (gameState.choiceMade && gameState.guide) {
+        guideSay(gameState.guide.kind, gameState.guide.text, { save: false });
+    }
+
+    if (currentScene.landing && gameState.choiceMade && gameState.landing) {
+        showConsequence("good", "ATERRIZAJE COMPLETADO", "Spirit ya está en la superficie del cráter Gusev.");
     }
 
     if (nextButton) {
@@ -560,60 +663,27 @@ function renderScene() {
 function makeChoice(choiceIndex) {
     const currentScene = scenes[gameState.sceneIndex];
     if (!currentScene || !currentScene.choices || !currentScene.choices[choiceIndex]) return;
+    if (gameState.choiceMade) return;
 
-    if (gameState.sceneIndex === 1) {
-        if (!gameState.landingStarted) {
-            startLandingSequence();
-            const button = document.querySelector(".choice-btn");
-            if (button) {
-                button.disabled = true;
-                button.textContent = "Aterrizando...";
-            }
-            const consequence = getElement("consequence");
-            if (consequence) {
-                consequence.className = "consequence neutral";
-                consequence.innerHTML = `
-                    <strong>ESPERANDO CONFIRMACIÓN</strong>
-                    <p>La secuencia automática de descenso ha comenzado.</p>
-                `;
-                consequence.style.display = "block";
-            }
-            return;
-        }
-        if (gameState.landingStarted && gameState.landingComplete && !gameState.choiceMade) {
-            completeLanding();
-            return;
-        }
+    if (currentScene.landing) {
+        startLanding();
         return;
     }
 
-    if (gameState.choiceMade) return;
-
     const choice = currentScene.choices[choiceIndex];
-    gameState.energy = clamp(gameState.energy + (choice.energy || 0));
-    gameState.science = clamp(gameState.science + (choice.science || 0));
-    gameState.exploration = clamp(gameState.exploration + (choice.exploration || 0));
-    gameState.condition = clamp(gameState.condition + (choice.condition || 0));
+    applyDeltas(choice);
 
     if (choice.trapped) gameState.trapped = true;
     if (gameState.sceneIndex === 6) gameState.wheelFailure = true;
     if (gameState.sceneIndex === 7) gameState.dustStorm = true;
     if (gameState.sceneIndex === 10) gameState.winter = true;
 
-    const consequence = getElement("consequence");
-    if (consequence) {
-        let className = choice.result || "neutral";
-        let label = "CONSECUENCIA";
-        if (className === "good") label = "RESULTADO POSITIVO";
-        if (className === "bad") label = "RESULTADO NEGATIVO";
-
-        consequence.innerHTML = `
-            <strong>${label}</strong>
-            <p>${choice.consequence}</p>
-        `;
-        consequence.className = `consequence ${className}`;
-        consequence.style.display = "block";
-    }
+    const className = choice.result || "neutral";
+    let label = "CONSECUENCIA";
+    if (className === "good") label = "RESULTADO POSITIVO";
+    if (className === "bad") label = "RESULTADO NEGATIVO";
+    showConsequence(className, label, choice.consequence);
+    guideSay(className);
 
     gameState.choiceMade = true;
     document.querySelectorAll(".choice-btn").forEach(btn => btn.disabled = true);
@@ -632,8 +702,7 @@ function nextSol() {
 
     gameState.sceneIndex++;
     gameState.choiceMade = false;
-    gameState.landingStarted = false;
-    gameState.landingComplete = false;
+    gameState.guide = null;
 
     if (gameState.sceneIndex >= 7) gameState.dustStorm = true;
     if (gameState.sceneIndex >= 10) gameState.winter = true;
@@ -650,7 +719,6 @@ function nextSol() {
    PANTALLA FINAL (MODAL)
 ========================================= */
 function renderFinal() {
-    // Ocultar elementos de la escena normal
     const choices = getElement("choices");
     const consequence = getElement("consequence");
     const nextButton = getElement("next-button");
@@ -659,27 +727,22 @@ function renderFinal() {
     if (consequence) consequence.style.display = "none";
     if (nextButton) nextButton.style.display = "none";
 
-    // Calcular puntuación
     const score = calculateScore();
 
-    // Rellenar valores de la pantalla final
-    const finalScore = getElement("final-score");
-    const finalEnergia = getElement("final-energia");
-    const finalCiencia = getElement("final-ciencia");
-    const finalExploracion = getElement("final-exploracion");
-    const finalEstado = getElement("final-estado");
+    const values = {
+        "final-score": score,
+        "final-energia": gameState.energy,
+        "final-ciencia": gameState.science,
+        "final-exploracion": gameState.exploration,
+        "final-estado": gameState.condition
+    };
+    Object.entries(values).forEach(([id, value]) => {
+        const el = getElement(id);
+        if (el) el.textContent = value;
+    });
 
-    if (finalScore) finalScore.textContent = score;
-    if (finalEnergia) finalEnergia.textContent = gameState.energy;
-    if (finalCiencia) finalCiencia.textContent = gameState.science;
-    if (finalExploracion) finalExploracion.textContent = gameState.exploration;
-    if (finalEstado) finalEstado.textContent = gameState.condition;
-
-    // Mostrar el modal
     const endScreen = getElement("mission-end");
-    if (endScreen) {
-        endScreen.style.display = "flex";
-    }
+    if (endScreen) endScreen.style.display = "flex";
 
     gameState.gameOver = true;
     updateStats();
@@ -694,36 +757,18 @@ function calculateScore() {
 }
 
 function restartGame() {
-    localStorage.removeItem(SAVE_KEY);
-
-    // Ocultar modal
-    const endScreen = getElement("mission-end");
-    if (endScreen) {
-        endScreen.style.display = "none";
+    try {
+        localStorage.removeItem(SAVE_KEY);
+    } catch (e) {
+        /* sin almacenamiento disponible */
     }
-
-    gameState = {
-        sceneIndex: 0,
-        energy: 70,
-        science: 20,
-        exploration: 20,
-        condition: 100,
-        trapped: false,
-        wheelFailure: false,
-        dustStorm: false,
-        winter: false,
-        choiceMade: false,
-        gameOver: false,
-        landingStarted: false,
-        landingComplete: false
-    };
-
+    gameState = createInitialState();
     location.reload();
 }
 
 document.addEventListener("DOMContentLoaded", () => {
     loadGame();
-    if (typeof gameState.landingStarted !== "boolean") gameState.landingStarted = false;
-    if (typeof gameState.landingComplete !== "boolean") gameState.landingComplete = false;
+    /* Si se recargó la página a mitad del descenso, se reinicia el aterrizaje */
+    if (gameState.sceneIndex === 1 && !gameState.choiceMade) gameState.landing = null;
     renderScene();
 });

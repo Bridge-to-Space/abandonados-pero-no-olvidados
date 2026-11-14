@@ -1,43 +1,9 @@
 /* =========================================
    MISIÓN DE ROVERCHITO
-   - Relato del origen, escena por escena
    - Mapa de la misión con 4 de los 10 dispositivos
    Datos de las paradas: Fichas de investigación del equipo (fuentes NASA).
 ========================================= */
 (() => {
-
-    /* ---------- RELATO DEL ORIGEN ---------- */
-    function initStory() {
-        const story = document.getElementById("story");
-        if (!story) return;
-
-        const steps = [...story.querySelectorAll(".story-step")];
-        const controls = story.querySelector(".story-controls");
-        const prev = story.querySelector(".story-prev");
-        const next = story.querySelector(".story-next");
-        const dots = story.querySelector(".story-dots");
-        const avatar = document.getElementById("story-avatar");
-        let index = 0;
-
-        story.classList.add("is-stepper");
-        controls.hidden = false;
-        dots.innerHTML = steps.map(() => "<span></span>").join("");
-
-        function show(i) {
-            index = Math.max(0, Math.min(steps.length - 1, i));
-            steps.forEach((step, n) => step.classList.toggle("is-current", n === index));
-            [...dots.children].forEach((dot, n) => dot.classList.toggle("is-on", n <= index));
-            prev.disabled = index === 0;
-            next.hidden = index === steps.length - 1;
-            if (avatar && typeof Roverchito !== "undefined") {
-                Roverchito.setMood(avatar, steps[index].dataset.mood || "neutral");
-            }
-        }
-
-        prev.addEventListener("click", () => show(index - 1));
-        next.addEventListener("click", () => show(index + 1));
-        show(0);
-    }
 
     /* ---------- MAPA DE LA MISIÓN ---------- */
     const DEVICES = {
@@ -144,7 +110,6 @@
     }
 
     function init() {
-        initStory();
         initMap();
     }
 

@@ -134,26 +134,29 @@
 
         </div>
 
-        <!-- ROVERCHITO: guía que cuenta las historias -->
-        <div class="guide-intro">
+    </div>
 
-            <div
-                class="guide-avatar"
-                data-roverchito
-                data-mood="happy"
-            ></div>
+    <!-- ROVERCHITO se asoma desde el borde derecho (lo anima mision.js) -->
+    <aside class="peek" id="peek" aria-label="Roverchito, tu tutorado">
 
-            <div class="guide-bubble">
-                <span class="guide-name">ROVERCHITO · TU GUÍA</span>
-                <p>
-                    ¡Hola! Soy Roverchito. Tengo una pregunta que nadie
-                    me ha podido responder… ¿me ayudas a encontrar la respuesta?
-                </p>
-            </div>
-
+        <div class="peek-label" aria-hidden="true">
+            <span>ROVERCHITO · TU TUTORADO</span>
+            <svg class="peek-arrow" viewBox="0 0 120 80">
+                <path d="M6 10 C 50 6, 92 22, 104 64" />
+                <path d="M92 58 L104 66 L110 52" />
+            </svg>
         </div>
 
-    </div>
+        <p class="peek-bubble">
+            <span class="peek-sr">¡Hola! Soy Roverchito. Tengo una pregunta que nadie me ha podido responder… ¿me ayudas a encontrar la respuesta?</span>
+            <span class="peek-text" aria-hidden="true" data-text="¡Hola! Soy Roverchito. Tengo una pregunta que nadie me ha podido responder… ¿me ayudas a encontrar la respuesta?"></span>
+        </p>
+
+        <button class="peek-bot" type="button" aria-label="Saludar a Roverchito">
+            <span data-roverchito data-mood="happy"></span>
+        </button>
+
+    </aside>
 
     <a
         class="hero-credit"

@@ -1876,114 +1876,308 @@ nav button:hover {
 
 
 /* =========================================
-   ROVERCHITO — guía en el inicio
+   ROVERCHITO SE ASOMA — inicio
+   Se asoma desde el borde derecho, una flecha lo señala
+   y dice su frase en un globo que se escribe solo.
 ========================================= */
-
-.guide-intro {
-    display: flex;
-    align-items: flex-end;
-    gap: 16px;
-
-    max-width: 560px;
-    margin-top: 36px;
-}
-
-.guide-avatar {
-    flex: none;
-    width: 88px;
-
-    animation: guideFloat 3.2s ease-in-out infinite;
-}
-
-.guide-avatar svg {
-    display: block;
-    width: 100%;
-    height: auto;
-    filter: drop-shadow(0 10px 18px rgba(239, 255, 105, 0.18));
-}
-
-.guide-bubble {
-    position: relative;
-
-    padding: 14px 18px;
-
-    background: var(--popover);
-    border: 1px solid rgba(239, 255, 105, 0.35);
-    border-radius: var(--radius-xl);
-}
-
-/* Pico del globo de diálogo */
-.guide-bubble::before {
-    content: "";
-    position: absolute;
-    left: -7px;
-    bottom: 22px;
-
-    width: 12px;
-    height: 12px;
-
-    background: var(--popover);
-    border-left: 1px solid rgba(239, 255, 105, 0.35);
-    border-bottom: 1px solid rgba(239, 255, 105, 0.35);
-    transform: rotate(45deg);
-}
-
-.guide-name {
-    display: block;
-    margin-bottom: 6px;
-
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.18em;
-    color: rgba(239, 255, 105, 0.8);
-}
-
-.guide-bubble p {
-    margin: 0;
-
-    color: var(--foreground);
-    font-size: 14px;
-    line-height: 1.6;
-}
 
 @keyframes guideFloat {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-6px); }
 }
 
+.peek {
+    --peek-delay: 3.5s;             /* espera a que termine la intro del sitio */
+
+    position: relative;
+    z-index: 2;
+
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+        "label  label"
+        "bubble bot";
+    align-items: end;
+
+    pointer-events: none;
+}
+
+.peek > * {
+    pointer-events: auto;
+}
+
+/* --- Roverchito asomándose --- */
+.peek-bot {
+    grid-area: bot;
+
+    width: 150px;
+    padding: 0;
+
+    background: none;
+    border: 0;
+    cursor: pointer;
+
+    transform: translateX(120%);
+    transform-origin: 100% 100%;
+
+    animation:
+        peekIn 0.9s cubic-bezier(0.2, 0.9, 0.3, 1.2) var(--peek-delay) forwards,
+        peekIdle 3.4s ease-in-out calc(var(--peek-delay) + 0.9s) infinite;
+}
+
+.peek-bot span,
+.peek-bot svg {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.peek-bot svg {
+    filter: drop-shadow(-8px 12px 18px rgba(0, 0, 0, 0.55));
+}
+
+/* Al pasar el cursor se asoma un poco más */
+.peek-bot:hover,
+.peek-bot:focus-visible {
+    animation-play-state: paused;
+}
+
+.peek-bot:hover span,
+.peek-bot:focus-visible span {
+    transform: translateX(-14%) rotate(6deg);
+}
+
+.peek-bot span {
+    transition: transform 0.35s cubic-bezier(0.2, 0.9, 0.3, 1.2);
+}
+
+.peek-bot:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 4px;
+    border-radius: 12px;
+}
+
+/* Saltito al hacerle clic */
+.peek-bot.is-hop span {
+    animation: peekHop 0.5s ease-out;
+}
+
+/* --- Globo de diálogo --- */
+.peek-bubble {
+    grid-area: bubble;
+    justify-self: end;
+    position: relative;
+
+    max-width: 330px;
+    min-height: 74px;
+    margin: 0 8px 70px 0;
+    padding: 16px 20px;
+
+    color: var(--foreground);
+    font-size: 15px;
+    line-height: 1.55;
+
+    background: var(--popover);
+    border: 1px solid rgba(239, 255, 105, 0.45);
+    border-radius: 18px 18px 4px 18px;
+    box-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.8);
+
+    opacity: 0;
+    transform: scale(0.6);
+    transform-origin: 100% 100%;
+    animation: peekPop 0.45s cubic-bezier(0.2, 0.9, 0.3, 1.3) calc(var(--peek-delay) + 0.7s) forwards;
+}
+
+/* Pico del globo, hacia Roverchito */
+.peek-bubble::after {
+    content: "";
+    position: absolute;
+    right: -8px;
+    bottom: 14px;
+
+    width: 14px;
+    height: 14px;
+
+    background: var(--popover);
+    border-top: 1px solid rgba(239, 255, 105, 0.45);
+    border-right: 1px solid rgba(239, 255, 105, 0.45);
+    transform: rotate(45deg);
+}
+
+/* Cursor de escritura */
+.peek-text.is-typing::after {
+    content: "▍";
+    margin-left: 2px;
+    color: var(--primary);
+    animation: cineBlink 0.8s steps(2, end) infinite;
+}
+
+/* Texto completo para lectores de pantalla */
+.peek-sr {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+}
+
+/* --- Etiqueta con flecha --- */
+.peek-label {
+    grid-area: label;
+    justify-self: end;
+
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+
+    margin: 0 42px -6px 0;
+
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    color: var(--primary);
+
+    opacity: 0;
+    animation: peekFade 0.4s ease-out calc(var(--peek-delay) + 1.1s) forwards;
+}
+
+.peek-label span {
+    padding: 5px 10px;
+
+    background: rgba(7, 7, 17, 0.75);
+    border: 1px dashed rgba(239, 255, 105, 0.55);
+    border-radius: 999px;
+    white-space: nowrap;
+}
+
+.peek-arrow {
+    width: 70px;
+    height: 48px;
+    margin-top: 10px;
+    overflow: visible;
+}
+
+.peek-arrow path {
+    fill: none;
+    stroke: var(--primary);
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+
+    stroke-dasharray: 160;
+    stroke-dashoffset: 160;
+    animation: peekDraw 0.7s ease-out calc(var(--peek-delay) + 1.3s) forwards;
+}
+
+.peek-arrow path + path {
+    animation-delay: calc(var(--peek-delay) + 1.85s);
+}
+
+/* --- Animaciones --- */
+@keyframes peekIn {
+    0% { transform: translateX(120%) rotate(0deg); }
+    100% { transform: translateX(34%) rotate(-12deg); }
+}
+
+@keyframes peekIdle {
+    0%, 100% { transform: translateX(34%) rotate(-12deg); }
+    50% { transform: translateX(28%) rotate(-7deg); }
+}
+
+@keyframes peekHop {
+    0% { transform: translateY(0); }
+    40% { transform: translateY(-16px) rotate(4deg); }
+    100% { transform: translateY(0); }
+}
+
+@keyframes peekPop {
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes peekFade {
+    from { opacity: 0; transform: translateY(-6px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes peekDraw {
+    to { stroke-dashoffset: 0; }
+}
+
+/* Pantallas grandes: Roverchito flota en la esquina inferior derecha del inicio */
+@media (min-width: 1100px) {
+    .peek {
+        position: absolute;
+        right: 0;
+        bottom: 84px;
+
+        width: 560px;
+    }
+
+    .hero {
+        padding-top: 108px;
+    }
+}
+
+/* Pantallas medianas y celulares: va debajo de los botones, pegado al borde */
+@media (max-width: 1099px) {
+    .hero {
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: center;
+    }
+
+    .peek {
+        margin: 30px -8% 0 auto;
+        width: min(560px, 100%);
+    }
+}
+
 @media (max-width: 600px) {
-    .guide-intro {
-        gap: 12px;
-        margin-top: 28px;
+    .peek {
+        margin-right: -6%;
     }
 
-    .guide-avatar {
-        width: 64px;
+    .peek-bot {
+        width: 96px;
     }
 
-    .guide-bubble p {
+    .peek-bubble {
+        max-width: 230px;
+        min-height: 0;
+        margin-bottom: 44px;
+        padding: 12px 14px;
+
         font-size: 13px;
+    }
+
+    .peek-label {
+        margin-right: 18px;
+        font-size: 10px;
+    }
+
+    .peek-arrow {
+        width: 48px;
+        height: 34px;
     }
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .guide-avatar {
+    .peek-bot,
+    .peek-bubble,
+    .peek-label,
+    .peek-arrow path {
         animation: none;
-    }
-}
-
-/* Que Roverchito quepa en la primera pantalla de una laptop */
-@media (min-width: 601px) {
-    .hero {
-        padding-top: 108px;
+        opacity: 1;
+        stroke-dashoffset: 0;
     }
 
-    .guide-intro {
-        margin-top: 26px;
+    .peek-bot {
+        transform: translateX(34%) rotate(-12deg);
     }
 
-    .guide-avatar {
-        width: 72px;
+    .peek-bubble {
+        transform: none;
     }
 }
 

@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Opportunity — Abandonados</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <meta name="color-scheme" content="dark">
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="level">
+
+<header class="level-header">
+    <a class="logo" href="../../index.html">ABANDONADOS<span>.</span></a>
+    <a class="secondary-btn level-back" href="../../index.html#mapa">← VOLVER AL MAPA</a>
+</header>
+
+<main class="level-main">
+
+    <!-- PRESENTACIÓN DE LA PARADA -->
+    <section class="level-hero">
+
+        <div class="level-hero-info">
+            <span class="level-kicker">PARADA 2 DE 4 · MARTE</span>
+            <h1>OPPORTUNITY</h1>
+            <p class="level-sub">El gemelo de Spirit · Meridiani Planum · 2004 – 2018</p>
+            <p class="level-lead">
+                Curioso, perseverante y muy orgulloso de sus logros. Comparte
+                historia con su hermano Spirit… pero siempre intenta demostrar
+                que él fue igual de importante, o incluso mejor.
+            </p>
+        </div>
+
+        <div class="level-cast" aria-hidden="true">
+            <div class="level-rover" id="level-rover"></div>
+            <div class="level-roverchito" data-roverchito data-mood="happy"></div>
+        </div>
+
+    </section>
+
+    <!-- PASOS DEL NIVEL -->
+    <section class="level-steps" aria-label="Pasos de esta parada">
+
+        <article class="level-step" id="step-1">
+            <span class="level-step-num">1</span>
+            <div>
+                <span class="level-step-kind">CINEMÁTICA</span>
+                <h2>El gemelo orgulloso</h2>
+                <p>Roverchito encuentra a Opportunity cubierto de polvo… y con muchas ganas de presumir.</p>
+            </div>
+            <button class="primary-btn" type="button" onclick="Cinematica.abrir('op-llegada')">▶ VER</button>
+        </article>
+
+        <article class="level-step is-locked" id="step-2">
+            <span class="level-step-num">2</span>
+            <div>
+                <span class="level-step-kind">MINIJUEGO</span>
+                <h2>Salvar a Opportunity</h2>
+                <p>Sácalo de la arena blanda, como en 2005, y protege sus paneles de la tormenta.</p>
+            </div>
+            <span class="level-soon">PRÓXIMAMENTE</span>
+        </article>
+
+        <article class="level-step" id="step-3">
+            <span class="level-step-num">3</span>
+            <div>
+                <span class="level-step-kind">CINEMÁTICA · DESPUÉS DEL MINIJUEGO</span>
+                <h2>Más de mil mensajes</h2>
+                <p>Opportunity abre su caja de recuerdos y le entrega a Roverchito la nota 2 de la melodía.</p>
+            </div>
+            <button class="secondary-btn" type="button" onclick="Cinematica.abrir('op-despedida')">▶ VER</button>
+        </article>
+
+    </section>
+
+    <!-- HISTORIA REAL (datos de las fichas de investigación) -->
+    <section class="level-facts">
+        <span class="level-kicker">HISTORIA REAL</span>
+        <ul>
+            <li>Lanzado el 7 de julio de 2003; aterrizó el 24 de enero de 2004 dentro del pequeño cráter Eagle, en Meridiani Planum.</li>
+            <li>Su misión estaba planeada para 90 días marcianos y funcionó casi 15 años terrestres.</li>
+            <li>Recorrió 45.16 km y envió más de 217,000 imágenes a la Tierra.</li>
+            <li>Encontró hematita, un mineral que puede formarse en presencia de agua.</li>
+            <li>Su última comunicación fue el 10 de junio de 2018, durante una enorme tormenta de polvo. La NASA anunció el final de la misión el 13 de febrero de 2019.</li>
+        </ul>
+        <p class="level-sources">
+            Fuentes:
+            <a href="https://science.nasa.gov/mission/mer-opportunity/" target="_blank" rel="noopener noreferrer">NASA Science — Opportunity</a> ·
+            <a href="https://www.nasa.gov/news-release/nasas-record-setting-opportunity-rover-mission-on-mars-comes-to-end/" target="_blank" rel="noopener noreferrer">NASA — Fin de la misión</a> ·
+            <a href="https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/" target="_blank" rel="noopener noreferrer">NASA Science — Spirit y Opportunity</a>
+        </p>
+    </section>
+
+</main>
+
+
+<!-- Dibujo de Opportunity (el mismo diseño gemelo que Spirit) -->
+<template id="op-sprite">
+<svg viewBox="0 0 420 240" class="op-rover" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+<ellipse cx="210" cy="190" rx="115" ry="9" fill="#000" opacity=".42" class="shadow"/>
+<g class="wheels">
+<g class="wheel front-wheel">
+<circle cx="92" cy="181" r="16" fill="#292723" stroke="#777066" stroke-width="3"/>
+<circle cx="92" cy="181" r="8" fill="#111"/>
+<path d="M92 165V197 M76 181H108" stroke="#70685e" stroke-width="2"/>
+</g>
+<g class="wheel">
+<circle cx="136" cy="181" r="16" fill="#292723" stroke="#777066" stroke-width="3"/>
+<circle cx="136" cy="181" r="8" fill="#111"/>
+<path d="M136 165V197 M120 181H152" stroke="#70685e" stroke-width="2"/>
+</g>
+<g class="wheel">
+<circle cx="178" cy="181" r="16" fill="#292723" stroke="#777066" stroke-width="3"/>
+<circle cx="178" cy="181" r="8" fill="#111"/>
+<path d="M178 165V197 M162 181H194" stroke="#70685e" stroke-width="2"/>
+</g>
+<g class="wheel">
+<circle cx="242" cy="181" r="16" fill="#292723" stroke="#777066" stroke-width="3"/>
+<circle cx="242" cy="181" r="8" fill="#111"/>
+<path d="M242 165V197 M226 181H258" stroke="#70685e" stroke-width="2"/>
+</g>
+<g class="wheel">
+<circle cx="284" cy="181" r="16" fill="#292723" stroke="#777066" stroke-width="3"/>
+<circle cx="284" cy="181" r="8" fill="#111"/>
+<path d="M284 165V197 M268 181H300" stroke="#70685e" stroke-width="2"/>
+</g>
+<g class="wheel">
+<circle cx="328" cy="181" r="16" fill="#292723" stroke="#777066" stroke-width="3"/>
+<circle cx="328" cy="181" r="8" fill="#111"/>
+<path d="M328 165V197 M312 181H344" stroke="#70685e" stroke-width="2"/>
+</g>
+</g>
+<g fill="none" stroke="#8a8074" stroke-width="4" stroke-linecap="round">
+<path d="M92 169 L112 143"/>
+<path d="M136 169 L145 143"/>
+<path d="M178 169 L180 143"/>
+<path d="M242 169 L240 143"/>
+<path d="M284 169 L275 143"/>
+<path d="M328 169 L308 143"/>
+</g>
+<g class="solar-panel">
+<rect x="66" y="102" width="34" height="53" rx="2" fill="#394a50" stroke="#77766e" stroke-width="2"/>
+<path d="M74 102V155 M83 102V155 M92 102V155 M66 115H100 M66 128H100 M66 141H100" stroke="#68767a" stroke-width="1"/>
+</g>
+<rect x="94" y="105" width="232" height="48" rx="5" fill="#a99d8e" stroke="#665d54" stroke-width="3"/>
+<rect x="104" y="91" width="212" height="22" rx="2" fill="#46575b" stroke="#746f66" stroke-width="2" class="solar-panel"/>
+<g stroke="#728085" stroke-width="1">
+<line x1="122" y1="91" x2="122" y2="113"/>
+<line x1="140" y1="91" x2="140" y2="113"/>
+<line x1="158" y1="91" x2="158" y2="113"/>
+<line x1="176" y1="91" x2="176" y2="113"/>
+<line x1="194" y1="91" x2="194" y2="113"/>
+<line x1="212" y1="91" x2="212" y2="113"/>
+<line x1="230" y1="91" x2="230" y2="113"/>
+<line x1="248" y1="91" x2="248" y2="113"/>
+<line x1="266" y1="91" x2="266" y2="113"/>
+<line x1="284" y1="91" x2="284" y2="113"/>
+<line x1="302" y1="91" x2="302" y2="113"/>
+</g>
+<path d="M112 91 L126 72 L298 72 L314 91 Z" fill="#b4a89a" stroke="#6c6258" stroke-width="2"/>
+<rect x="267" y="42" width="24" height="62" rx="3" fill="#9c9184" stroke="#635a51" stroke-width="2"/>
+<rect x="258" y="96" width="42" height="10" rx="2" fill="#776d62"/>
+<rect x="247" y="23" width="64" height="27" rx="5" fill="#a69b8e" stroke="#625951" stroke-width="3"/>
+<circle cx="263" cy="36" r="9" fill="#1c1b1a" stroke="#6d655d" stroke-width="2"/>
+<circle cx="263" cy="36" r="4" fill="#465e68"/>
+<circle cx="294" cy="36" r="9" fill="#1c1b1a" stroke="#6d655d" stroke-width="2"/>
+<circle cx="294" cy="36" r="4" fill="#465e68"/>
+<g class="antenna">
+<line x1="289" y1="99" x2="342" y2="69" stroke="#84796d" stroke-width="3"/>
+<circle cx="350" cy="65" r="13" fill="#aaa096" stroke="#625a52" stroke-width="2"/>
+<circle cx="350" cy="65" r="6" fill="#81776d"/>
+</g>
+<g class="arm">
+<line x1="119" y1="123" x2="89" y2="150" stroke="#91867a" stroke-width="6" stroke-linecap="round"/>
+<line x1="89" y1="150" x2="63" y2="165" stroke="#7c7268" stroke-width="5" stroke-linecap="round"/>
+<circle cx="89" cy="150" r="7" fill="#aaa095" stroke="#625a52" stroke-width="2"/>
+<circle cx="63" cy="165" r="7" fill="#91867a" stroke="#625a52" stroke-width="2"/>
+</g>
+<g class="arm-right">
+<line x1="310" y1="123" x2="337" y2="147" stroke="#91867a" stroke-width="6" stroke-linecap="round"/>
+<g class="hand-wave">
+<line x1="337" y1="147" x2="361" y2="130" stroke="#7c7268" stroke-width="5" stroke-linecap="round"/>
+<circle cx="337" cy="147" r="7" fill="#aaa095" stroke="#625a52" stroke-width="2"/>
+<circle cx="361" cy="130" r="7" fill="#91867a" stroke="#625a52" stroke-width="2"/>
+</g>
+</g>
+<rect x="143" y="128" width="117" height="8" rx="2" fill="#81766b"/>
+<circle cx="158" cy="118" r="4" fill="#675e55"/>
+<circle cx="245" cy="118" r="4" fill="#675e55"/>
+<g class="mars-dust" fill="#765b45" opacity=".48">
+<ellipse cx="116" cy="110" rx="17" ry="5"/>
+<ellipse cx="151" cy="145" rx="25" ry="4"/>
+<ellipse cx="204" cy="111" rx="20" ry="4"/>
+<ellipse cx="264" cy="145" rx="28" ry="5"/>
+<ellipse cx="303" cy="109" rx="14" ry="4"/>
+</g>
+</svg>
+</template>
+
+
+<!-- =========================================
+     CINEMÁTICA 1 · EL GEMELO ORGULLOSO
+========================================= -->
+<ol class="cine-script" id="op-script-1">
+
+    <li data-type="narrador" data-scene="mars-day" data-place="MERIDIANI PLANUM, MARTE">
+        <strong>Narrador:</strong>
+        Al otro lado de Marte, lejos de donde se quedó Spirit, hay una llanura
+        enorme llamada Meridiani Planum. Ahí, cubierto de polvo, descansa Opportunity.
+    </li>
+
+    <li data-type="roverchito" data-mood="happy" data-scene="mars-day" data-place="MERIDIANI PLANUM, MARTE">
+        <strong>Roverchito:</strong>
+        ¡Se parece muchísimo a Spirit! … ¿Hola? ¿Me escuchas?
+    </li>
+
+    <li data-type="memoria" data-scene="file" data-place="ESCANEO DE OPPORTUNITY"
+        data-name="ESCANEO DE OPPORTUNITY" data-file="REGISTRO · OPPORTUNITY"
+        data-loading="ESCANEANDO A OPPORTUNITY…" data-stamp="SIN SEÑAL" data-tone="alert">
+        <strong>Escaneo:</strong>
+        <span data-label="MISIÓN">MARS EXPLORATION ROVER</span> ·
+        <span data-label="ATERRIZAJE">24 ENE 2004 · CRÁTER EAGLE</span> ·
+        <span data-label="PLANEADA">90 DÍAS MARCIANOS</span> ·
+        <span data-label="ÚLTIMA SEÑAL" data-alert>10 JUN 2018</span>
+    </li>
+
+    <li data-type="nave" data-name="OPPORTUNITY" data-weak data-mood="neutral" data-scene="mars-day" data-place="MERIDIANI PLANUM, MARTE">
+        <strong>Opportunity:</strong>
+        …¿Quién anda ahí? ¡Ah, un visitante! Hace años que nadie viene a verme.
+    </li>
+
+    <li data-type="nave" data-name="OPPORTUNITY" data-mood="neutral" data-scene="mars-day" data-place="MERIDIANI PLANUM, MARTE">
+        <strong>Opportunity:</strong>
+        ¿Viste a mi hermano Spirit? Seguro te contó sus aventuras… aunque las mías
+        fueron bastante mejores.
+    </li>
+
+    <li data-type="roverchito" data-mood="neutral" data-scene="mars-day" data-place="MERIDIANI PLANUM, MARTE">
+        <strong>Roverchito:</strong>
+        Sí, lo visité… aunque Spirit dejó de responder en 2010.
+    </li>
+
+    <li data-type="nave" data-name="OPPORTUNITY" data-mood="happy" data-scene="mars-day" data-place="MERIDIANI PLANUM, MARTE">
+        <strong>Opportunity:</strong>
+        Lo sé. Yo seguí explorando hasta 2018. Recorrí 45.16 kilómetros, ¡más que
+        un maratón! Y un día avancé 220 metros en un solo día marciano. Récord.
+    </li>
+
+    <li data-type="nave" data-name="OPPORTUNITY" data-mood="neutral" data-scene="mars-day" data-place="MERIDIANI PLANUM, MARTE">
+        <strong>Opportunity:</strong>
+        Claro que… en 2005 yo también me atasqué en arena blanda. Pero a mí me
+        sacaron en unas seis semanas.
+    </li>
+
+    <li data-type="nave" data-name="OPPORTUNITY" data-mood="neutral" data-scene="mars-day" data-place="MERIDIANI PLANUM, MARTE" data-note="LE PREGUNTA A ROVERCHITO">
+        <strong>Opportunity:</strong>
+        ¿Tú no te atoras en la arena como mi hermano y yo?
+    </li>
+
+    <li data-type="roverchito" data-mood="happy" data-scene="mars-day" data-place="MERIDIANI PLANUM, MARTE">
+        <strong>Roverchito:</strong>
+        ¡Espero que no! … Oye, ¿y por qué estás tan quieto?
+    </li>
+
+    <li data-type="nave" data-name="OPPORTUNITY" data-weak data-mood="sad" data-scene="storm" data-place="MERIDIANI PLANUM · JUNIO DE 2018">
+        <strong>Opportunity:</strong>
+        En junio de 2018 una tormenta de polvo gigante tapó el Sol. Sin luz, mis
+        paneles solares se quedaron sin energía y dejé de comunicarme con la Tierra.
+    </li>
+
+    <li data-type="nave" data-name="OPPORTUNITY" data-weak data-mood="sad" data-scene="storm" data-place="MERIDIANI PLANUM, MARTE">
+        <strong>Opportunity:</strong>
+        Hasta el mejor explorador de Marte necesita ayuda a veces… Te ayudo si me ayudas.
+    </li>
+
+    <li data-type="roverchito" data-mood="happy" data-scene="mars-day" data-place="MERIDIANI PLANUM, MARTE" data-note="TE PREGUNTA A TI">
+        <strong>Roverchito:</strong>
+        ¡Vamos a ayudarlo! ¿Estás listo?
+    </li>
+
+</ol>
+
+
+<!-- =========================================
+     CINEMÁTICA 2 · MÁS DE MIL MENSAJES
+     (se ve después del minijuego)
+========================================= -->
+<ol class="cine-script" id="op-script-2">
+
+    <li data-type="narrador" data-scene="mars-dusk" data-place="MERIDIANI PLANUM · DESPUÉS DE LA TORMENTA">
+        <strong>Narrador:</strong>
+        Con tu ayuda, Opportunity recupera la energía suficiente para abrir su caja de recuerdos.
+    </li>
+
+    <li data-type="nave" data-name="OPPORTUNITY" data-mood="happy" data-scene="mars-dusk" data-place="MERIDIANI PLANUM · DESPUÉS DE LA TORMENTA">
+        <strong>Opportunity:</strong>
+        ¡Mira esto! Mis mejores momentos.
+    </li>
+
+    <li data-type="memoria" data-scene="file" data-place="CAJA DE RECUERDOS DE OPPORTUNITY"
+        data-name="RECUERDOS DE OPPORTUNITY" data-file="CAJA DE RECUERDOS · OPPORTUNITY"
+        data-loading="ABRIENDO RECUERDOS…" data-stamp="RECUERDOS RECUPERADOS" data-tone="ok">
+        <strong>Recuerdos:</strong>
+        <span data-label="HALLAZGO">HEMATITA, UN MINERAL QUE PUEDE FORMARSE CON AGUA</span> ·
+        <span data-label="CRÁTERES">EAGLE · ENDURANCE · VICTORIA · ENDEAVOUR</span> ·
+        <span data-label="IMÁGENES">MÁS DE 217,000 ENVIADAS A LA TIERRA</span> ·
+        <span data-label="DURACIÓN">CASI 15 AÑOS (PLANEADA: 90 DÍAS MARCIANOS)</span>
+    </li>
+
+    <li data-type="nave" data-name="OPPORTUNITY" data-mood="happy" data-scene="mars-dusk" data-place="MERIDIANI PLANUM · DESPUÉS DE LA TORMENTA">
+        <strong>Opportunity:</strong>
+        Ayudé a demostrar que algunas regiones de Marte tuvieron condiciones que
+        podrían haber sido buenas para la vida microbiana. ¿A que eso no te lo contó Spirit?
+    </li>
+
+    <li data-type="roverchito" data-mood="happy" data-scene="mars-dusk" data-place="MERIDIANI PLANUM · DESPUÉS DE LA TORMENTA">
+        <strong>Roverchito:</strong>
+        ¡Wow! Eres increíble, Opportunity.
+    </li>
+
+    <li data-type="nave" data-name="OPPORTUNITY" data-mood="neutral" data-scene="mars-dusk" data-place="VALLE PERSEVERANCE, MARTE">
+        <strong>Opportunity:</strong>
+        Mi último lugar fue el valle Perseverance. Lo estaba estudiando cuando llegó la tormenta.
+    </li>
+
+    <li data-type="nave" data-name="OPPORTUNITY" data-mood="neutral" data-scene="mars-dusk" data-place="VALLE PERSEVERANCE, MARTE">
+        <strong>Opportunity:</strong>
+        Toma. Es lo último que envié a la Tierra, el 10 de junio de 2018.
+    </li>
+
+    <li data-type="nota" data-scene="space" data-place="NOTA DE LA MELODÍA">
+        <strong>Nota:</strong>
+        Roverchito recibió la nota 2 de 4.
+    </li>
+
+    <li data-type="roverchito" data-mood="sad" data-scene="mars-night" data-place="VALLE PERSEVERANCE · ESA NOCHE">
+        <strong>Roverchito:</strong>
+        Opportunity… después de esa última señal, ¿te quedaste solo?
+    </li>
+
+    <li data-type="nave" data-name="OPPORTUNITY" data-mood="neutral" data-scene="mars-night" data-place="VALLE PERSEVERANCE · ESA NOCHE">
+        <strong>Opportunity:</strong>
+        ¿Solo? ¡Para nada! Desde la Tierra me mandaron más de mil mensajes para
+        despertarme. Así de importante era.
+    </li>
+
+    <li data-type="nave" data-name="OPPORTUNITY" data-mood="happy" data-scene="mars-night" data-place="VALLE PERSEVERANCE · ESA NOCHE">
+        <strong>Opportunity:</strong>
+        Aunque… entre tú y yo, a Spirit le mandaron más de 1,300. Supongo que los
+        dos fuimos importantes.
+    </li>
+
+    <li data-type="eleccion" data-key="roverchito_respuesta" data-mood="sad" data-scene="mars-night" data-place="VALLE PERSEVERANCE · ESA NOCHE" data-note="TE PREGUNTA A TI">
+        <strong>Roverchito:</strong>
+        Oye… cuando yo ya no sirva… ¿también me vas a dejar allá?
+        <span data-option="a">Nunca te voy a dejar solo.</span>
+        <span data-option="b">Siempre te voy a buscar, como buscaron a Opportunity.</span>
+        <span data-option="c">No lo sé… pero hoy estoy aquí contigo.</span>
+    </li>
+
+    <li data-type="roverchito" data-if="roverchito_respuesta=a" data-mood="happy" data-scene="mars-night" data-place="VALLE PERSEVERANCE · ESA NOCHE">
+        <strong>Roverchito:</strong>
+        ¿Lo prometes? Voy a guardar eso en mi memoria, donde nadie lo pueda borrar.
+    </li>
+
+    <li data-type="roverchito" data-if="roverchito_respuesta=b" data-mood="happy" data-scene="mars-night" data-place="VALLE PERSEVERANCE · ESA NOCHE">
+        <strong>Roverchito:</strong>
+        ¿Más de mil mensajes? ¡Entonces yo también te mandaría mil!
+    </li>
+
+    <li data-type="roverchito" data-if="roverchito_respuesta=c" data-mood="neutral" data-scene="mars-night" data-place="VALLE PERSEVERANCE · ESA NOCHE">
+        <strong>Roverchito:</strong>
+        Gracias por decirme la verdad. Por hoy… eso es suficiente.
+    </li>
+
+    <li data-type="narrador" data-scene="mars-night" data-place="MERIDIANI PLANUM, MARTE">
+        <strong>Narrador:</strong>
+        Opportunity vuelve a dormir, orgulloso. La NASA anunció el final de su misión
+        el 13 de febrero de 2019. Abandonado, pero no olvidado.
+    </li>
+
+</ol>
+
+
+<script src="../../roverchito.js"></script>
+<script src="../../cinematica.js"></script>
+<script src="opportunity.js"></script>
+</body>
+</html>

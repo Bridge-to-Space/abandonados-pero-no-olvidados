@@ -19,10 +19,10 @@
         opportunity: {
             name: "Opportunity",
             place: "MERIDIANI PLANUM, MARTE",
-            text: "La gemela de Spirit. Funcionó casi 15 años, recorrió 45.16 km y envió más de 217,000 imágenes. Una enorme tormenta de polvo la apagó en 2018.",
-            guide: "¡Spirit tiene una gemela! A lo mejor me parezco a ella.",
+            text: "El gemelo de Spirit. Funcionó casi 15 años, recorrió 45.16 km y envió más de 217,000 imágenes. Una enorme tormenta de polvo lo apagó en 2018.",
+            guide: "¡Spirit tiene un gemelo! Dicen que es muy orgulloso de sus récords…",
             mood: "happy",
-            play: null,
+            play: "niveles/opportunity/index.html",
             source: "https://science.nasa.gov/mission/mer-opportunity/"
         },
         ingenuity: {
@@ -45,12 +45,13 @@
         }
     };
 
-    /* Una nota por nave completada. Por ahora solo Spirit tiene nivel. */
+    /* Una nota por nave completada (Spirit y Opportunity ya tienen nivel). */
     function completedDevices() {
         const done = [];
         try {
             const spirit = JSON.parse(localStorage.getItem("spirit_abandonados_save") || "null");
             if (spirit && spirit.gameOver) done.push("spirit");
+            if (localStorage.getItem("opportunity_nota")) done.push("opportunity");
         } catch (e) {
             /* sin almacenamiento disponible: el mapa empieza en cero */
         }

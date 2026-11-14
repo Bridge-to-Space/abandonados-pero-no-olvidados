@@ -1,0 +1,322 @@
+/* =========================================
+   PARADA 2 · OPPORTUNITY — página del nivel
+   Usa los tokens y componentes de ../../style.css
+========================================= */
+
+body.level::after {
+    opacity: 0.08;
+}
+
+.level-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+
+    padding: 16px 6%;
+
+    background: rgba(7, 7, 17, 0.8);
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+}
+
+.level-header .logo {
+    font-size: 20px;
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    color: #fff;
+}
+
+.level-header .logo span {
+    color: var(--primary);
+}
+
+.level-back {
+    padding: 10px 16px;
+    font-size: 12px;
+}
+
+.level-main {
+    width: min(1100px, 100%);
+    margin: 0 auto;
+    padding: 40px 6% 80px;
+
+    display: grid;
+    gap: 28px;
+}
+
+.level-kicker {
+    display: block;
+    margin-bottom: 10px;
+
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    color: rgba(239, 255, 105, 0.8);
+}
+
+/* ---------- Presentación ---------- */
+.level-hero {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    align-items: center;
+    gap: 24px;
+
+    padding: 32px;
+
+    background:
+        radial-gradient(circle at 80% 70%, rgba(251, 146, 60, 0.18), transparent 55%),
+        var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+}
+
+.level-hero h1 {
+    margin: 0;
+
+    font-size: clamp(40px, 7vw, 76px);
+    font-weight: 900;
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+}
+
+.level-sub {
+    margin: 10px 0 0;
+
+    font-size: 14px;
+    color: #fb923c;
+}
+
+.level-lead {
+    margin: 16px 0 0;
+    max-width: 520px;
+
+    color: var(--muted-foreground);
+    line-height: 1.65;
+}
+
+.level-cast {
+    position: relative;
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 6px;
+
+    min-height: 200px;
+}
+
+.level-rover {
+    width: min(300px, 70%);
+    filter: sepia(0.35) saturate(0.85);
+}
+
+.level-rover svg,
+.level-roverchito svg {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.level-roverchito {
+    width: 82px;
+    margin-bottom: 18px;
+    animation: guideFloat 3.2s ease-in-out infinite;
+}
+
+/* ---------- Pasos ---------- */
+.level-steps {
+    display: grid;
+    gap: 12px;
+}
+
+.level-step {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 18px;
+
+    padding: 20px 22px;
+
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+}
+
+.level-step h2 {
+    margin: 2px 0 4px;
+
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+
+.level-step p {
+    margin: 0;
+
+    font-size: 14px;
+    color: var(--muted-foreground);
+}
+
+.level-step-kind {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    color: var(--muted-foreground);
+}
+
+.level-step-num {
+    display: grid;
+    place-items: center;
+
+    width: 38px;
+    height: 38px;
+
+    font-weight: 600;
+    color: var(--primary);
+
+    border: 1px solid var(--primary);
+    border-radius: 50%;
+}
+
+.level-step.is-done .level-step-num {
+    color: var(--primary-foreground);
+    background: var(--primary);
+}
+
+.level-step.is-done .level-step-num::before {
+    content: "✓";
+}
+
+.level-step.is-done .level-step-num {
+    font-size: 0;
+}
+
+.level-step.is-done .level-step-num::before {
+    font-size: 16px;
+}
+
+.level-step.is-locked .level-step-num {
+    color: var(--muted-foreground);
+    border-color: rgba(148, 163, 184, 0.35);
+}
+
+.level-step .primary-btn,
+.level-step .secondary-btn {
+    padding: 12px 18px;
+    white-space: nowrap;
+}
+
+.level-soon {
+    padding: 10px 14px;
+
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    color: var(--muted-foreground);
+
+    border: 1px dashed rgba(148, 163, 184, 0.35);
+    border-radius: var(--radius);
+}
+
+.level-step.is-flash {
+    animation: levelFlash 1.2s ease-out;
+}
+
+@keyframes levelFlash {
+    0%, 60% { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(239, 255, 105, 0.15); }
+    100% { border-color: var(--border); box-shadow: none; }
+}
+
+/* ---------- Historia real ---------- */
+.level-facts {
+    padding: 24px;
+
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-left: 3px solid #fb923c;
+    border-radius: var(--radius-xl);
+}
+
+.level-facts ul {
+    margin: 0;
+    padding-left: 18px;
+
+    display: grid;
+    gap: 8px;
+
+    color: var(--foreground);
+    line-height: 1.6;
+}
+
+.level-sources {
+    margin: 16px 0 0;
+
+    font-size: 12px;
+    color: var(--muted-foreground);
+}
+
+.level-sources a {
+    color: var(--muted-foreground);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.level-sources a:hover {
+    color: var(--primary);
+}
+
+@media (max-width: 760px) {
+    .level-hero {
+        grid-template-columns: 1fr;
+        padding: 22px;
+    }
+
+    .level-cast {
+        min-height: 150px;
+    }
+
+    .level-step {
+        grid-template-columns: auto 1fr;
+    }
+
+    .level-step > .primary-btn,
+    .level-step > .secondary-btn,
+    .level-step > .level-soon {
+        grid-column: 1 / -1;
+        justify-self: start;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .level-roverchito {
+        animation: none;
+    }
+}
+
+.level-steps {
+    padding: 0;
+}
+
+.level-header {
+    height: auto;
+    min-height: 64px;
+    flex-wrap: nowrap;
+}
+
+@media (max-width: 600px) {
+    .level-header .logo {
+        font-size: 17px;
+    }
+
+    .level-back {
+        flex: none;
+        padding: 8px 10px;
+        font-size: 10px;
+        letter-spacing: 0.08em;
+    }
+}

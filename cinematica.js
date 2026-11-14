@@ -9,7 +9,7 @@
      Cinematica.abrir()            → la cinemática del inicio ("origen")
 
    Atributos de cada <li>:
-     data-type   narrador | roverchito | control | nave | memoria | nota | eleccion
+     data-type   narrador | roverchito | control | nave | jugador | memoria | nota | eleccion
      data-mood   expresión de Roverchito: neutral | happy | sad
      data-scene  fondo: lab | file | night | control | space | mars-day | mars-dusk | mars-night | storm |
                  asteroids | jupiter | deep
@@ -39,6 +39,7 @@ const Cinematica = (() => {
         control: '<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="9" r="1.6" fill="currentColor"/><path d="M5 6a4.2 4.2 0 0 0 0 6M11 6a4.2 4.2 0 0 1 0 6M2.8 3.8a7.3 7.3 0 0 0 0 10.4M13.2 3.8a7.3 7.3 0 0 1 0 10.4" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>',
         nave: '<svg viewBox="0 0 16 16" aria-hidden="true"><rect x="2" y="6" width="12" height="4" rx="1" fill="currentColor"/><rect x="3" y="4" width="10" height="1.6" fill="currentColor"/><circle cx="4" cy="12.5" r="1.6" fill="currentColor"/><circle cx="8" cy="12.5" r="1.6" fill="currentColor"/><circle cx="12" cy="12.5" r="1.6" fill="currentColor"/><rect x="10.5" y="1" width="1.4" height="3.5" fill="currentColor"/></svg>',
         memoria: '<svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3.5" y="3.5" width="9" height="9" rx="1" fill="none" stroke="currentColor" stroke-width="1.4"/><rect x="6" y="6" width="4" height="4" fill="currentColor"/><path d="M6 1v2.5M10 1v2.5M6 12.5V15M10 12.5V15M1 6h2.5M1 10h2.5M12.5 6H15M12.5 10H15" stroke="currentColor" stroke-width="1.3"/></svg>',
+        jugador: '<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="5" r="3" fill="currentColor"/><path d="M2.5 15c.4-3.4 2.6-5.4 5.5-5.4s5.1 2 5.5 5.4z" fill="currentColor"/></svg>',
         nota: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 12.5V3l7-1.5v9" fill="none" stroke="currentColor" stroke-width="1.5"/><ellipse cx="4.3" cy="12.6" rx="2.2" ry="1.7" fill="currentColor"/><ellipse cx="11.3" cy="11" rx="2.2" ry="1.7" fill="currentColor"/></svg>',
         lock: '<svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="7" width="10" height="7.5" rx="1.2" fill="currentColor"/><path d="M5.2 7V5a2.8 2.8 0 0 1 5.6 0v2" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>',
         check: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 4.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
@@ -50,7 +51,8 @@ const Cinematica = (() => {
         control: "CONTROL DE MISIÓN",
         memoria: "MEMORIA DE ROVERCHITO",
         nota: "NOTA DE LA MELODÍA",
-        eleccion: "ROVERCHITO"
+        eleccion: "ROVERCHITO",
+        jugador: "TÚ · EXPLORADOR"
     };
 
     const store = {

@@ -109,8 +109,76 @@
         select("spirit");
     }
 
+    /* ---------- ROVERCHITO SE ASOMA (inicio) ---------- */
+    const PEEK_LINES = [
+        null, /* la primera frase viene del HTML */
+        "¡Ey! Si pulsas «Comenzar la misión», te cuento cómo empezó todo.",
+        "Las naves que quiero visitar siguen allá afuera, en silencio… ¿me acompañas?"
+    ];
+
+    function initPeek() {
+        const peek = document.getElementById("peek");
+        if (!peek) return;
+
+        const bot = peek.querySelector(".peek-bot");
+        const bubble = peek.querySelector(".peek-bubble");
+        const text = peek.querySelector(".peek-text");
+        const sr = peek.querySelector(".peek-sr");
+        const face = bot.querySelector("[data-roverchito]");
+        PEEK_LINES[0] = text.dataset.text;
+
+        const reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        let line = 0;
+        let timer = null;
+
+        function type(message) {
+            clearInterval(timer);
+            sr.textContent = message;
+            if (reduceMotion) {
+                text.textContent = message;
+                return;
+            }
+            let n = 0;
+            text.textContent = "";
+            text.classList.add("is-typing");
+            timer = setInterval(() => {
+                n++;
+                text.textContent = message.slice(0, n);
+                if (n >= message.length) {
+                    clearInterval(timer);
+                    text.classList.remove("is-typing");
+                }
+            }, 32);
+        }
+
+        /* Empieza a escribir cuando el globo termina de aparecer */
+        let started = false;
+        const start = () => {
+            if (started) return;
+            started = true;
+            type(PEEK_LINES[0]);
+        };
+        bubble.addEventListener("animationend", start, { once: true });
+        setTimeout(start, 5200);          /* respaldo por si no hay animación */
+        if (reduceMotion) start();
+
+        /* Al hacerle clic: saltito y otra frase */
+        bot.addEventListener("click", () => {
+            line = (line + 1) % PEEK_LINES.length;
+            bot.classList.remove("is-hop");
+            void bot.offsetWidth;
+            bot.classList.add("is-hop");
+            if (typeof Roverchito !== "undefined") {
+                Roverchito.setMood(face, "happy");
+            }
+            started = true;
+            type(PEEK_LINES[line]);
+        });
+    }
+
     function init() {
         initMap();
+        initPeek();
     }
 
     if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);

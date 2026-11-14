@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Abandonados, pero no olvidados</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+
+<!-- =========================================
+     INTRO
+========================================= -->
+
+<div id="intro">
+
+    <div class="intro-content">
+
+        <div class="intro-line"></div>
+
+        <div class="intro-small">
+            HYBRIDGE EDUCATION PRESENTS
+        </div>
+
+        <div class="intro-title">
+            BRIDGE <span>TO</span> SPACE
+        </div>
+
+        <div class="intro-subtitle">
+            NASA SPACE APPS CHALLENGE 2026
+        </div>
+
+        <div class="intro-logo">
+            ABANDONADOS<span>.</span>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================
+     HEADER
+========================================= -->
+
+<header>
+
+    <div
+        class="logo"
+        onclick="location.reload()"
+        style="cursor: pointer;"
+    >
+        ABANDONADOS<span>.</span>
+    </div>
+
+    <nav>
+
+        <button onclick="goTo('inicio')">
+            Inicio
+        </button>
+
+        <button onclick="goTo('historia')">
+            Historia
+        </button>
+
+        <button onclick="goTo('archivo')">
+            Archivo
+        </button>
+
+        <button onclick="goTo('equipo')">
+            Equipo
+        </button>
+
+    </nav>
+
+</header>
+
+
+<!-- =========================================
+     HERO
+========================================= -->
+
+<section id="inicio" class="hero">
+
+    <div class="hero-content">
+
+        <div class="badge">
+            NASA SPACE APPS CHALLENGE 2026
+        </div>
+
+        <h1>
+            ABANDONADOS,<br>
+            PERO NO OLVIDADOS.
+        </h1>
+
+        <p>
+            Explora las historias de los vehículos de la NASA
+            que quedaron atrás en la Luna y Marte.
+        </p>
+
+        <div class="hero-buttons">
+
+            <button
+                class="primary-btn"
+                onclick="goTo('historia')"
+            >
+                MODO HISTORIA
+            </button>
+
+            <button
+                class="secondary-btn"
+                onclick="goTo('archivo')"
+            >
+                MODO INFORMACIÓN
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     HISTORIA
+========================================= -->
+
+<section id="historia">
+
+    <div class="section-header">
+
+        <span>
+            01 / HISTORIAS
+        </span>
+
+        <h2>
+            MISIONES QUE<br>
+            DEJARON HUELLA
+        </h2>
+
+        <p>
+            Cada misión tuvo un objetivo.
+            Cada vehículo enfrentó condiciones extremas.
+            Y algunos terminaron quedándose para siempre en otro mundo.
+        </p>
+
+    </div>
+
+
+    <div class="mission-grid">
+
+        <!-- SPIRIT -->
+
+        <a
+            href="niveles/spirit/index.html"
+            class="mission-card active"
+        >
+
+            <div class="mission-number">
+                01
+            </div>
+
+            <div class="mission-icon">
+                🔴
+            </div>
+
+            <h3>
+                SPIRIT
+            </h3>
+
+            <p>
+                2004 — 2010
+            </p>
+
+            <span class="mission-status">
+                JUGAR HISTORIA →
+            </span>
+
+        </a>
+
+
+        <!-- OPPORTUNITY -->
+
+        <div
+            class="mission-card"
+            onclick="showComing('Opportunity')"
+        >
+
+            <div class="mission-number">
+                02
+            </div>
+
+            <div class="mission-icon">
+                🟠
+            </div>
+
+            <h3>
+                OPPORTUNITY
+            </h3>
+
+            <p>
+                2004 — 2018
+            </p>
+
+            <span class="mission-status">
+                PRÓXIMAMENTE
+            </span>
+
+        </div>
+
+
+        <!-- CURIOSITY -->
+
+        <div
+            class="mission-card"
+            onclick="showComing('Curiosity')"
+        >
+
+            <div class="mission-number">
+                03
+            </div>
+
+            <div class="mission-icon">
+                🔵
+            </div>
+
+            <h3>
+                CURIOSITY
+            </h3>
+
+            <p>
+                2012 — ACTUALIDAD
+            </p>
+
+            <span class="mission-status">
+                PRÓXIMAMENTE
+            </span>
+
+        </div>
+
+
+        <!-- INSIGHT -->
+
+        <div
+            class="mission-card"
+            onclick="showComing('InSight')"
+        >
+
+            <div class="mission-number">
+                04
+            </div>
+
+            <div class="mission-icon">
+                🟣
+            </div>
+
+            <h3>
+                INSIGHT
+            </h3>
+
+            <p>
+                2018 — 2022
+            </p>
+
+            <span class="mission-status">
+                PRÓXIMAMENTE
+            </span>
+
+        </div>
+
+
+        <!-- VOYAGER -->
+
+        <div
+            class="mission-card"
+            onclick="showComing('Voyager')"
+        >
+
+            <div class="mission-number">
+                05
+            </div>
+
+            <div class="mission-icon">
+                🛰️
+            </div>
+
+            <h3>
+                VOYAGER
+            </h3>
+
+            <p>
+                1977 — ACTUALIDAD
+            </p>
+
+            <span class="mission-status">
+                PRÓXIMAMENTE
+            </span>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     ARCHIVO
+========================================= -->
+
+<section id="archivo">
+
+    <div class="section-header">
+
+        <span>
+            02 / ARCHIVO
+        </span>
+
+        <h2>
+            LOS QUE<br>
+            SE QUEDARON
+        </h2>
+
+        <p>
+            Vehículos, sondas y misiones que dejaron atrás
+            una parte de la historia de la exploración espacial.
+        </p>
+
+    </div>
+
+
+    <div class="archive-grid">
+
+        <div class="archive-card">
+
+            <span>
+                MARS EXPLORATION ROVER
+            </span>
+
+            <h3>
+                SPIRIT
+            </h3>
+
+            <p>
+                Uno de los primeros vehículos en explorar Marte
+                durante años.
+            </p>
+
+            <strong>
+                2004 — 2010
+            </strong>
+
+        </div>
+
+
+        <div class="archive-card">
+
+            <span>
+                MARS EXPLORATION ROVER
+            </span>
+
+            <h3>
+                OPPORTUNITY
+            </h3>
+
+            <p>
+                Exploró Marte durante más de una década,
+                superando ampliamente su misión original.
+            </p>
+
+            <strong>
+                2004 — 2018
+            </strong>
+
+        </div>
+
+
+        <div class="archive-card">
+
+            <span>
+                MARS SCIENCE LABORATORY
+            </span>
+
+            <h3>
+                CURIOSITY
+            </h3>
+
+            <p>
+                Laboratorio móvil que continúa investigando
+                la superficie marciana.
+            </p>
+
+            <strong>
+                2012 — ACTUALIDAD
+            </strong>
+
+        </div>
+
+
+        <div class="archive-card">
+
+            <span>
+                MARS LANDER
+            </span>
+
+            <h3>
+                INSIGHT
+            </h3>
+
+            <p>
+                Estudió el interior de Marte y permitió conocer
+                más sobre su estructura.
+            </p>
+
+            <strong>
+                2018 — 2022
+            </strong>
+
+        </div>
+
+
+        <div class="archive-card">
+
+            <span>
+                DEEP SPACE MISSION
+            </span>
+
+            <h3>
+                VOYAGER
+            </h3>
+
+            <p>
+                Dos sondas que continúan viajando
+                por el espacio interestelar.
+            </p>
+
+            <strong>
+                1977 — ACTUALIDAD
+            </strong>
+
+        </div>
+
+    </div>
+
+
+    <!-- TIMELINE -->
+
+    <div class="timeline">
+
+        <div class="timeline-title">
+
+            <span>
+                SPIRIT / LÍNEA DEL TIEMPO
+            </span>
+
+            <h2>
+                UNA MISIÓN<br>
+                QUE NO TERMINÓ COMO ESPERABA
+            </h2>
+
+        </div>
+
+
+        <div class="timeline-item">
+
+            <div class="timeline-year">
+                2004
+            </div>
+
+            <div>
+
+                <h3>
+                    Llegada a Marte
+                </h3>
+
+                <p>
+                    Spirit aterriza en el cráter Gusev
+                    y comienza su misión científica.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="timeline-item">
+
+            <div class="timeline-year">
+                2005
+            </div>
+
+            <div>
+
+                <h3>
+                    Spirit continúa explorando
+                </h3>
+
+                <p>
+                    El rover analiza rocas y terrenos que ayudan
+                    a estudiar el pasado geológico de Marte.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="timeline-item">
+
+            <div class="timeline-year">
+                2009
+            </div>
+
+            <div>
+
+                <h3>
+                    Queda atrapado
+                </h3>
+
+                <p>
+                    Spirit queda atrapado en un terreno de arena
+                    mientras el equipo intenta liberarlo.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="timeline-item">
+
+            <div class="timeline-year">
+                2010
+            </div>
+
+            <div>
+
+                <h3>
+                    Última comunicación
+                </h3>
+
+                <p>
+                    Después de enfrentar el invierno marciano,
+                    Spirit deja de comunicarse con la Tierra.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     EQUIPO
+========================================= -->
+
+<section id="equipo">
+
+    <div class="section-header">
+
+        <span>
+            03 / EQUIPO
+        </span>
+
+        <h2>
+            LOS<br>
+            DESARROLLADORES
+        </h2>
+
+        <p>
+            Las personas detrás de este proyecto.
+        </p>
+
+    </div>
+
+
+    <div class="team-grid">
+
+
+        <!-- EVELYN -->
+
+        <div
+            class="team-card"
+            onclick="openTeamModal('modal-evelyn')"
+        >
+
+            <div class="team-photo">
+
+                <img
+                    src="img/equipo/Evelyn%20Velazquez.png"
+                    alt="Evelyn Velazquez"
+                    onerror="this.style.display='none'"
+                >
+
+            </div>
+
+            <h3>
+                Evelyn Abigail Velázquez Romero
+            </h3>
+
+            <span>
+                DESARROLLADORA
+            </span>
+
+            <div class="team-open">
+                VER PERFIL →
+            </div>
+
+        </div>
+
+
+        <!-- JOEL -->
+
+        <div
+            class="team-card"
+            onclick="openTeamModal('modal-joel')"
+        >
+
+            <div class="team-photo">
+
+                <img
+                    src="img/equipo/Joel%20Vazquez%20Juarez.png"
+                    alt="Joel Vazquez Juarez"
+                    onerror="this.style.display='none'"
+                >
+
+            </div>
+
+            <h3>
+                Joel Vazquez Juarez
+            </h3>
+
+            <span>
+                DESARROLLADOR
+            </span>
+
+            <div class="team-open">
+                VER PERFIL →
+            </div>
+
+        </div>
+
+
+        <!-- PAULO -->
+
+        <div
+            class="team-card"
+            onclick="openTeamModal('modal-paulo')"
+        >
+
+            <div class="team-photo">
+
+                <img
+                    src="img/equipo/Paulo%20Ramon%20Aldama.png"
+                    alt="Paulo Ramon Aldama"
+                    onerror="this.style.display='none'"
+                >
+
+            </div>
+
+            <h3>
+                Paulo Ramon Aldama
+            </h3>
+
+            <span>
+                DESARROLLADOR
+            </span>
+
+            <div class="team-open">
+                VER PERFIL →
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     HYBRIDGE
+========================================= -->
+
+<div class="hybridge-note">
+
+    <div class="hybridge-inner">
+
+        <img
+            src="img/logos/Hybridge.png"
+            alt="Hybridge Education"
+            class="hybridge-logo"
+            onerror="this.style.display='none'"
+        >
+
+        <p>
+            <strong>Hybridge Education</strong>
+            · Preparatoria ·
+            Proyecto desarrollado por estudiantes para el
+            NASA Space Apps Challenge 2026
+        </p>
+
+        <img
+            src="img/logos/logo-equipo.png"
+            alt="Logo del equipo"
+            class="hybridge-logo"
+            onerror="this.style.display='none'"
+        >
+
+    </div>
+
+</div>
+
+
+<!-- =========================================
+     FOOTER
+========================================= -->
+
+<footer>
+
+    <div class="footer-logo">
+        ABANDONADOS<span>.</span>
+    </div>
+
+    <p>
+        NASA SPACE APPS CHALLENGE 2026
+    </p>
+
+    <p>
+        Un proyecto de Hybridge Education
+    </p>
+
+</footer>
+
+
+<!-- =========================================
+     MODAL GENERAL
+========================================= -->
+
+<div id="modal" class="modal">
+
+    <div class="modal-box">
+
+        <button
+            class="modal-close"
+            onclick="closeModal()"
+        >
+            ×
+        </button>
+
+        <span>
+            ARCHIVO
+        </span>
+
+        <h2 id="modal-title">
+            Próximamente
+        </h2>
+
+        <p>
+            Esta historia todavía está en desarrollo.
+            Muy pronto podrás explorar esta misión.
+        </p>
+
+        <button
+            class="primary-btn"
+            onclick="closeModal()"
+        >
+            ENTENDIDO
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================
+     MODAL EVELYN
+========================================= -->
+
+<div
+    id="modal-evelyn"
+    class="modal team-modal-overlay"
+>
+
+    <div class="modal-box team-modal">
+
+        <button
+            class="modal-close"
+            onclick="closeTeamModal('modal-evelyn')"
+        >
+            ×
+        </button>
+
+        <div class="team-modal-photo">
+
+            <img
+                src="img/equipo/Evelyn%20Velazquez.png"
+                alt="Evelyn Velazquez"
+                onerror="this.style.display='none'"
+            >
+
+        </div>
+
+        <span class="team-role">
+            DESARROLLADORA
+        </span>
+
+        <h2>
+            Evelyn Abigail Velázquez Romero
+        </h2>
+
+        <div class="team-divider"></div>
+
+        <p>
+            Soy estudiante de la preparatoria Hybridge.
+            Actualmente estoy aprendiendo desarrollo web.
+            Aún soy principiante, pero me gusta experimentar,
+            aprender cosas nuevas y seguir mejorando.
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================
+     MODAL JOEL
+========================================= -->
+
+<div
+    id="modal-joel"
+    class="modal team-modal-overlay"
+>
+
+    <div class="modal-box team-modal">
+
+        <button
+            class="modal-close"
+            onclick="closeTeamModal('modal-joel')"
+        >
+            ×
+        </button>
+
+        <div class="team-modal-photo">
+
+            <img
+                src="img/equipo/Joel%20Vazquez%20Juarez.png"
+                alt="Joel Vazquez Juarez"
+                onerror="this.style.display='none'"
+            >
+
+        </div>
+
+        <span class="team-role">
+            DESARROLLADOR
+        </span>
+
+        <h2>
+            Joel Vazquez Juarez
+        </h2>
+
+        <div class="team-divider"></div>
+
+        <p>
+            Soy estudiante de Hybridge Education y también estudio
+            música en el Conservatorio. Me gusta mucho aprender sobre
+            programación y enfrentarme a nuevos retos.
+
+            Me interesa la tecnología y soy de los que prefieren
+            desarmar algo para entender cómo funciona y ver si pueden
+            arreglarlo. También me gusta crear mis propias soluciones:
+            si no encuentro una aplicación que haga lo que necesito,
+            intento hacerla yo mismo.
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================
+     MODAL PAULO
+========================================= -->
+
+<div
+    id="modal-paulo"
+    class="modal team-modal-overlay"
+>
+
+    <div class="modal-box team-modal">
+
+        <button
+            class="modal-close"
+            onclick="closeTeamModal('modal-paulo')"
+        >
+            ×
+        </button>
+
+        <div class="team-modal-photo">
+
+            <img
+                src="img/equipo/Paulo%20Ramon%20Aldama.png"
+                alt="Paulo Ramon Aldama"
+                onerror="this.style.display='none'"
+            >
+
+        </div>
+
+        <span class="team-role">
+            DESARROLLADOR
+        </span>
+
+        <h2>
+            Paulo Ramon Aldama
+        </h2>
+
+        <div class="team-divider"></div>
+
+        <p>
+            Soy Paulo Ramón Aldama, estudiante de Hybridge.
+            Ex experto en programación, me gusta aprender cosas nuevas,
+            salir de mi zona de confort y sobre todo seguir mejorando.
+
+            Programador de robots de LEGO, juegos en Scratch.
+            Sé arreglar casi cualquier elemento electrónico.
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================
+     JAVASCRIPT
+========================================= -->
+
+<script>
+
+    /* =========================================
+       NAVEGACIÓN
+    ========================================= */
+
+    function goTo(id) {
+
+        const section = document.getElementById(id);
+
+        if (!section) return;
+
+        section.scrollIntoView({
+            behavior: "smooth"
+        });
+
+    }
+
+
+    /* =========================================
+       MODAL GENERAL
+    ========================================= */
+
+    function showComing(name) {
+
+        const modal = document.getElementById("modal");
+        const title = document.getElementById("modal-title");
+
+        if (!modal) return;
+
+        if (title) {
+            title.textContent = name + " — Próximamente";
+        }
+
+        modal.classList.add("show");
+
+        document.body.style.overflow = "hidden";
+
+    }
+
+
+    function closeModal() {
+
+        const modal = document.getElementById("modal");
+
+        if (!modal) return;
+
+        modal.classList.remove("show");
+
+        document.body.style.overflow = "";
+
+    }
+
+
+    /* =========================================
+       MODALES DEL EQUIPO
+    ========================================= */
+
+    window.openTeamModal = function (id) {
+
+        console.log("Intentando abrir:", id);
+
+        const modal = document.getElementById(id);
+
+        if (!modal) {
+
+            console.error("No se encontró el modal:", id);
+
+            return;
+
+        }
+
+        document
+            .querySelectorAll(".team-modal-overlay")
+            .forEach(function (otherModal) {
+
+                otherModal.classList.remove("show");
+
+            });
+
+        modal.classList.add("show");
+
+        document.body.style.overflow = "hidden";
+
+        console.log("Modal abierto:", id);
+
+    };
+
+
+    window.closeTeamModal = function (id) {
+
+        console.log("Intentando cerrar:", id);
+
+        const modal = document.getElementById(id);
+
+        if (!modal) {
+
+            console.error("No se encontró el modal:", id);
+
+            return;
+
+        }
+
+        modal.classList.remove("show");
+
+        document.body.style.overflow = "";
+
+    };
+
+
+    /* =========================================
+       CERRAR MODALES AL HACER CLICK AFUERA
+    ========================================= */
+
+    document.querySelectorAll(".modal").forEach(function (modal) {
+
+        modal.addEventListener("click", function (event) {
+
+            if (event.target === modal) {
+
+                modal.classList.remove("show");
+
+                document.body.style.overflow = "";
+
+            }
+
+        });
+
+    });
+
+
+    /* =========================================
+       ESC PARA CERRAR
+    ========================================= */
+
+    document.addEventListener("keydown", function (event) {
+
+        if (event.key !== "Escape") return;
+
+        document
+            .querySelectorAll(".modal.show")
+            .forEach(function (modal) {
+
+                modal.classList.remove("show");
+
+            });
+
+        document.body.style.overflow = "";
+
+    });
+
+</script>
+
+</body>
+</html>

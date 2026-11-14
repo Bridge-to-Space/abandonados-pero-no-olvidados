@@ -71,31 +71,58 @@
             <div class="ground"></div>
             <div class="dust-cloud" id="dust-cloud"></div>
 
-            <!-- ==================== NAVE ==================== -->
-            <div class="landing-ship" id="landing-ship">
-                <svg viewBox="0 0 180 280" class="ship-svg" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <!-- CUERPO PRINCIPAL -->
-                    <path d="M90 8 C65 25 48 65 48 125 L48 185 L132 185 L132 125 C132 65 115 25 90 8 Z" fill="#d7d7d7" stroke="#777" stroke-width="3"/>
-                    <!-- PARTE OSCURA -->
-                    <path d="M55 105 L125 105 L132 160 L48 160 Z" fill="#777"/>
-                    <!-- VENTANA -->
-                    <ellipse cx="90" cy="75" rx="24" ry="30" fill="#1b2635" stroke="#999" stroke-width="3"/>
-                    <ellipse cx="90" cy="72" rx="15" ry="20" fill="#263f58"/>
-                    <!-- DETALLES -->
-                    <line x1="65" y1="125" x2="115" y2="125" stroke="#aaa" stroke-width="3"/>
-                    <line x1="62" y1="145" x2="118" y2="145" stroke="#aaa" stroke-width="3"/>
-                    <!-- PATAS -->
-                    <line x1="58" y1="175" x2="35" y2="215" stroke="#aaa" stroke-width="5"/>
-                    <line x1="122" y1="175" x2="145" y2="215" stroke="#aaa" stroke-width="5"/>
-                    <!-- MOTOR -->
-                    <path d="M48 180 L35 225 L70 215 L90 255 L110 215 L145 225 L132 180 Z" fill="#888" stroke="#555" stroke-width="2"/>
-                    <!-- FUEGO -->
-                    <g class="rocket-flame">
-                        <path d="M65 210 C70 235 75 245 90 275 C105 245 110 235 115 210 Z" fill="#ff7a00"/>
-                        <path d="M78 215 C82 240 86 248 90 263 C94 248 98 240 102 215 Z" fill="#ffd45a"/>
+            <!-- ==================== MÓDULO DE ATERRIZAJE ====================
+                 Cápsula con paracaídas, bolsas de aire y retrocohetes,
+                 como en el descenso real de Spirit (2004). -->
+            <div class="lander" id="lander" data-stage="hidden" aria-hidden="true">
+                <svg viewBox="0 0 200 320" class="lander-svg" xmlns="http://www.w3.org/2000/svg">
+                    <!-- PARACAÍDAS -->
+                    <g class="lander-chute">
+                        <path d="M20 70 C30 10 170 10 180 70 C160 60 140 60 120 68 C110 58 90 58 80 68 C60 60 40 60 20 70 Z" fill="#e8ecf0" stroke="#8b949c" stroke-width="2"/>
+                        <path d="M60 64 C70 40 130 40 140 64" fill="none" stroke="#c45f35" stroke-width="6"/>
+                        <g stroke="#b9c0c6" stroke-width="1.2">
+                            <line x1="22" y1="70" x2="100" y2="150"/>
+                            <line x1="80" y1="68" x2="100" y2="150"/>
+                            <line x1="120" y1="68" x2="100" y2="150"/>
+                            <line x1="178" y1="70" x2="100" y2="150"/>
+                        </g>
+                    </g>
+
+                    <!-- CÁPSULA (escudo trasero) -->
+                    <g class="lander-backshell">
+                        <path d="M70 150 L130 150 L150 196 L50 196 Z" fill="#d7d7d7" stroke="#777" stroke-width="2.5"/>
+                        <path d="M56 182 L144 182" stroke="#999" stroke-width="2"/>
+                        <rect x="88" y="142" width="24" height="10" rx="2" fill="#aaa" stroke="#777" stroke-width="1.5"/>
+                        <!-- RETROCOHETES -->
+                        <g class="lander-flames">
+                            <path d="M60 196 C62 214 66 222 70 236 C74 222 78 214 80 196 Z" fill="#ff7a00"/>
+                            <path d="M120 196 C122 214 126 222 130 236 C134 222 138 214 140 196 Z" fill="#ff7a00"/>
+                            <path d="M66 196 C68 208 69 214 70 222 C71 214 72 208 74 196 Z" fill="#ffd45a"/>
+                            <path d="M126 196 C128 208 129 214 130 222 C131 214 132 208 134 196 Z" fill="#ffd45a"/>
+                        </g>
+                    </g>
+
+                    <!-- CABLE (brida) -->
+                    <line class="lander-bridle" x1="100" y1="196" x2="100" y2="232" stroke="#b9c0c6" stroke-width="1.5"/>
+
+                    <!-- MÓDULO CON BOLSAS DE AIRE -->
+                    <g class="lander-ball">
+                        <g class="lander-airbags">
+                            <circle cx="100" cy="270" r="40" fill="#e9dcc3" stroke="#a8936d" stroke-width="2"/>
+                            <circle cx="70" cy="262" r="24" fill="#efe3cc" stroke="#a8936d" stroke-width="2"/>
+                            <circle cx="130" cy="262" r="24" fill="#efe3cc" stroke="#a8936d" stroke-width="2"/>
+                            <circle cx="80" cy="292" r="22" fill="#e4d5b8" stroke="#a8936d" stroke-width="2"/>
+                            <circle cx="120" cy="292" r="22" fill="#e4d5b8" stroke="#a8936d" stroke-width="2"/>
+                            <circle cx="100" cy="244" r="20" fill="#f2e8d5" stroke="#a8936d" stroke-width="2"/>
+                            <path d="M62 270 H138 M100 232 V308" stroke="#b9a37a" stroke-width="1.5"/>
+                        </g>
+                        <path class="lander-core" d="M84 256 L116 256 L124 284 L76 284 Z" fill="#8a8074" stroke="#5f574f" stroke-width="2"/>
                     </g>
                 </svg>
             </div>
+
+            <!-- MINIJUEGO (se dibuja desde minijuegos.js) -->
+            <div class="minigame" id="minigame" hidden></div>
 
             <!-- ==================== ROVER SPIRIT ==================== -->
             <div class="rover-box" id="rover-box">
@@ -231,14 +258,23 @@
         <div class="content">
             <div class="label" id="scene-label">2003 / PREPARACIÓN</div>
             <h2 id="scene-title">Spirit: rumbo a Marte</h2>
-            <p id="scene-text">Después de años de desarrollo, Spirit está listo para comenzar su viaje hacia Marte.</p>
+            <!-- ROVERCHITO cuenta la historia -->
+            <div class="guide">
+                <div class="guide-avatar" id="guide-avatar" data-roverchito data-mood="neutral"></div>
+                <div class="guide-bubble">
+                    <span class="guide-name">ROVERCHITO</span>
+                    <p id="scene-text">¡Hola! Soy Roverchito y hoy te contaré la historia de Spirit.</p>
+                    <p class="guide-reaction" id="guide-reaction" hidden></p>
+                </div>
+            </div>
 
             <div class="choices" id="choices"></div>
             <div class="consequence" id="consequence"></div>
 
             <div class="history">
                 <span>HISTORIA REAL</span>
-                <p id="real-history-text">Spirit fue lanzado el 10 de junio de 2003 y llegó a Marte el 4 de enero de 2004.</p>
+                <p id="real-history-text">Spirit fue lanzado el 10 de junio de 2003.</p>
+                <a id="history-source" class="history-source" href="https://science.nasa.gov/mission/mer-spirit/" target="_blank" rel="noopener noreferrer">Fuente: NASA Science — Spirit (MER-A)</a>
             </div>
 
             <button class="next" id="next-button" onclick="nextSol()" disabled>SIGUIENTE →</button>
@@ -250,6 +286,7 @@
 <div class="mission-end" id="mission-end" style="display: none;">
     <div class="mission-end-card">
         <div class="end-header">
+            <div class="end-guide" data-roverchito data-mood="happy"></div>
             <span class="end-label">MISIÓN COMPLETADA</span>
             <h2 class="end-title">Abandonado, pero no olvidado</h2>
             <p class="end-subtitle">
@@ -291,9 +328,16 @@
         </p>
 
         <button class="end-button" onclick="restartGame()">VOLVER A JUGAR</button>
+
+        <p class="end-credit">
+            Información histórica:
+            <a href="https://science.nasa.gov/mission/mer-spirit/" target="_blank" rel="noopener noreferrer">NASA Science — Spirit (MER-A)</a>
+        </p>
     </div>
 </div>
 
+<script src="../../roverchito.js"></script>
+<script src="minijuegos.js"></script>
 <script src="script.js"></script>
 </body>
 </html>

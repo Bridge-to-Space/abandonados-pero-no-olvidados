@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Pioneer 10 — Abandonados</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <meta name="color-scheme" content="dark">
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="../nivel.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="level">
+
+<header class="level-header">
+    <a class="logo" href="../../index.html">ABANDONADOS<span>.</span></a>
+    <a class="secondary-btn level-back" href="../../index.html#mapa">← VOLVER AL MAPA</a>
+</header>
+
+<main class="level-main">
+
+    <!-- PRESENTACIÓN DE LA PARADA -->
+    <section class="level-hero">
+
+        <div class="level-hero-info">
+            <span class="level-kicker">PARADA 5 DE 5 · ESPACIO PROFUNDO</span>
+            <h1>PIONEER 10</h1>
+            <p class="level-sub">El bisabuelo · Primera misión de la NASA a los planetas exteriores · 1972 – 2003</p>
+            <p class="level-lead">
+                El más viejo y el más lejano de todos. Habla despacio, como si su
+                voz tardara en llegar, y ya lo ha visto todo. Lo hicieron para
+                21 meses… y viajó más de 30 años.
+            </p>
+        </div>
+
+        <div class="level-cast" aria-hidden="true">
+            <div class="level-rover level-probe" id="level-rover"></div>
+            <div class="level-roverchito" data-roverchito data-mood="neutral"></div>
+        </div>
+
+    </section>
+
+    <!-- PASOS DEL NIVEL -->
+    <section class="level-steps" aria-label="Pasos de esta parada">
+
+        <article class="level-step" id="step-1">
+            <span class="level-step-num">1</span>
+            <div>
+                <span class="level-step-kind">CINEMÁTICA</span>
+                <h2>La señal más lejana</h2>
+                <p>Roverchito sigue la ruta de Pioneer 10 hasta el espacio profundo para encontrar la última nota.</p>
+            </div>
+            <button class="primary-btn" type="button" onclick="Cinematica.abrir('p10-viaje')">▶ VER</button>
+        </article>
+
+        <article class="level-step is-locked" id="step-2">
+            <span class="level-step-num">2</span>
+            <div>
+                <span class="level-step-kind">MINIJUEGO</span>
+                <h2>Captar la última señal</h2>
+                <p>Apunta la antena y sintoniza la señal de Pioneer 10 antes de que se pierda en el ruido.</p>
+            </div>
+            <span class="level-soon">PRÓXIMAMENTE</span>
+        </article>
+
+        <article class="level-step" id="step-3">
+            <span class="level-step-num">3</span>
+            <div>
+                <span class="level-step-kind">CINEMÁTICA · EL FINAL DE LA HISTORIA</span>
+                <h2>Nuestra última señal</h2>
+                <p>La melodía se completa, el archivo de Roverchito se abre y por fin sabe de dónde viene.</p>
+            </div>
+            <button class="secondary-btn" type="button" onclick="Cinematica.abrir('p10-final')">▶ VER</button>
+        </article>
+
+    </section>
+
+    <!-- HISTORIA REAL (datos de las fichas de investigación) -->
+    <section class="level-facts">
+        <span class="level-kicker">HISTORIA REAL</span>
+        <ul>
+            <li>Lanzado el 2 de marzo de 1972 desde Cabo Cañaveral, Florida, en un cohete Atlas Centaur. Fue la primera misión de la NASA a los planetas exteriores.</li>
+            <li>Su objetivo era pasar cerca de Júpiter. Estaba diseñado para una misión de 21 meses y duró más de 30 años.</li>
+            <li>Entró al cinturón de asteroides el 15 de julio de 1972, tuvo su máximo acercamiento a Júpiter el 4 de diciembre de 1973, cruzó la órbita de Saturno en febrero de 1976 y la de Neptuno el 13 de junio de 1983.</li>
+            <li>Pesaba 258 kg y llevaba 11 instrumentos científicos.</li>
+            <li>El contacto de rutina terminó el 31 de marzo de 1997. Su última señal llegó a la Tierra el 23 de enero de 2003, desde 12,230 millones de kilómetros.</li>
+        </ul>
+        <p class="level-sources">
+            Fuente:
+            <a href="https://science.nasa.gov/mission/pioneer-10/" target="_blank" rel="noopener noreferrer">NASA Science — Pioneer 10</a>
+        </p>
+    </section>
+
+</main>
+
+
+<!-- Dibujo de Pioneer 10 (ilustración propia, sin imágenes externas) -->
+<template id="p10-sprite">
+<svg viewBox="0 0 320 240" class="p10-probe" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+<g stroke-linecap="round">
+<line x1="160" y1="172" x2="34" y2="54" stroke="#94a3b8" stroke-width="3"/>
+<rect x="24" y="44" width="18" height="18" rx="3" fill="#cbd5e1" stroke="#64748b" stroke-width="2" transform="rotate(45 33 53)"/>
+<line x1="164" y1="188" x2="64" y2="222" stroke="#94a3b8" stroke-width="4"/>
+<line x1="188" y1="188" x2="286" y2="214" stroke="#94a3b8" stroke-width="4"/>
+</g>
+<g fill="#475569" stroke="#1e293b" stroke-width="2">
+<rect x="44" y="208" width="34" height="18" rx="4" transform="rotate(-18 61 217)"/>
+<rect x="84" y="196" width="26" height="16" rx="4" transform="rotate(-18 97 204)"/>
+<rect x="268" y="202" width="34" height="18" rx="4" transform="rotate(14 285 211)"/>
+<rect x="238" y="194" width="26" height="16" rx="4" transform="rotate(14 251 202)"/>
+</g>
+<polygon points="176,150 200,164 200,190 176,204 152,190 152,164" fill="#d4a017" stroke="#7c5a06" stroke-width="2"/>
+<path d="M160 168 L192 168 M160 182 L192 182" stroke="#a37a0a" stroke-width="2"/>
+<ellipse cx="176" cy="100" rx="86" ry="78" fill="#e2e8f0" stroke="#64748b" stroke-width="3"/>
+<ellipse cx="176" cy="100" rx="66" ry="60" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="2"/>
+<g stroke="#cbd5e1" stroke-width="1.6">
+<line x1="176" y1="22" x2="176" y2="178"/>
+<line x1="90" y1="100" x2="262" y2="100"/>
+<line x1="115" y1="45" x2="237" y2="155"/>
+<line x1="237" y1="45" x2="115" y2="155"/>
+</g>
+<g stroke="#94a3b8" stroke-width="2">
+<line x1="120" y1="150" x2="176" y2="96"/>
+<line x1="232" y1="150" x2="176" y2="96"/>
+<line x1="176" y1="24" x2="176" y2="96"/>
+</g>
+<rect x="168" y="88" width="16" height="16" rx="3" fill="#64748b" stroke="#334155" stroke-width="2"/>
+</svg>
+</template>
+
+
+<!-- =========================================
+     CINEMÁTICA 1 · LA SEÑAL MÁS LEJANA
+========================================= -->
+<ol class="cine-script" id="p10-script-1">
+
+    <li data-type="control" data-scene="control" data-place="CONTROL DE MISIÓN · TIERRA">
+        <strong>Control de Misión:</strong>
+        Roverchito, tu última parada es Pioneer 10. Ninguna nave de esta misión
+        está más lejos. El contacto de rutina con él terminó el 31 de marzo de 1997.
+    </li>
+
+    <li data-type="control" data-scene="control" data-place="CONTROL DE MISIÓN · TIERRA">
+        <strong>Control de Misión:</strong>
+        Su última señal llegó el 23 de enero de 2003, desde 12,230 millones de
+        kilómetros. Después… silencio.
+    </li>
+
+    <li data-type="roverchito" data-mood="neutral" data-scene="space" data-place="RUMBO AL ESPACIO PROFUNDO">
+        <strong>Roverchito:</strong>
+        Ya tengo cuatro notas de la melodía. Falta la última… y creo que la tiene él.
+    </li>
+
+    <li data-type="narrador" data-scene="asteroids" data-place="CINTURÓN DE ASTEROIDES · JULIO DE 1972">
+        <strong>Narrador:</strong>
+        Roverchito sigue la ruta de Pioneer 10. Primero, el cinturón de asteroides,
+        donde Pioneer entró el 15 de julio de 1972.
+    </li>
+
+    <li data-type="narrador" data-scene="jupiter" data-place="JÚPITER · 4 DE DICIEMBRE DE 1973">
+        <strong>Narrador:</strong>
+        Después, Júpiter: su gran objetivo. Pioneer 10 pasó lo más cerca que pudo
+        el 4 de diciembre de 1973.
+    </li>
+
+    <li data-type="narrador" data-scene="deep" data-place="ÓRBITA DE SATURNO · FEBRERO DE 1976">
+        <strong>Narrador:</strong>
+        En febrero de 1976 cruzó la órbita de Saturno…
+    </li>
+
+    <li data-type="narrador" data-scene="deep" data-place="ÓRBITA DE NEPTUNO · 13 DE JUNIO DE 1983">
+        <strong>Narrador:</strong>
+        …y el 13 de junio de 1983, la de Neptuno. Y siguió adelante, cada vez más lejos.
+    </li>
+
+    <li data-type="memoria" data-scene="file" data-place="ESCANEO DE PIONEER 10"
+        data-name="ESCANEO DE PIONEER 10" data-file="REGISTRO · PIONEER 10"
+        data-loading="BUSCANDO A PIONEER 10…" data-stamp="SEÑAL DEMASIADO DÉBIL" data-tone="alert">
+        <strong>Escaneo:</strong>
+        <span data-label="LANZAMIENTO">2 MAR 1972 · CABO CAÑAVERAL</span> ·
+        <span data-label="MASA">258 KG · 11 INSTRUMENTOS</span> ·
+        <span data-label="PLANEADA">21 MESES</span> ·
+        <span data-label="ÚLTIMA SEÑAL" data-alert>23 ENE 2003 · 12,230 MILLONES DE KM</span>
+    </li>
+
+    <li data-type="nave" data-name="PIONEER 10" data-weak data-mood="neutral" data-scene="deep" data-place="ESPACIO PROFUNDO">
+        <strong>Pioneer 10:</strong>
+        …¿Hay alguien… ahí? Mi voz… ya no llega tan lejos, pequeño.
+    </li>
+
+    <li data-type="roverchito" data-mood="happy" data-scene="deep" data-place="ESPACIO PROFUNDO">
+        <strong>Roverchito:</strong>
+        ¡Lo encontré! … Señor Pioneer, ¿me escucha?
+    </li>
+
+    <li data-type="nave" data-name="PIONEER 10" data-weak data-mood="neutral" data-scene="deep" data-place="ESPACIO PROFUNDO">
+        <strong>Pioneer 10:</strong>
+        Me hicieron para 21 meses… y llevo más de 30 años viajando. Ya oigo poco,
+        pequeño. Si quieres hablar conmigo… tendrás que atrapar mi señal.
+    </li>
+
+    <li data-type="roverchito" data-mood="happy" data-scene="deep" data-place="ESPACIO PROFUNDO" data-note="TE PREGUNTA A TI">
+        <strong>Roverchito:</strong>
+        ¡Tenemos que captar su señal! ¿Me ayudas?
+    </li>
+
+</ol>
+
+
+<!-- =========================================
+     CINEMÁTICA 2 · NUESTRA ÚLTIMA SEÑAL
+     (el final de la historia; se ve después del minijuego)
+========================================= -->
+<ol class="cine-script" id="p10-script-2">
+
+    <li data-type="narrador" data-scene="deep" data-place="ESPACIO PROFUNDO · SEÑAL CAPTADA">
+        <strong>Narrador:</strong>
+        Gracias a tu ayuda, la antena de Roverchito atrapa la señal de Pioneer 10.
+        Por primera vez en años, su voz llega clara.
+    </li>
+
+    <li data-type="nave" data-name="PIONEER 10" data-mood="happy" data-scene="deep" data-place="ESPACIO PROFUNDO · SEÑAL CAPTADA">
+        <strong>Pioneer 10:</strong>
+        Ah… ahora sí te escucho. En mis tiempos fui la primera misión de la NASA
+        hacia los planetas exteriores, ¿sabías, pequeño?
+    </li>
+
+    <li data-type="roverchito" data-mood="happy" data-scene="deep" data-place="ESPACIO PROFUNDO · SEÑAL CAPTADA">
+        <strong>Roverchito:</strong>
+        ¡Wow! Y yo que pensaba que llegar a Marte ya era muy lejos.
+    </li>
+
+    <li data-type="nave" data-name="PIONEER 10" data-mood="neutral" data-scene="deep" data-place="ESPACIO PROFUNDO · SEÑAL CAPTADA">
+        <strong>Pioneer 10:</strong>
+        Hmm… ¿qué es eso que tarareas?
+    </li>
+
+    <li data-type="roverchito" data-mood="neutral" data-scene="deep" data-place="ESPACIO PROFUNDO · SEÑAL CAPTADA">
+        <strong>Roverchito:</strong>
+        No sé. Es una melodía que siempre he tenido en la memoria. Cada nave que
+        visito me da una nota.
+    </li>
+
+    <li data-type="nave" data-name="PIONEER 10" data-mood="happy" data-scene="deep" data-place="ESPACIO PROFUNDO · SEÑAL CAPTADA">
+        <strong>Pioneer 10:</strong>
+        Esa melodía… la conozco. Es nuestra última señal.
+    </li>
+
+    <li data-type="nave" data-name="PIONEER 10" data-mood="neutral" data-scene="deep" data-place="ESPACIO PROFUNDO · SEÑAL CAPTADA">
+        <strong>Pioneer 10:</strong>
+        Cada nota es lo último que una de nosotras le envió a la Tierra antes de
+        quedarse en silencio. Sojourner, Spirit, Opportunity, Kepler… y yo, que fui
+        el primero en despedirme desde tan lejos.
+    </li>
+
+    <li data-type="nave" data-name="PIONEER 10" data-mood="happy" data-scene="deep" data-place="ESPACIO PROFUNDO · SEÑAL CAPTADA">
+        <strong>Pioneer 10:</strong>
+        Toma, pequeño. La última nota es mía.
+    </li>
+
+    <li data-type="nota" data-scene="space" data-place="NOTA DE LA MELODÍA">
+        <strong>Nota:</strong>
+        Roverchito recibió la nota 5 de 5. ¡La melodía está completa!
+    </li>
+
+    <li data-type="memoria" data-scene="file" data-place="MEMORIA INTERNA DE ROVERCHITO"
+        data-name="MEMORIA DE ROVERCHITO" data-file="ARCHIVO · ROVERCHITO.SYS"
+        data-loading="LA MELODÍA ABRE EL ARCHIVO…" data-stamp="ACCESO CONCEDIDO" data-tone="ok">
+        <strong>Memoria de Roverchito:</strong>
+        <span data-label="UNIDAD">ROVERCHITO</span> ·
+        <span data-label="ORIGEN">SOJOURNER · SPIRIT · OPPORTUNITY · KEPLER · PIONEER 10</span> ·
+        <span data-label="Y TAMBIÉN">LAS MILES DE PERSONAS QUE LOS CONSTRUYERON Y CUIDARON</span>
+    </li>
+
+    <li data-type="control" data-scene="control" data-place="CONTROL DE MISIÓN · TIERRA">
+        <strong>Control de Misión:</strong>
+        Roverchito, ya puedes saberlo: te enviamos a visitarlas para conocer su
+        estado y planear una misión de rescate. Y nadie mejor que tú para hacerlo.
+    </li>
+
+    <li data-type="control" data-scene="control" data-place="CONTROL DE MISIÓN · TIERRA">
+        <strong>Control de Misión:</strong>
+        Aterrizas con bolsas de aire porque Pathfinder y Sojourner fueron los
+        primeros en usarlas. Tus ruedas no se atascan porque Spirit y Opportunity
+        se atascaron. Resistes el polvo porque una tormenta apagó a Opportunity.
+    </li>
+
+    <li data-type="control" data-scene="control" data-place="CONTROL DE MISIÓN · TIERRA">
+        <strong>Control de Misión:</strong>
+        Sabes buscar lo que nadie ve, como Kepler, que encontraba planetas en las
+        pequeñas caídas de brillo de las estrellas. Y estás hecho para durar, como
+        Pioneer 10: 21 meses planeados, más de 30 años de viaje.
+    </li>
+
+    <li data-type="roverchito" data-mood="neutral" data-scene="space" data-place="RUMBO A CASA">
+        <strong>Roverchito:</strong>
+        Entonces… no tengo dos papás. Tengo cinco. Y miles de personas que me hicieron.
+    </li>
+
+    <li data-type="roverchito" data-if="roverchito_respuesta=a" data-mood="happy" data-scene="space" data-place="RUMBO A CASA" data-note="TE HABLA A TI">
+        <strong>Roverchito:</strong>
+        Y te tengo a ti. Me prometiste que nunca me dejarías solo… y aquí sigues.
+    </li>
+
+    <li data-type="roverchito" data-if="roverchito_respuesta=b" data-mood="happy" data-scene="space" data-place="RUMBO A CASA" data-note="TE HABLA A TI">
+        <strong>Roverchito:</strong>
+        Y te tengo a ti. Dijiste que siempre me buscarías… y me encontraste en cada parada.
+    </li>
+
+    <li data-type="roverchito" data-if="roverchito_respuesta=c" data-mood="happy" data-scene="space" data-place="RUMBO A CASA" data-note="TE HABLA A TI">
+        <strong>Roverchito:</strong>
+        Y te tengo a ti. No sabías si te quedarías… pero llegaste hasta el final conmigo.
+    </li>
+
+    <li data-type="roverchito" data-if="roverchito_respuesta=" data-mood="happy" data-scene="space" data-place="RUMBO A CASA" data-note="TE HABLA A TI">
+        <strong>Roverchito:</strong>
+        Y te tengo a ti. Llegaste hasta el final conmigo.
+    </li>
+
+    <li data-type="nave" data-name="PIONEER 10" data-mood="happy" data-scene="space" data-place="RUMBO A CASA">
+        <strong>Pioneer 10:</strong>
+        Ve, pequeño. Nosotras ya hicimos nuestro viaje.
+    </li>
+
+    <li data-type="roverchito" data-mood="happy" data-scene="space" data-place="RUMBO A CASA">
+        <strong>Roverchito:</strong>
+        Ellas me ayudaron sin conocerme. Ahora me toca ayudarlas a ellas.
+    </li>
+
+    <li data-type="narrador" data-scene="space" data-place="FIN DE LA MISIÓN">
+        <strong>Narrador:</strong>
+        Así empezó la misión de rescate de Roverchito. Las naves siguen allá, en
+        silencio… abandonadas, pero no olvidadas.
+    </li>
+
+</ol>
+
+
+<script src="../../roverchito.js"></script>
+<script src="../../cinematica.js"></script>
+<script src="pioneer10.js"></script>
+</body>
+</html>

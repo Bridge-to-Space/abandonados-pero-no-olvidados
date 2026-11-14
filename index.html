@@ -286,8 +286,8 @@
         </span>
 
         <h2>
-            CUATRO NAVES,<br>
-            CUATRO PISTAS
+            CINCO NAVES,<br>
+            CINCO PISTAS
         </h2>
 
         <p>
@@ -302,12 +302,13 @@
         <div class="map-melody">
             <span class="map-melody-label">NOTAS DE LA MELODÍA</span>
             <div class="map-notes" id="map-notes" aria-hidden="true">
+                <span class="map-note" data-device="sojourner">♪</span>
                 <span class="map-note" data-device="spirit">♪</span>
                 <span class="map-note" data-device="opportunity">♪</span>
-                <span class="map-note" data-device="ingenuity">♪</span>
+                <span class="map-note" data-device="kepler">♪</span>
                 <span class="map-note" data-device="pioneer10">♪</span>
             </div>
-            <strong class="map-melody-count" id="map-melody-count">0 / 4</strong>
+            <strong class="map-melody-count" id="map-melody-count">0 / 5</strong>
         </div>
 
         <div class="map-route">
@@ -323,29 +324,34 @@
             <div class="map-zone map-zone--mars">
                 <span class="map-zone-name">MARTE</span>
                 <div class="map-stops">
-                    <button class="map-stop is-available is-selected" type="button" data-device="spirit" aria-pressed="true">
+                    <button class="map-stop" type="button" data-device="sojourner" aria-pressed="false">
                         <span class="map-stop-num">1</span>
+                        <span class="map-stop-name">Sojourner</span>
+                        <span class="map-stop-years">1997</span>
+                    </button>
+                    <button class="map-stop is-available is-selected" type="button" data-device="spirit" aria-pressed="true">
+                        <span class="map-stop-num">2</span>
                         <span class="map-stop-name">Spirit</span>
                         <span class="map-stop-years">2004 – 2010</span>
                     </button>
                     <button class="map-stop is-available" type="button" data-device="opportunity" aria-pressed="false">
-                        <span class="map-stop-num">2</span>
+                        <span class="map-stop-num">3</span>
                         <span class="map-stop-name">Opportunity</span>
                         <span class="map-stop-years">2004 – 2018</span>
-                    </button>
-                    <button class="map-stop" type="button" data-device="ingenuity" aria-pressed="false">
-                        <span class="map-stop-num">3</span>
-                        <span class="map-stop-name">Ingenuity</span>
-                        <span class="map-stop-years">2021 – 2024</span>
                     </button>
                 </div>
             </div>
 
             <div class="map-zone map-zone--deep">
-                <span class="map-zone-name">ESPACIO PROFUNDO</span>
+                <span class="map-zone-name">MÁS ALLÁ DE MARTE</span>
                 <div class="map-stops">
-                    <button class="map-stop" type="button" data-device="pioneer10" aria-pressed="false">
+                    <button class="map-stop" type="button" data-device="kepler" aria-pressed="false">
                         <span class="map-stop-num">4</span>
+                        <span class="map-stop-name">Kepler</span>
+                        <span class="map-stop-years">desde 2009</span>
+                    </button>
+                    <button class="map-stop is-available" type="button" data-device="pioneer10" aria-pressed="false">
+                        <span class="map-stop-num">5</span>
                         <span class="map-stop-name">Pioneer 10</span>
                         <span class="map-stop-years">1972 – 2003</span>
                     </button>
@@ -403,7 +409,7 @@
         </h2>
 
         <p>
-            Las cuatro naves de la misión, con los datos de las
+            Las cinco naves de la misión, con los datos de las
             fichas de investigación del equipo.
         </p>
 
@@ -411,6 +417,16 @@
 
 
     <div class="archive-grid">
+
+        <div class="archive-card">
+            <span>MARS PATHFINDER</span>
+            <h3>SOJOURNER</h3>
+            <p>
+                El primer rover en Marte, de solo 10.6 kg. Llegó con
+                paracaídas y bolsas de aire, usadas por primera vez.
+            </p>
+            <strong>1997</strong>
+        </div>
 
         <div class="archive-card">
             <span>MARS EXPLORATION ROVER</span>
@@ -433,13 +449,13 @@
         </div>
 
         <div class="archive-card">
-            <span>MARS HELICOPTER</span>
-            <h3>INGENUITY</h3>
+            <span>TELESCOPIO ESPACIAL</span>
+            <h3>KEPLER / K2</h3>
             <p>
-                El primer vuelo propulsado en otro planeta.
-                Completó 72 vuelos sobre el cráter Jezero.
+                La primera misión de la NASA para buscar planetas.
+                Mostró que en el cielo hay más planetas que estrellas.
             </p>
-            <strong>2021 — 2024</strong>
+            <strong>DESDE 2009</strong>
         </div>
 
         <div class="archive-card">

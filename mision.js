@@ -1,12 +1,21 @@
 /* =========================================
    MISIÓN DE ROVERCHITO
-   - Mapa de la misión con 4 de los 10 dispositivos
+   - Mapa de la misión con 5 de los 10 dispositivos
    Datos de las paradas: Fichas de investigación del equipo (fuentes NASA).
 ========================================= */
 (() => {
 
     /* ---------- MAPA DE LA MISIÓN ---------- */
     const DEVICES = {
+        sojourner: {
+            name: "Sojourner y Mars Pathfinder",
+            place: "MARTE · 1997",
+            text: "Pathfinder probó una nueva forma de aterrizar en Marte: con paracaídas y bolsas de aire gigantes, usadas por primera vez. Llevó a Sojourner, el primer rover en Marte, de solo 10.6 kg.",
+            guide: "¡El primer rover de Marte! Pesaba 10.6 kg… casi tan chiquito como yo.",
+            mood: "happy",
+            play: null,
+            source: "https://www.jpl.nasa.gov/edu/resources/lesson-plan/lets-go-to-mars-calculating-launch-windows"
+        },
         spirit: {
             name: "Spirit",
             place: "CRÁTER GUSEV, MARTE",
@@ -25,33 +34,34 @@
             play: "niveles/opportunity/index.html",
             source: "https://science.nasa.gov/mission/mer-opportunity/"
         },
-        ingenuity: {
-            name: "Ingenuity",
-            place: "CRÁTER JEZERO, MARTE",
-            text: "El primer vuelo propulsado en otro planeta. Lo diseñaron para 5 vuelos de prueba y completó 72 en casi tres años.",
-            guide: "¡Un helicóptero en Marte! Ojalá me enseñe a volar.",
-            mood: "happy",
+        kepler: {
+            name: "Kepler / K2",
+            place: "ÓRBITA ALREDEDOR DEL SOL",
+            text: "La primera misión de la NASA para buscar planetas. Los encontraba por las pequeñas caídas de brillo de las estrellas, y en nueve años mostró que en el cielo hay más planetas que estrellas.",
+            guide: "Buscaba mundos escondidos en la luz de las estrellas… ¿podrá encontrar de dónde vengo yo?",
+            mood: "neutral",
             play: null,
-            source: "https://science.nasa.gov/mission/mars-2020-perseverance/ingenuity-mars-helicopter/"
+            source: "https://science.nasa.gov/mission/kepler/"
         },
         pioneer10: {
             name: "Pioneer 10",
             place: "ESPACIO PROFUNDO",
             text: "La primera misión de la NASA a los planetas exteriores. La diseñaron para 21 meses y duró más de 30 años. Su última señal llegó en 2003 desde 12,230 millones de km.",
-            guide: "Es la nave más lejana de todas… ¿Cómo voy a llegar hasta allá?",
-            mood: "sad",
-            play: null,
+            guide: "Es la nave más lejana de todas… y creo que tiene la última nota.",
+            mood: "neutral",
+            play: "niveles/pioneer10/index.html",
             source: "https://science.nasa.gov/mission/pioneer-10/"
         }
     };
 
-    /* Una nota por nave completada (Spirit y Opportunity ya tienen nivel). */
+    /* Una nota por nave completada (Spirit, Opportunity y Pioneer 10 ya tienen nivel). */
     function completedDevices() {
         const done = [];
         try {
             const spirit = JSON.parse(localStorage.getItem("spirit_abandonados_save") || "null");
             if (spirit && spirit.gameOver) done.push("spirit");
             if (localStorage.getItem("opportunity_nota")) done.push("opportunity");
+            if (localStorage.getItem("pioneer10_nota")) done.push("pioneer10");
         } catch (e) {
             /* sin almacenamiento disponible: el mapa empieza en cero */
         }

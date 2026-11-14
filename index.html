@@ -202,7 +202,7 @@
             <h3>El origen de Roverchito</h3>
             <p>
                 Un laboratorio de la NASA, un robot muy curioso y un archivo
-                que nadie quiere abrir. Dura alrededor de un minuto.
+                que nadie quiere abrir. Dura alrededor de un minuto y medio.
             </p>
             <div class="cine-poster-actions">
                 <button class="primary-btn cine-play" type="button" onclick="Cinematica.abrir()">
@@ -217,34 +217,50 @@
     </div>
 
     <!-- GUION de la cinemática. Sin JavaScript se lee aquí mismo;
-         con JavaScript, cinematica.js lo reproduce a pantalla completa. -->
+         con JavaScript, cinematica.js lo reproduce a pantalla completa.
+         data-type: narrador | roverchito | control | memoria
+         data-place: dónde ocurre la escena · data-note: a quién se dirige -->
     <ol class="cine-script" id="cine-script">
 
-        <li data-mood="neutral" data-scene="lab" data-speaker="LABORATORIO DE LA NASA · 2040">
+        <li data-type="narrador" data-mood="neutral" data-scene="lab" data-place="LABORATORIO DE LA NASA · 2040">
+            <strong>Narrador:</strong>
             Roverchito es un robot con pocos meses de vida, todavía en
             desarrollo y muy curioso. Tú eres la científica o el científico que lo cuida.
         </li>
 
-        <li data-mood="happy" data-scene="lab" data-speaker="ROVERCHITO">
+        <li data-type="roverchito" data-mood="happy" data-scene="lab" data-place="LABORATORIO DE LA NASA · 2040">
+            <strong>Roverchito:</strong>
             ¡Todos los robots del laboratorio tienen en su ficha el nombre
-            de quien los construyó! Voy a ver la mía…
+            de quien los construyó! Voy a revisar mi memoria…
         </li>
 
-        <li data-mood="sad" data-scene="file" data-speaker="ARCHIVO DE ROVERCHITO">
-            ORIGEN: MÚLTIPLES FUENTES. ACCESO RESTRINGIDO.
+        <li data-type="memoria" data-mood="neutral" data-scene="file" data-place="MEMORIA INTERNA DE ROVERCHITO">
+            <strong>Memoria de Roverchito:</strong>
+            <span data-label="UNIDAD">ROVERCHITO</span> ·
+            <span data-label="ESTADO">EN DESARROLLO</span> ·
+            <span data-label="ORIGEN" data-alert>MÚLTIPLES FUENTES — ACCESO RESTRINGIDO</span>
         </li>
 
-        <li data-mood="sad" data-scene="night" data-speaker="ROVERCHITO">
+        <li data-type="roverchito" data-mood="sad" data-scene="night" data-place="LABORATORIO DE LA NASA · ESA NOCHE" data-note="TE PREGUNTA A TI">
+            <strong>Roverchito:</strong>
             Oye… ¿tú sabes quiénes son mis papás?
         </li>
 
-        <li data-mood="neutral" data-scene="control" data-speaker="CONTROL DE MISIÓN">
+        <li data-type="narrador" data-mood="neutral" data-scene="control" data-place="CONTROL DE MISIÓN · AL DÍA SIGUIENTE">
+            <strong>Narrador:</strong>
+            Al día siguiente, Roverchito y tú van juntos a Control de Misión
+            a buscar respuestas.
+        </li>
+
+        <li data-type="control" data-mood="neutral" data-scene="control" data-place="CONTROL DE MISIÓN · AL DÍA SIGUIENTE">
+            <strong>Control de Misión:</strong>
             No podemos abrir tu archivo todavía. Pero las naves que enviamos
             a Marte y al espacio profundo podrían saber de dónde vienes.
             Muchas siguen allá, en silencio. Ve a visitarlas.
         </li>
 
-        <li data-mood="happy" data-scene="space" data-speaker="ROVERCHITO">
+        <li data-type="roverchito" data-mood="happy" data-scene="space" data-place="RUMBO A LA MISIÓN" data-note="TE PREGUNTA A TI">
+            <strong>Roverchito:</strong>
             ¿Vienes conmigo? ¡Te ayudo si me ayudas!
         </li>
 

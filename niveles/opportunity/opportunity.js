@@ -1,5 +1,6 @@
 /* =========================================
-   PARADA 2 · OPPORTUNITY
+   PARADA 3 · OPPORTUNITY
+   Historia de las cinemáticas: Joel Vazquez Juarez
    Registra las cinemáticas del nivel y guarda el progreso.
    (El minijuego se agregará en la siguiente etapa.)
 ========================================= */
@@ -32,7 +33,7 @@
 
         Cinematica.crear("op-llegada", {
             script: "op-script-1",
-            title: "el gemelo orgulloso",
+            title: "una misión de 90 días",
             seenKey: KEYS.llegada,
             guest: "op-sprite",
             guestColor: "#fb923c",
@@ -55,7 +56,7 @@
 
         Cinematica.crear("op-despedida", {
             script: "op-script-2",
-            title: "más de mil mensajes",
+            title: "casi 15 años en Marte",
             seenKey: KEYS.despedida,
             guest: "op-sprite",
             guestColor: "#fb923c",

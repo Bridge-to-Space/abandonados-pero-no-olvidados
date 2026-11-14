@@ -4070,3 +4070,43 @@ nav button:hover {
         animation: none;
     }
 }
+
+
+/* =========================================
+   CINEMÁTICA — VOZ DEL JUGADOR ("TÚ")
+   Globo azul claro alineado a la derecha, sin pico:
+   es lo que responde quien está jugando.
+========================================= */
+
+.cine {
+    --voz-jugador: #93c5fd;
+}
+
+.cine[data-type="jugador"] .cine-tag {
+    justify-content: flex-end;
+    color: var(--voz-jugador);
+}
+
+.cine[data-type="jugador"] .cine-box {
+    margin-left: auto;
+    max-width: 88%;
+
+    background: #0f1a2b;
+    border: 2px solid var(--voz-jugador);
+    border-radius: 22px 22px 6px 22px;
+}
+
+.cine[data-type="jugador"] .cine-text {
+    color: #e0efff;
+    text-align: right;
+}
+
+@media (max-width: 700px) {
+    .cine[data-type="jugador"] .cine-tag {
+        justify-content: center;
+    }
+
+    .cine[data-type="jugador"] .cine-box {
+        max-width: 100%;
+    }
+}

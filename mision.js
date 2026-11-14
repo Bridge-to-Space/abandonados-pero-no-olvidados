@@ -29,7 +29,7 @@
             name: "Opportunity",
             place: "MERIDIANI PLANUM, MARTE",
             text: "El gemelo de Spirit. Funcionó casi 15 años, recorrió 45.16 km y envió más de 217,000 imágenes. Una enorme tormenta de polvo lo apagó en 2018.",
-            guide: "¡Spirit tiene un gemelo! Dicen que es muy orgulloso de sus récords…",
+            guide: "¡Tenía una misión de 90 días y trabajó casi 15 años! Te cuento su historia.",
             mood: "happy",
             play: "niveles/opportunity/index.html",
             source: "https://science.nasa.gov/mission/mer-opportunity/"

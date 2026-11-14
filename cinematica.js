@@ -11,7 +11,8 @@
    Atributos de cada <li>:
      data-type   narrador | roverchito | control | nave | memoria | nota | eleccion
      data-mood   expresión de Roverchito: neutral | happy | sad
-     data-scene  fondo: lab | file | night | control | space | mars-day | mars-dusk | mars-night | storm
+     data-scene  fondo: lab | file | night | control | space | mars-day | mars-dusk | mars-night | storm |
+                 asteroids | jupiter | deep
      data-place  dónde ocurre (barra superior)
      data-note   etiqueta junto al nombre (por ejemplo "TE PREGUNTA A TI")
      data-if     "clave=valor": la escena solo aparece si el usuario eligió ese valor
@@ -107,8 +108,9 @@ const Cinematica = (() => {
 
         function visible(scene) {
             if (!scene.cond) return true;
+            /* "clave=" (sin valor) aparece solo si el usuario aún no ha elegido nada */
             const [key, value] = scene.cond.split("=");
-            return store.get(key) === value;
+            return (store.get(key) || "") === (value || "");
         }
         const nextIndex = from => { for (let n = from + 1; n < scenes.length; n++) if (visible(scenes[n])) return n; return -1; };
         const prevIndex = from => { for (let n = from - 1; n >= 0; n--) if (visible(scenes[n])) return n; return -1; };

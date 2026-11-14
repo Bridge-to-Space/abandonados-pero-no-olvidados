@@ -1,0 +1,26 @@
+/* =========================================
+   PARADA 5 · PIONEER 10
+   Estilos propios; la base está en ../nivel.css
+========================================= */
+
+body.level {
+    --nivel-accent: #c4b5fd;
+    --nivel-glow: rgba(196, 181, 253, 0.16);
+}
+
+/* La sonda flota lejos, en el espacio */
+.level-probe {
+    width: min(260px, 62%);
+    animation: probeDrift 7s ease-in-out infinite;
+}
+
+@keyframes probeDrift {
+    0%, 100% { transform: translateY(0) rotate(-3deg); }
+    50% { transform: translateY(-8px) rotate(2deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .level-probe {
+        animation: none;
+    }
+}

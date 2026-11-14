@@ -3760,7 +3760,7 @@ nav button:hover {
 }
 
 .cine[data-type="nave"] .cine-box {
-    background: #1d1007;
+    background: #17141d;
     border: 2px solid var(--voz-nave);
     border-radius: 22px;
 }
@@ -3775,7 +3775,7 @@ nav button:hover {
     width: 22px;
     height: 22px;
 
-    background: #1d1007;
+    background: #17141d;
     border-right: 2px solid var(--voz-nave);
     border-top: 2px solid var(--voz-nave);
     transform: rotate(45deg);
@@ -3783,7 +3783,7 @@ nav button:hover {
 
 .cine[data-type="nave"] .cine-text {
     position: relative;
-    color: #ffedd5;
+    color: #fdf8f2;
 }
 
 .cine[data-type="nave"] .cine-tag {
@@ -3988,6 +3988,85 @@ nav button:hover {
     .cine.is-weak .cine-text,
     .cine-notebox.is-in .cine-bignote,
     .cine-option {
+        animation: none;
+    }
+}
+
+/* Cinco paradas: la zona de más allá de Marte tiene dos */
+.map-route {
+    grid-template-columns: minmax(120px, 0.6fr) 3fr 2fr;
+}
+
+@media (max-width: 900px) {
+    .map-route {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* =========================================
+   CINEMÁTICA — ESPACIO PROFUNDO (Pioneer 10)
+========================================= */
+
+/* Cinturón de asteroides */
+.cine-bg[data-scene="asteroids"] {
+    background:
+        radial-gradient(6px 5px at 12% 68%, #6b5a4a, transparent),
+        radial-gradient(10px 8px at 28% 74%, #7c6a58, transparent),
+        radial-gradient(4px 4px at 41% 62%, #5b4c3f, transparent),
+        radial-gradient(12px 9px at 63% 70%, #6f5e4d, transparent),
+        radial-gradient(5px 5px at 79% 64%, #82705d, transparent),
+        radial-gradient(8px 7px at 92% 72%, #5f5043, transparent),
+        radial-gradient(1px 1px at 20% 20%, #fff, transparent),
+        radial-gradient(1px 1px at 70% 15%, #fff, transparent),
+        radial-gradient(1px 1px at 50% 35%, #fff, transparent),
+        radial-gradient(circle at 50% 50%, #0b1020, #02030a 75%);
+    background-size: 100% 100%;
+    animation: cineDrift 14s linear infinite;
+}
+
+/* Júpiter a lo lejos */
+.cine-bg[data-scene="jupiter"] {
+    background:
+        radial-gradient(circle at 78% 68%, transparent 0 15%, rgba(2, 3, 10, 0) 15%),
+        repeating-linear-gradient(8deg, rgba(180, 120, 70, 0) 0 6px, rgba(120, 72, 40, 0.25) 6px 12px),
+        radial-gradient(circle at 78% 68%, #e9c08d 0, #c98b52 9%, #8a5a34 15%, transparent 15.5%),
+        radial-gradient(1px 1px at 15% 25%, #fff, transparent),
+        radial-gradient(1px 1px at 40% 15%, #fff, transparent),
+        radial-gradient(1px 1px at 60% 40%, #fff, transparent),
+        radial-gradient(circle at 30% 40%, #0a0f1f, #02030a 75%);
+}
+
+/* Espacio profundo: estrellas finas y mucho vacío */
+.cine-bg[data-scene="deep"] {
+    background:
+        radial-gradient(1px 1px at 10% 15%, #fff, transparent),
+        radial-gradient(1px 1px at 25% 70%, rgba(255, 255, 255, 0.8), transparent),
+        radial-gradient(1px 1px at 38% 30%, rgba(255, 255, 255, 0.6), transparent),
+        radial-gradient(1px 1px at 55% 80%, #fff, transparent),
+        radial-gradient(1px 1px at 68% 22%, rgba(255, 255, 255, 0.7), transparent),
+        radial-gradient(1px 1px at 82% 55%, #fff, transparent),
+        radial-gradient(1px 1px at 92% 12%, rgba(255, 255, 255, 0.6), transparent),
+        radial-gradient(circle at 50% 50%, rgba(196, 181, 253, 0.08), transparent 55%),
+        #010208;
+}
+
+@keyframes cineDrift {
+    from { background-position: 0 0; }
+    to { background-position: -80px 0; }
+}
+
+/* La nave invitada: oscura cuando escucha, iluminada con su color cuando habla */
+.cine-stage.has-guest .cine-guest {
+    filter: brightness(0.55) saturate(0.7);
+}
+
+.cine[data-type="nave"] .cine-guest {
+    filter: drop-shadow(0 0 22px var(--voz-nave));
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .cine-bg[data-scene="asteroids"] {
         animation: none;
     }
 }

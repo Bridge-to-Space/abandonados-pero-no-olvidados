@@ -120,7 +120,7 @@
 
             <button
                 class="primary-btn"
-                onclick="goTo('origen')"
+                onclick="Cinematica.abrir()"
             >
                 COMENZAR LA MISIÓN
             </button>
@@ -185,83 +185,70 @@
         </h2>
 
         <p>
-            Así empieza la misión. Avanza la historia para conocer a Roverchito.
+            Así empieza la misión. Mira la cinemática cuando estés listo.
         </p>
 
     </div>
 
-    <!-- Sin JavaScript se ven todas las escenas seguidas;
-         con JavaScript se muestran una por una (mision.js). -->
-    <div class="story" id="story">
+    <!-- PÓSTER: el usuario decide cuándo empieza la cinemática -->
+    <div class="cine-poster">
 
-        <div class="story-stage">
-
-            <div class="story-avatar" id="story-avatar" data-roverchito data-mood="neutral"></div>
-
-            <ol class="story-steps">
-
-                <li class="story-step" data-mood="neutral">
-                    <span class="story-speaker">LABORATORIO DE LA NASA · 2040</span>
-                    <p>
-                        Roverchito es un robot con pocos meses de vida, todavía
-                        en desarrollo y muy curioso. Tú eres la científica o el
-                        científico que lo cuida.
-                    </p>
-                </li>
-
-                <li class="story-step" data-mood="happy">
-                    <span class="story-speaker">ROVERCHITO</span>
-                    <p>
-                        ¡Todos los robots del laboratorio tienen en su ficha el
-                        nombre de quien los construyó! Voy a ver la mía…
-                    </p>
-                </li>
-
-                <li class="story-step story-step--file" data-mood="sad">
-                    <span class="story-speaker">ARCHIVO DE ROVERCHITO</span>
-                    <p class="story-file">
-                        ORIGEN: MÚLTIPLES FUENTES.<br>
-                        ACCESO RESTRINGIDO.
-                    </p>
-                </li>
-
-                <li class="story-step" data-mood="sad">
-                    <span class="story-speaker">ROVERCHITO</span>
-                    <p>
-                        Oye… ¿tú sabes quiénes son mis papás?
-                    </p>
-                </li>
-
-                <li class="story-step story-step--control" data-mood="neutral">
-                    <span class="story-speaker">CONTROL DE MISIÓN</span>
-                    <p>
-                        No podemos abrir tu archivo todavía. Pero las naves que
-                        enviamos a Marte y al espacio profundo podrían saber de
-                        dónde vienes. Muchas siguen allá, en silencio. Ve a visitarlas.
-                    </p>
-                </li>
-
-                <li class="story-step" data-mood="happy">
-                    <span class="story-speaker">ROVERCHITO</span>
-                    <p>
-                        ¿Vienes conmigo? ¡Te ayudo si me ayudas!
-                    </p>
-                    <button class="primary-btn story-cta" type="button" onclick="goTo('mapa')">
-                        ABRIR EL MAPA DE LA MISIÓN
-                    </button>
-                </li>
-
-            </ol>
-
+        <div class="cine-poster-art" aria-hidden="true">
+            <div class="cine-poster-avatar" data-roverchito data-mood="neutral"></div>
         </div>
 
-        <div class="story-controls" hidden>
-            <button class="secondary-btn story-prev" type="button">← ANTERIOR</button>
-            <div class="story-dots" aria-hidden="true"></div>
-            <button class="primary-btn story-next" type="button">SIGUIENTE →</button>
+        <div class="cine-poster-info">
+            <span class="cine-poster-kicker">CINEMÁTICA · EPISODIO 0</span>
+            <h3>El origen de Roverchito</h3>
+            <p>
+                Un laboratorio de la NASA, un robot muy curioso y un archivo
+                que nadie quiere abrir. Dura alrededor de un minuto.
+            </p>
+            <div class="cine-poster-actions">
+                <button class="primary-btn cine-play" type="button" onclick="Cinematica.abrir()">
+                    ▶ COMENZAR LA HISTORIA
+                </button>
+                <button class="secondary-btn cine-to-map" type="button" onclick="goTo('mapa')" hidden>
+                    IR AL MAPA
+                </button>
+            </div>
         </div>
 
     </div>
+
+    <!-- GUION de la cinemática. Sin JavaScript se lee aquí mismo;
+         con JavaScript, cinematica.js lo reproduce a pantalla completa. -->
+    <ol class="cine-script" id="cine-script">
+
+        <li data-mood="neutral" data-scene="lab" data-speaker="LABORATORIO DE LA NASA · 2040">
+            Roverchito es un robot con pocos meses de vida, todavía en
+            desarrollo y muy curioso. Tú eres la científica o el científico que lo cuida.
+        </li>
+
+        <li data-mood="happy" data-scene="lab" data-speaker="ROVERCHITO">
+            ¡Todos los robots del laboratorio tienen en su ficha el nombre
+            de quien los construyó! Voy a ver la mía…
+        </li>
+
+        <li data-mood="sad" data-scene="file" data-speaker="ARCHIVO DE ROVERCHITO">
+            ORIGEN: MÚLTIPLES FUENTES. ACCESO RESTRINGIDO.
+        </li>
+
+        <li data-mood="sad" data-scene="night" data-speaker="ROVERCHITO">
+            Oye… ¿tú sabes quiénes son mis papás?
+        </li>
+
+        <li data-mood="neutral" data-scene="control" data-speaker="CONTROL DE MISIÓN">
+            No podemos abrir tu archivo todavía. Pero las naves que enviamos
+            a Marte y al espacio profundo podrían saber de dónde vienes.
+            Muchas siguen allá, en silencio. Ve a visitarlas.
+        </li>
+
+        <li data-mood="happy" data-scene="space" data-speaker="ROVERCHITO">
+            ¿Vienes conmigo? ¡Te ayudo si me ayudas!
+        </li>
+
+    </ol>
 
 </section>
 
@@ -1353,5 +1340,6 @@
 
 <script src="roverchito.js"></script>
 <script src="mision.js"></script>
+<script src="cinematica.js"></script>
 </body>
 </html>

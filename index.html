@@ -68,8 +68,12 @@
             Inicio
         </button>
 
-        <button onclick="goTo('historia')">
-            Historia
+        <button onclick="goTo('origen')">
+            Origen
+        </button>
+
+        <button onclick="goTo('mapa')">
+            Mapa
         </button>
 
         <button onclick="goTo('archivo')">
@@ -107,24 +111,25 @@
         </h1>
 
         <p>
-            Explora las historias de los vehículos de la NASA
-            que quedaron atrás en la Luna y Marte.
+            Roverchito no sabe de dónde viene. Las únicas que podrían
+            saberlo son las naves que la NASA dejó en Marte y en el
+            espacio profundo.
         </p>
 
         <div class="hero-buttons">
 
             <button
                 class="primary-btn"
-                onclick="goTo('historia')"
+                onclick="goTo('origen')"
             >
-                MODO HISTORIA
+                COMENZAR LA MISIÓN
             </button>
 
             <button
                 class="secondary-btn"
-                onclick="goTo('archivo')"
+                onclick="goTo('mapa')"
             >
-                MODO INFORMACIÓN
+                VER EL MAPA
             </button>
 
         </div>
@@ -141,9 +146,8 @@
             <div class="guide-bubble">
                 <span class="guide-name">ROVERCHITO · TU GUÍA</span>
                 <p>
-                    ¡Hola! Soy Roverchito. Te voy a contar las historias
-                    de los robots que la NASA envió a la Luna y a Marte.
-                    Tú tomarás sus decisiones… y yo te diré qué tal lo hiciste.
+                    ¡Hola! Soy Roverchito. Tengo una pregunta que nadie
+                    me ha podido responder… ¿me ayudas a encontrar la respuesta?
                 </p>
             </div>
 
@@ -164,179 +168,209 @@
 
 
 <!-- =========================================
-     HISTORIA
+     ORIGEN (Acto 1 de la historia)
 ========================================= -->
 
-<section id="historia">
+<section id="origen">
 
     <div class="section-header">
 
         <span>
-            01 / HISTORIAS
+            01 / EL ORIGEN
         </span>
 
         <h2>
-            MISIONES QUE<br>
-            DEJARON HUELLA
+            ¿QUIÉNES SON<br>
+            MIS PAPÁS?
         </h2>
 
         <p>
-            Cada misión tuvo un objetivo.
-            Cada vehículo enfrentó condiciones extremas.
-            Y algunos terminaron quedándose para siempre en otro mundo.
+            Así empieza la misión. Avanza la historia para conocer a Roverchito.
         </p>
 
     </div>
 
+    <!-- Sin JavaScript se ven todas las escenas seguidas;
+         con JavaScript se muestran una por una (mision.js). -->
+    <div class="story" id="story">
 
-    <div class="mission-grid">
+        <div class="story-stage">
 
-        <!-- SPIRIT -->
+            <div class="story-avatar" id="story-avatar" data-roverchito data-mood="neutral"></div>
 
-        <a
-            href="niveles/spirit/index.html"
-            class="mission-card active"
-        >
+            <ol class="story-steps">
 
-            <div class="mission-number">
-                01
-            </div>
+                <li class="story-step" data-mood="neutral">
+                    <span class="story-speaker">LABORATORIO DE LA NASA · 2040</span>
+                    <p>
+                        Roverchito es un robot con pocos meses de vida, todavía
+                        en desarrollo y muy curioso. Tú eres la científica o el
+                        científico que lo cuida.
+                    </p>
+                </li>
 
-            <div class="mission-icon">
-                🔴
-            </div>
+                <li class="story-step" data-mood="happy">
+                    <span class="story-speaker">ROVERCHITO</span>
+                    <p>
+                        ¡Todos los robots del laboratorio tienen en su ficha el
+                        nombre de quien los construyó! Voy a ver la mía…
+                    </p>
+                </li>
 
-            <h3>
-                SPIRIT
-            </h3>
+                <li class="story-step story-step--file" data-mood="sad">
+                    <span class="story-speaker">ARCHIVO DE ROVERCHITO</span>
+                    <p class="story-file">
+                        ORIGEN: MÚLTIPLES FUENTES.<br>
+                        ACCESO RESTRINGIDO.
+                    </p>
+                </li>
 
-            <p>
-                2004 — 2010
-            </p>
+                <li class="story-step" data-mood="sad">
+                    <span class="story-speaker">ROVERCHITO</span>
+                    <p>
+                        Oye… ¿tú sabes quiénes son mis papás?
+                    </p>
+                </li>
 
-            <span class="mission-status">
-                JUGAR HISTORIA →
-            </span>
+                <li class="story-step story-step--control" data-mood="neutral">
+                    <span class="story-speaker">CONTROL DE MISIÓN</span>
+                    <p>
+                        No podemos abrir tu archivo todavía. Pero las naves que
+                        enviamos a Marte y al espacio profundo podrían saber de
+                        dónde vienes. Muchas siguen allá, en silencio. Ve a visitarlas.
+                    </p>
+                </li>
 
-        </a>
+                <li class="story-step" data-mood="happy">
+                    <span class="story-speaker">ROVERCHITO</span>
+                    <p>
+                        ¿Vienes conmigo? ¡Te ayudo si me ayudas!
+                    </p>
+                    <button class="primary-btn story-cta" type="button" onclick="goTo('mapa')">
+                        ABRIR EL MAPA DE LA MISIÓN
+                    </button>
+                </li>
 
-
-        <!-- OPPORTUNITY -->
-
-        <div
-            class="mission-card"
-            onclick="showComing('Opportunity')"
-        >
-
-            <div class="mission-number">
-                02
-            </div>
-
-            <div class="mission-icon">
-                🟠
-            </div>
-
-            <h3>
-                OPPORTUNITY
-            </h3>
-
-            <p>
-                2004 — 2018
-            </p>
-
-            <span class="mission-status">
-                PRÓXIMAMENTE
-            </span>
-
-        </div>
-
-
-        <!-- CURIOSITY -->
-
-        <div
-            class="mission-card"
-            onclick="showComing('Curiosity')"
-        >
-
-            <div class="mission-number">
-                03
-            </div>
-
-            <div class="mission-icon">
-                🔵
-            </div>
-
-            <h3>
-                CURIOSITY
-            </h3>
-
-            <p>
-                2012 — ACTUALIDAD
-            </p>
-
-            <span class="mission-status">
-                PRÓXIMAMENTE
-            </span>
+            </ol>
 
         </div>
 
+        <div class="story-controls" hidden>
+            <button class="secondary-btn story-prev" type="button">← ANTERIOR</button>
+            <div class="story-dots" aria-hidden="true"></div>
+            <button class="primary-btn story-next" type="button">SIGUIENTE →</button>
+        </div>
 
-        <!-- INSIGHT -->
+    </div>
 
-        <div
-            class="mission-card"
-            onclick="showComing('InSight')"
-        >
+</section>
 
-            <div class="mission-number">
-                04
+
+<!-- =========================================
+     MAPA DE LA MISIÓN (Acto 2)
+     4 de los 10 dispositivos de las fichas
+========================================= -->
+
+<section id="mapa">
+
+    <div class="section-header">
+
+        <span>
+            02 / MAPA DE LA MISIÓN
+        </span>
+
+        <h2>
+            CUATRO NAVES,<br>
+            CUATRO PISTAS
+        </h2>
+
+        <p>
+            Visita a cada nave. Si la ayudas, te dará una nota de la
+            melodía que Roverchito tararea sin saber por qué.
+        </p>
+
+    </div>
+
+    <div class="mission-map">
+
+        <div class="map-melody">
+            <span class="map-melody-label">NOTAS DE LA MELODÍA</span>
+            <div class="map-notes" id="map-notes" aria-hidden="true">
+                <span class="map-note" data-device="spirit">♪</span>
+                <span class="map-note" data-device="opportunity">♪</span>
+                <span class="map-note" data-device="ingenuity">♪</span>
+                <span class="map-note" data-device="pioneer10">♪</span>
+            </div>
+            <strong class="map-melody-count" id="map-melody-count">0 / 4</strong>
+        </div>
+
+        <div class="map-route">
+
+            <div class="map-zone map-zone--earth">
+                <span class="map-zone-name">TIERRA</span>
+                <div class="map-start">
+                    <span class="map-start-dot"></span>
+                    <span>Laboratorio · inicio</span>
+                </div>
             </div>
 
-            <div class="mission-icon">
-                🟣
+            <div class="map-zone map-zone--mars">
+                <span class="map-zone-name">MARTE</span>
+                <div class="map-stops">
+                    <button class="map-stop is-available is-selected" type="button" data-device="spirit" aria-pressed="true">
+                        <span class="map-stop-num">1</span>
+                        <span class="map-stop-name">Spirit</span>
+                        <span class="map-stop-years">2004 – 2010</span>
+                    </button>
+                    <button class="map-stop" type="button" data-device="opportunity" aria-pressed="false">
+                        <span class="map-stop-num">2</span>
+                        <span class="map-stop-name">Opportunity</span>
+                        <span class="map-stop-years">2004 – 2018</span>
+                    </button>
+                    <button class="map-stop" type="button" data-device="ingenuity" aria-pressed="false">
+                        <span class="map-stop-num">3</span>
+                        <span class="map-stop-name">Ingenuity</span>
+                        <span class="map-stop-years">2021 – 2024</span>
+                    </button>
+                </div>
             </div>
 
-            <h3>
-                INSIGHT
-            </h3>
-
-            <p>
-                2018 — 2022
-            </p>
-
-            <span class="mission-status">
-                PRÓXIMAMENTE
-            </span>
+            <div class="map-zone map-zone--deep">
+                <span class="map-zone-name">ESPACIO PROFUNDO</span>
+                <div class="map-stops">
+                    <button class="map-stop" type="button" data-device="pioneer10" aria-pressed="false">
+                        <span class="map-stop-num">4</span>
+                        <span class="map-stop-name">Pioneer 10</span>
+                        <span class="map-stop-years">1972 – 2003</span>
+                    </button>
+                </div>
+            </div>
 
         </div>
 
+        <!-- Detalle de la parada elegida (lo actualiza mision.js) -->
+        <div class="map-detail" id="map-detail" aria-live="polite">
 
-        <!-- VOYAGER -->
-
-        <div
-            class="mission-card"
-            onclick="showComing('Voyager')"
-        >
-
-            <div class="mission-number">
-                05
+            <div class="map-detail-info">
+                <span class="map-detail-place" id="map-detail-place">CRÁTER GUSEV, MARTE</span>
+                <h3 id="map-detail-name">Spirit</h3>
+                <p id="map-detail-text">
+                    Su misión debía durar 90 días marcianos y siguió trabajando
+                    hasta 2010. En 2009 se atascó en tierra blanda.
+                </p>
+                <div class="map-detail-actions">
+                    <a class="primary-btn" id="map-detail-play" href="niveles/spirit/index.html">VISITAR A SPIRIT →</a>
+                    <span class="map-detail-soon" id="map-detail-soon" hidden>PRÓXIMAMENTE</span>
+                    <a class="map-detail-source" id="map-detail-source" href="https://science.nasa.gov/mission/mer-spirit/" target="_blank" rel="noopener noreferrer">Fuente: NASA Science</a>
+                </div>
             </div>
 
-            <div class="mission-icon">
-                🛰️
+            <div class="map-detail-guide">
+                <div class="map-guide-avatar" id="map-guide-avatar" data-roverchito data-mood="neutral"></div>
+                <p class="map-guide-bubble" id="map-guide-text">
+                    Dicen que Spirit quedó atascado en la arena… ¿y si sabe algo de mí?
+                </p>
             </div>
-
-            <h3>
-                VOYAGER
-            </h3>
-
-            <p>
-                1977 — ACTUALIDAD
-            </p>
-
-            <span class="mission-status">
-                PRÓXIMAMENTE
-            </span>
 
         </div>
 
@@ -354,7 +388,7 @@
     <div class="section-header">
 
         <span>
-            02 / ARCHIVO
+            03 / ARCHIVO
         </span>
 
         <h2>
@@ -363,8 +397,8 @@
         </h2>
 
         <p>
-            Vehículos, sondas y misiones que dejaron atrás
-            una parte de la historia de la exploración espacial.
+            Las cuatro naves de la misión, con los datos de las
+            fichas de investigación del equipo.
         </p>
 
     </div>
@@ -373,112 +407,43 @@
     <div class="archive-grid">
 
         <div class="archive-card">
-
-            <span>
-                MARS EXPLORATION ROVER
-            </span>
-
-            <h3>
-                SPIRIT
-            </h3>
-
+            <span>MARS EXPLORATION ROVER</span>
+            <h3>SPIRIT</h3>
             <p>
-                Uno de los primeros vehículos en explorar Marte
-                durante años.
+                Exploró el cráter Gusev y encontró pruebas de que
+                Marte fue mucho más húmedo en el pasado.
             </p>
-
-            <strong>
-                2004 — 2010
-            </strong>
-
+            <strong>2004 — 2010</strong>
         </div>
 
-
         <div class="archive-card">
-
-            <span>
-                MARS EXPLORATION ROVER
-            </span>
-
-            <h3>
-                OPPORTUNITY
-            </h3>
-
+            <span>MARS EXPLORATION ROVER</span>
+            <h3>OPPORTUNITY</h3>
             <p>
-                Exploró Marte durante más de una década,
-                superando ampliamente su misión original.
+                La gemela de Spirit. Funcionó casi 15 años y recorrió
+                45.16 km en Marte.
             </p>
-
-            <strong>
-                2004 — 2018
-            </strong>
-
+            <strong>2004 — 2018</strong>
         </div>
 
-
         <div class="archive-card">
-
-            <span>
-                MARS SCIENCE LABORATORY
-            </span>
-
-            <h3>
-                CURIOSITY
-            </h3>
-
+            <span>MARS HELICOPTER</span>
+            <h3>INGENUITY</h3>
             <p>
-                Laboratorio móvil que continúa investigando
-                la superficie marciana.
+                El primer vuelo propulsado en otro planeta.
+                Completó 72 vuelos sobre el cráter Jezero.
             </p>
-
-            <strong>
-                2012 — ACTUALIDAD
-            </strong>
-
+            <strong>2021 — 2024</strong>
         </div>
 
-
         <div class="archive-card">
-
-            <span>
-                MARS LANDER
-            </span>
-
-            <h3>
-                INSIGHT
-            </h3>
-
+            <span>DEEP SPACE MISSION</span>
+            <h3>PIONEER 10</h3>
             <p>
-                Estudió el interior de Marte y permitió conocer
-                más sobre su estructura.
+                La primera misión de la NASA a los planetas exteriores.
+                Duró más de 30 años.
             </p>
-
-            <strong>
-                2018 — 2022
-            </strong>
-
-        </div>
-
-
-        <div class="archive-card">
-
-            <span>
-                DEEP SPACE MISSION
-            </span>
-
-            <h3>
-                VOYAGER
-            </h3>
-
-            <p>
-                Dos sondas que continúan viajando
-                por el espacio interestelar.
-            </p>
-
-            <strong>
-                1977 — ACTUALIDAD
-            </strong>
-
+            <strong>1972 — 2003</strong>
         </div>
 
     </div>
@@ -603,7 +568,7 @@
     <div class="section-header">
 
         <span>
-            03 / EQUIPO
+            04 / EQUIPO
         </span>
 
         <h2>
@@ -794,7 +759,7 @@
     <div class="section-header">
 
         <span>
-            04 / SOBRE NOSOTROS
+            05 / SOBRE NOSOTROS
         </span>
 
         <h2>
@@ -1387,5 +1352,6 @@
 </script>
 
 <script src="roverchito.js"></script>
+<script src="mision.js"></script>
 </body>
 </html>

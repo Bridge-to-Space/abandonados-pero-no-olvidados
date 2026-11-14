@@ -1821,3 +1821,55 @@ nav button:hover {
         font-size: clamp(32px, 10.5vw, 60px);
     }
 }
+
+
+/* =========================================
+   HERO — IMAGEN NASA (Viking, 50 años en Marte)
+========================================= */
+
+.hero {
+    background:
+        linear-gradient(
+            90deg,
+            rgba(7, 7, 17, 0.94) 0%,
+            rgba(7, 7, 17, 0.78) 40%,
+            rgba(7, 7, 17, 0.25) 100%
+        ),
+        linear-gradient(
+            180deg,
+            rgba(7, 7, 17, 0.55) 0%,
+            rgba(7, 7, 17, 0) 25%,
+            rgba(7, 7, 17, 0) 70%,
+            var(--background) 100%
+        ),
+        url("img/hero/viking-nasa.jpg") center 35% / cover no-repeat;
+}
+
+.hero-credit {
+    position: absolute;
+    right: 8%;
+    bottom: 28px;
+    z-index: 1;
+
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(226, 232, 240, 0.7);
+
+    transition: color 0.25s ease;
+}
+
+.hero-credit:hover {
+    color: var(--primary);
+}
+
+@media (max-width: 600px) {
+    .hero {
+        background-position: 70% 35%;
+    }
+
+    .hero-credit {
+        right: 6%;
+        bottom: 16px;
+    }
+}

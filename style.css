@@ -1502,3 +1502,70 @@ footer p {
     }
 
 }
+
+
+/* =========================================
+   SOBRE NOSOTROS
+========================================= */
+
+.about-box {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 32px 28px;
+
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 75, 43, 0.35);
+    border-radius: 6px;
+}
+
+.about-box p {
+    margin-bottom: 18px;
+    line-height: 1.7;
+    color: #d6d6d6;
+}
+
+.about-box strong {
+    color: #fff;
+}
+
+.about-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+
+    margin: 28px 0;
+    padding: 22px 0;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+    font-size: 14px;
+    color: #d6d6d6;
+}
+
+.about-info span {
+    display: block;
+    margin-bottom: 6px;
+
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: #ff4b2b;
+}
+
+.about-link {
+    display: inline-block;
+    padding: 12px 20px;
+
+    font-size: 13px;
+    letter-spacing: 1px;
+
+    border: 1px solid #ff4b2b;
+    border-radius: 4px;
+    color: #fff;
+
+    transition: background 0.3s ease;
+}
+
+.about-link:hover {
+    background: rgba(255, 75, 43, 0.2);
+}

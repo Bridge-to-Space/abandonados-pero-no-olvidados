@@ -4130,3 +4130,290 @@ nav button:hover {
 .cine-voice[aria-pressed="false"] {
     color: rgba(255, 255, 255, 0.55);
 }
+
+
+/* =========================================
+   CINEMÁTICA — RETOS (minijuegos cortos)
+========================================= */
+
+.cine {
+    --voz-reto: #f472b6;
+}
+
+.cine[data-type="reto"] .cine-tag {
+    color: var(--voz-reto);
+}
+
+.cine[data-type="reto"] .cine-box {
+    background: rgba(244, 114, 182, 0.08);
+    border: 2px dashed var(--voz-reto);
+    border-radius: 16px;
+}
+
+.cine[data-type="reto"] .cine-text {
+    font-size: clamp(17px, 2vw, 22px);
+}
+
+/* Roverchito apagado: oscuro y sin brillo hasta que lo encienden */
+.cine.is-off .cine-avatar svg {
+    filter: grayscale(1) brightness(0.35);
+    transition: filter 0.8s ease;
+}
+
+.cine-avatar svg {
+    transition: filter 0.8s ease;
+}
+
+.cine-reto {
+    margin-top: 18px;
+    padding: 18px;
+
+    background: rgba(5, 7, 12, 0.7);
+    border: 1px solid rgba(244, 114, 182, 0.35);
+    border-radius: 16px;
+
+    animation: cineCaptionIn 0.4s ease-out;
+}
+
+.cine-reto[hidden] {
+    display: none;
+}
+
+.cine-reto.is-won {
+    border-color: var(--voz-roverchito);
+    box-shadow: 0 0 30px rgba(239, 255, 105, 0.25);
+}
+
+.reto-area {
+    display: grid;
+    justify-items: center;
+    gap: 16px;
+}
+
+.reto-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+
+    margin-top: 16px;
+}
+
+.reto-msg {
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.cine-reto.is-won .reto-msg {
+    color: var(--voz-roverchito);
+}
+
+.reto-skip {
+    padding: 6px 12px;
+
+    color: rgba(255, 255, 255, 0.7);
+    font-family: inherit;
+    font-size: 11px;
+
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.reto-skip:hover,
+.reto-skip:focus-visible {
+    color: #fff;
+    border-color: var(--voz-reto);
+}
+
+/* Barra de progreso del reto */
+.reto-meter {
+    width: 100%;
+    max-width: 360px;
+    height: 10px;
+    overflow: hidden;
+
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 999px;
+}
+
+.reto-meter i {
+    display: block;
+    width: 0;
+    height: 100%;
+
+    background: linear-gradient(90deg, var(--voz-reto), var(--voz-roverchito));
+    border-radius: 999px;
+    box-shadow: 0 0 12px rgba(239, 255, 105, 0.5);
+}
+
+/* --- Encender: botón que se mantiene presionado --- */
+.reto-power {
+    --charge: 0;
+
+    display: grid;
+    place-items: center;
+    gap: 4px;
+
+    width: 128px;
+    height: 128px;
+
+    color: #fff;
+    font-family: inherit;
+
+    background:
+        radial-gradient(circle, rgba(239, 255, 105, calc(var(--charge) * 0.5)), transparent 70%),
+        #12141c;
+    border: 3px solid var(--voz-reto);
+    border-radius: 50%;
+    cursor: pointer;
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+
+    box-shadow: 0 0 calc(10px + var(--charge) * 40px) rgba(239, 255, 105, calc(0.2 + var(--charge) * 0.6));
+    transition: transform 0.15s ease;
+}
+
+.reto-power.is-holding {
+    transform: scale(0.94);
+    border-color: var(--voz-roverchito);
+}
+
+.reto-power-icon {
+    font-size: 38px;
+    line-height: 1;
+}
+
+.reto-power-label {
+    font-size: 9px;
+    letter-spacing: 0.14em;
+}
+
+/* --- Secuencia: cuadrícula de bloques de memoria --- */
+.reto-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 64px);
+    gap: 10px;
+}
+
+.reto-cell {
+    width: 64px;
+    height: 64px;
+
+    background: #0e1a22;
+    border: 2px solid rgba(103, 232, 249, 0.35);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease;
+}
+
+.reto-cell:hover,
+.reto-cell:focus-visible {
+    border-color: var(--voz-memoria);
+}
+
+.reto-cell:active {
+    transform: scale(0.94);
+}
+
+.reto-cell.is-lit {
+    background: var(--voz-memoria);
+    box-shadow: 0 0 24px rgba(103, 232, 249, 0.9);
+}
+
+.reto-area.is-showing .reto-cell {
+    cursor: default;
+}
+
+.reto-area.is-wrong .reto-grid {
+    animation: cineShake 0.45s ease-in-out;
+}
+
+/* --- Sintonizar: ondas y perilla --- */
+.reto-wave {
+    width: 100%;
+    max-width: 360px;
+    height: auto;
+
+    background: rgba(14, 165, 233, 0.06);
+    border: 1px solid rgba(125, 211, 252, 0.3);
+    border-radius: 10px;
+}
+
+.reto-wave path {
+    fill: none;
+    stroke-width: 3;
+    stroke-linecap: round;
+}
+
+.reto-wave-target {
+    stroke: rgba(125, 211, 252, 0.55);
+    stroke-dasharray: 6 6;
+}
+
+.reto-wave-mine {
+    stroke: var(--voz-reto);
+}
+
+.reto-area.is-close .reto-wave-mine {
+    stroke: var(--voz-roverchito);
+}
+
+.reto-knob {
+    display: grid;
+    gap: 6px;
+
+    width: 100%;
+    max-width: 360px;
+
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.reto-knob input {
+    width: 100%;
+    accent-color: var(--voz-reto);
+    cursor: pointer;
+}
+
+@media (max-width: 700px) {
+    .cine-reto {
+        padding: 14px;
+    }
+
+    .reto-grid {
+        grid-template-columns: repeat(3, 54px);
+    }
+
+    .reto-cell {
+        width: 54px;
+        height: 54px;
+    }
+
+    .reto-power {
+        width: 110px;
+        height: 110px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .cine-reto,
+    .reto-area.is-wrong .reto-grid {
+        animation: none;
+    }
+}
+
+/* El reto conserva su estilo aunque la escena sea de memoria o de Control de Misión */
+.cine[data-type="reto"] .cine-tag .cine-speaker {
+    color: var(--voz-reto);
+}
+
+.cine[data-type="reto"] .cine-text {
+    font-family: var(--font-sans);
+    letter-spacing: normal;
+    color: #fff;
+}

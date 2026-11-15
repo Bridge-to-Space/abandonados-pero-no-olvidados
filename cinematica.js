@@ -9,7 +9,7 @@
      Cinematica.abrir()            → la cinemática del inicio ("origen")
 
    Atributos de cada <li>:
-     data-type   narrador | roverchito | control | nave | jugador | memoria | nota | eleccion
+     data-type   narrador | roverchito | control | nave | jugador | memoria | nota | eleccion | reto
      data-mood   expresión de Roverchito: neutral | happy | sad
      data-scene  fondo: lab | file | night | control | space | mars-day | mars-dusk | mars-night | storm |
                  asteroids | jupiter | deep
@@ -17,6 +17,9 @@
      data-note   etiqueta junto al nombre (por ejemplo "TE PREGUNTA A TI")
      data-if     "clave=valor": la escena solo aparece si el usuario eligió ese valor
      data-solo   escena del pasado: Roverchito no aparece y la nave invitada se ilumina
+     data-off    Roverchito aparece apagado (antes de encenderlo)
+     reto:      data-reto = encender | secuencia | sintonizar  (minijuego corto;
+                el texto del <li> es la instrucción; no avanza hasta completarlo)
      data-audio  (frases de Roverchito) archivo con la voz grabada; si no hay,
                  la lee la voz del navegador (ver voz.js)
      nave:      data-name (nombre), data-weak (señal débil)
@@ -43,6 +46,7 @@ const Cinematica = (() => {
         nave: '<svg viewBox="0 0 16 16" aria-hidden="true"><rect x="2" y="6" width="12" height="4" rx="1" fill="currentColor"/><rect x="3" y="4" width="10" height="1.6" fill="currentColor"/><circle cx="4" cy="12.5" r="1.6" fill="currentColor"/><circle cx="8" cy="12.5" r="1.6" fill="currentColor"/><circle cx="12" cy="12.5" r="1.6" fill="currentColor"/><rect x="10.5" y="1" width="1.4" height="3.5" fill="currentColor"/></svg>',
         memoria: '<svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3.5" y="3.5" width="9" height="9" rx="1" fill="none" stroke="currentColor" stroke-width="1.4"/><rect x="6" y="6" width="4" height="4" fill="currentColor"/><path d="M6 1v2.5M10 1v2.5M6 12.5V15M10 12.5V15M1 6h2.5M1 10h2.5M12.5 6H15M12.5 10H15" stroke="currentColor" stroke-width="1.3"/></svg>',
         jugador: '<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="5" r="3" fill="currentColor"/><path d="M2.5 15c.4-3.4 2.6-5.4 5.5-5.4s5.1 2 5.5 5.4z" fill="currentColor"/></svg>',
+        reto: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M9.5 1L3 9h4.5L6.5 15 13 7H8.5z" fill="currentColor"/></svg>',
         nota: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 12.5V3l7-1.5v9" fill="none" stroke="currentColor" stroke-width="1.5"/><ellipse cx="4.3" cy="12.6" rx="2.2" ry="1.7" fill="currentColor"/><ellipse cx="11.3" cy="11" rx="2.2" ry="1.7" fill="currentColor"/></svg>',
         lock: '<svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="7" width="10" height="7.5" rx="1.2" fill="currentColor"/><path d="M5.2 7V5a2.8 2.8 0 0 1 5.6 0v2" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>',
         check: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 4.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
@@ -55,6 +59,7 @@ const Cinematica = (() => {
         memoria: "MEMORIA DE ROVERCHITO",
         nota: "NOTA DE LA MELODÍA",
         eleccion: "ROVERCHITO",
+        reto: "RETO",
         jugador: "TÚ · EXPLORADOR"
     };
 
@@ -92,6 +97,8 @@ const Cinematica = (() => {
                 stamp: d.stamp || "ACCESO RESTRINGIDO",
                 tone: d.tone || "alert",
                 key: d.key || "",
+                reto: d.reto || "",
+                off: "off" in d,
                 audio: d.audio || "",
                 text: clean(copy.textContent),
                 rows: [...li.querySelectorAll("[data-label]")].map(s => ({
@@ -103,6 +110,142 @@ const Cinematica = (() => {
             };
         });
     }
+
+    /* ---------- Los retos ----------
+       Minijuegos cortos dentro de una cinemática, para que el usuario participe.
+       Cada uno recibe (área, { done, say, root }) y devuelve una función de limpieza. */
+    const RETOS = {
+
+        /* Mantener presionado para cargar la energía de Roverchito */
+        encender(area, { done, say }) {
+            area.innerHTML =
+                '<button type="button" class="reto-power" aria-label="Mantén presionado para encender a Roverchito">' +
+                '<span class="reto-power-icon" aria-hidden="true">⏻</span>' +
+                '<span class="reto-power-label">MANTÉN PRESIONADO</span></button>' +
+                '<div class="reto-meter" aria-hidden="true"><i></i></div>';
+            const btn = area.querySelector(".reto-power");
+            const bar = area.querySelector(".reto-meter i");
+            let charge = 0, holding = false, last = performance.now(), frame = 0;
+            const down = e => { e.preventDefault(); holding = true; btn.classList.add("is-holding"); };
+            const up = () => { holding = false; btn.classList.remove("is-holding"); };
+            const key = e => {
+                if (e.code === "Space" || e.key === "Enter") {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    if (e.type === "keydown") down(e); else up();
+                }
+            };
+            btn.addEventListener("pointerdown", down);
+            btn.addEventListener("pointerleave", up);
+            btn.addEventListener("click", e => e.stopPropagation());
+            btn.addEventListener("keydown", key);
+            btn.addEventListener("keyup", key);
+            window.addEventListener("pointerup", up);
+            say("Carga su energía al 100%");
+            const tick = now => {
+                const dt = now - last;
+                last = now;
+                charge = Math.max(0, Math.min(1, charge + (holding ? dt / 1600 : -dt / 2600)));
+                bar.style.width = Math.round(charge * 100) + "%";
+                btn.style.setProperty("--charge", charge.toFixed(3));
+                if (charge >= 1) { done(); return; }
+                frame = requestAnimationFrame(tick);
+            };
+            frame = requestAnimationFrame(tick);
+            return () => {
+                cancelAnimationFrame(frame);
+                window.removeEventListener("pointerup", up);
+            };
+        },
+
+        /* Repetir la secuencia de luces para abrir la memoria */
+        secuencia(area, { done, say }) {
+            const ORDER = [4, 0, 8, 2];
+            let cellsHtml = "";
+            for (let n = 0; n < 9; n++) {
+                cellsHtml += '<button type="button" class="reto-cell" data-n="' + n + '" aria-label="Bloque de memoria ' + (n + 1) + '"></button>';
+            }
+            area.innerHTML = '<div class="reto-grid">' + cellsHtml + '</div>';
+            const cells = [...area.querySelectorAll(".reto-cell")];
+            let step = 0, showing = true;
+            const timers = [];
+            const flash = (n, ms = 420) => {
+                cells[n].classList.add("is-lit");
+                timers.push(setTimeout(() => cells[n].classList.remove("is-lit"), ms));
+            };
+            const show = () => {
+                showing = true;
+                step = 0;
+                area.classList.add("is-showing");
+                say("Observa la secuencia…");
+                ORDER.forEach((n, k) => timers.push(setTimeout(() => flash(n), 500 + k * 650)));
+                timers.push(setTimeout(() => {
+                    showing = false;
+                    area.classList.remove("is-showing");
+                    say("Ahora repítela");
+                }, 500 + ORDER.length * 650));
+            };
+            cells.forEach(cell => cell.addEventListener("click", e => {
+                e.stopPropagation();
+                if (showing) return;
+                const n = Number(cell.dataset.n);
+                flash(n, 250);
+                if (n === ORDER[step]) {
+                    step++;
+                    if (step === ORDER.length) done();
+                } else {
+                    say("¡Casi! Mira otra vez");
+                    area.classList.add("is-wrong");
+                    timers.push(setTimeout(() => { area.classList.remove("is-wrong"); show(); }, 700));
+                }
+            }));
+            show();
+            return () => timers.forEach(clearTimeout);
+        },
+
+        /* Mover la perilla hasta que la onda coincida con la de Control de Misión */
+        sintonizar(area, { done, say }) {
+            const TARGET = 6.4, W = 320, H = 90;
+            area.innerHTML =
+                '<svg class="reto-wave" viewBox="0 0 ' + W + ' ' + H + '" aria-hidden="true">' +
+                '<path class="reto-wave-target" d=""/><path class="reto-wave-mine" d=""/></svg>' +
+                '<label class="reto-knob"><span>FRECUENCIA</span>' +
+                '<input type="range" min="1" max="12" step="0.1" value="2" aria-label="Frecuencia de la antena"></label>' +
+                '<div class="reto-meter" aria-hidden="true"><i></i></div>';
+            const target = area.querySelector(".reto-wave-target");
+            const mine = area.querySelector(".reto-wave-mine");
+            const input = area.querySelector("input");
+            const bar = area.querySelector(".reto-meter i");
+            ["click", "pointerdown", "keydown"].forEach(ev => input.addEventListener(ev, e => e.stopPropagation()));
+            let lock = 0, last = performance.now(), frame = 0;
+            const wave = (f, phase, amp) => {
+                let d = "";
+                for (let x = 0; x <= W; x += 4) {
+                    const y = H / 2 + Math.sin((x / W) * f * Math.PI * 2 + phase) * amp;
+                    d += (x ? "L" : "M") + x + " " + y.toFixed(1);
+                }
+                return d;
+            };
+            say("Mueve la perilla hasta que las ondas coincidan");
+            const tick = now => {
+                const dt = now - last;
+                last = now;
+                const f = Number(input.value);
+                const diff = Math.abs(f - TARGET);
+                const phase = now / 400;
+                target.setAttribute("d", wave(TARGET, phase, 26));
+                mine.setAttribute("d", wave(f, phase, 26 - Math.min(diff * 2, 16)));
+                lock = diff < 0.35 ? Math.min(1, lock + dt / 1200) : Math.max(0, lock - dt / 900);
+                bar.style.width = Math.round(lock * 100) + "%";
+                area.classList.toggle("is-close", diff < 0.35);
+                if (lock >= 1) { done(); return; }
+                frame = requestAnimationFrame(tick);
+            };
+            frame = requestAnimationFrame(tick);
+            return () => cancelAnimationFrame(frame);
+        }
+    };
+
 
     /* ---------- Un reproductor por cinemática ---------- */
     function createPlayer(id, opts) {
@@ -160,6 +303,7 @@ const Cinematica = (() => {
                             <p class="cine-text" aria-live="polite"></p>
                         </div>
                         <div class="cine-options" hidden></div>
+                        <div class="cine-reto" hidden></div>
                         <div class="cine-memory" hidden>
                             <div class="mem-rain" aria-hidden="true"></div>
                             <div class="mem-loading">
@@ -198,7 +342,7 @@ const Cinematica = (() => {
             els = {
                 bg: q(".cine-bg"), place: q(".cine-place"), avatarWrap: q(".cine-avatar-wrap"), avatar: q(".cine-avatar"),
                 caption: q(".cine-caption"), tagIcon: q(".cine-tag-icon"), speaker: q(".cine-speaker"), note: q(".cine-note"),
-                box: q(".cine-box"), text: q(".cine-text"), options: q(".cine-options"),
+                box: q(".cine-box"), text: q(".cine-text"), options: q(".cine-options"), reto: q(".cine-reto"),
                 memory: q(".cine-memory"), memLoading: q(".mem-loading"), memLoadingLabel: q(".mem-loading-label"),
                 memBar: q(".mem-bar i"), memPct: q(".mem-pct"), memFile: q(".mem-file"), memHead: q(".mem-file-head"),
                 memRows: q(".mem-rows"), memStamp: q(".mem-stamp"), memStampIcon: q(".mem-stamp-icon"), memStampText: q(".mem-stamp-text"),
@@ -268,7 +412,7 @@ const Cinematica = (() => {
         function sceneDuration(s) {
             if (s.type === "memoria") return MEM_LOAD_MS + s.rows.length * MEM_ROW_MS + MEM_STAMP_MS + MEM_HOLD_MS;
             if (s.type === "nota") return NOTE_MS;
-            if (s.type === "eleccion") return 0;
+            if (s.type === "eleccion" || s.type === "reto") return 0;
             const t = reduceMotion ? 0 : s.text.length * TYPE_MS;
             return isLast() ? t + 300 : t + holdFor(s.text);
         }
@@ -338,6 +482,8 @@ const Cinematica = (() => {
             els.end.hidden = true;
             els.options.hidden = true;
             els.options.innerHTML = "";
+            stopReto();
+            root.classList.toggle("is-off", s.off);
             els.text.textContent = "";
             typed = 0;
             setMood(s.mood);
@@ -350,8 +496,10 @@ const Cinematica = (() => {
 
             els.prev.disabled = prevIndex(index) === -1;
             els.skip.hidden = isLast() || s.type === "eleccion";
-            els.pause.hidden = isLast() || s.type === "eleccion";
-            els.hint.textContent = s.type === "eleccion" ? "Elige una respuesta" : "Clic o espacio para avanzar";
+            els.pause.hidden = isLast() || s.type === "eleccion" || s.type === "reto";
+            els.hint.textContent = s.type === "eleccion" ? "Elige una respuesta"
+                : s.type === "reto" ? "Completa el reto para continuar"
+                : "Clic o espacio para avanzar";
 
             updateProgress(sceneDuration(s));
 
@@ -406,6 +554,7 @@ const Cinematica = (() => {
             els.text.textContent = s.text;
 
             if (s.type === "eleccion") { showOptions(s); return; }
+            if (s.type === "reto") { startReto(s); return; }
             if (isLast()) { showEnd(); return; }
             if (paused) return;
             if (voiceBusy()) {
@@ -527,6 +676,50 @@ const Cinematica = (() => {
             if (opts.onNote) opts.onNote();
             later(() => { busy = false; if (!paused) next(); }, NOTE_MS);
         }
+
+        /* ---------- Retos: minijuegos cortos entre escenas ---------- */
+        let retoCleanup = null;
+
+        function stopReto() {
+            if (retoCleanup) { retoCleanup(); retoCleanup = null; }
+            if (els.reto) { els.reto.hidden = true; els.reto.innerHTML = ""; els.reto.classList.remove("is-won"); }
+        }
+
+        function startReto(s) {
+            const game = RETOS[s.reto];
+            if (!game) { next(); return; }
+            waiting = true;
+            els.reto.hidden = false;
+            els.reto.innerHTML = '<div class="reto-area"></div>' +
+                '<div class="reto-foot"><span class="reto-msg" aria-live="polite"></span>' +
+                '<button type="button" class="reto-skip">Saltar reto</button></div>';
+            const area = els.reto.querySelector(".reto-area");
+            const msg = els.reto.querySelector(".reto-msg");
+            const mine = index;
+            let finished = false;
+            const done = (won = true) => {
+                if (finished || index !== mine) return;
+                finished = true;
+                if (retoCleanup) { retoCleanup(); retoCleanup = null; }
+                if (won) {
+                    msg.textContent = "¡Listo!";
+                    els.reto.classList.add("is-won");
+                    setMood("happy");
+                }
+                root.classList.remove("is-off");
+                fillCurrent();
+                setTimeout(() => {
+                    if (index !== mine) return;
+                    waiting = false;
+                    if (!isLast()) next();
+                }, won ? 1100 : 200);
+            };
+            els.reto.querySelector(".reto-skip").addEventListener("click", () => done(false));
+            retoCleanup = game(area, { done: () => done(true), say: t => { msg.textContent = t; }, root });
+            const first = area.querySelector("button, input");
+            if (first) first.focus();
+        }
+
 
         /* ---------- Controles ---------- */
         function advance() {

@@ -142,9 +142,10 @@
         let line = 0;
         let timer = null;
 
-        function type(message) {
+        function type(message, { speak = false } = {}) {
             clearInterval(timer);
             sr.textContent = message;
+            if (speak && typeof RoverchitoVoz !== "undefined") RoverchitoVoz.decir(message);
             if (reduceMotion) {
                 text.textContent = message;
                 return;
@@ -183,7 +184,7 @@
                 Roverchito.setMood(face, "happy");
             }
             started = true;
-            type(PEEK_LINES[line]);
+            type(PEEK_LINES[line], { speak: true });
         });
     }
 

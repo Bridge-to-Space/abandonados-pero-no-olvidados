@@ -4125,3 +4125,8 @@ nav button:hover {
     filter: drop-shadow(0 0 18px var(--voz-nave));
     transform: scale(1.08);
 }
+
+/* Botón de voz en la barra de la cinemática */
+.cine-voice[aria-pressed="false"] {
+    color: rgba(255, 255, 255, 0.55);
+}

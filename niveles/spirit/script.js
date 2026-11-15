@@ -385,10 +385,20 @@ const GUIDE_REACTIONS = {
 const GUIDE_MOODS = { good: "happy", neutral: "neutral", bad: "sad" };
 
 /* Roverchito cambia de expresión y comenta. kind: good | neutral | bad */
-function guideSay(kind, text, { save = true } = {}) {
+/* Voz de Roverchito (../../voz.js). Solo suena después de que el usuario hizo clic. */
+function guideSpeak(text) {
+    if (typeof RoverchitoVoz !== "undefined" && userInteracted) RoverchitoVoz.decir(text);
+}
+
+let userInteracted = false;
+document.addEventListener("pointerdown", () => { userInteracted = true; }, { capture: true });
+document.addEventListener("keydown", () => { userInteracted = true; }, { capture: true });
+
+function guideSay(kind, text, { save = true, speak = true } = {}) {
     const avatar = getElement("guide-avatar");
     const reaction = getElement("guide-reaction");
     const line = text || GUIDE_REACTIONS[kind][Math.floor(Math.random() * GUIDE_REACTIONS[kind].length)];
+    if (speak) guideSpeak(line);
 
     if (avatar) {
         Roverchito.setMood(avatar, GUIDE_MOODS[kind] || "neutral");
@@ -610,6 +620,7 @@ function renderScene() {
     if (sceneLabel) sceneLabel.textContent = currentScene.label;
     if (sceneTitle) sceneTitle.textContent = currentScene.title;
     if (sceneText) sceneText.textContent = currentScene.text;
+    guideSpeak(currentScene.text);
     if (historyText) historyText.textContent = currentScene.history;
     if (solNumber) solNumber.textContent = currentScene.sol === null ? "—" : currentScene.sol;
     renderSource(currentScene.source);
@@ -767,6 +778,7 @@ function restartGame() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+    if (typeof RoverchitoVoz !== "undefined") RoverchitoVoz.boton(getElement("voice-toggle"));
     loadGame();
     /* Si se recargó la página a mitad del descenso, se reinicia el aterrizaje */
     if (gameState.sceneIndex === 1 && !gameState.choiceMade) gameState.landing = null;

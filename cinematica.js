@@ -17,6 +17,8 @@
      data-note   etiqueta junto al nombre (por ejemplo "TE PREGUNTA A TI")
      data-if     "clave=valor": la escena solo aparece si el usuario eligió ese valor
      data-solo   escena del pasado: Roverchito no aparece y la nave invitada se ilumina
+     data-audio  (frases de Roverchito) archivo con la voz grabada; si no hay,
+                 la lee la voz del navegador (ver voz.js)
      nave:      data-name (nombre), data-weak (señal débil)
      memoria:   data-name, data-file, data-loading, data-stamp, data-tone (alert | ok),
                 y dentro <span data-label="…" data-alert>valor</span> por dato
@@ -56,6 +58,10 @@ const Cinematica = (() => {
         jugador: "TÚ · EXPLORADOR"
     };
 
+    /* Voz de Roverchito (voz.js); si la página no la carga, todo sigue en texto */
+    const voz = () => (typeof RoverchitoVoz !== "undefined" ? RoverchitoVoz : null);
+    const speaksRover = s => s.type === "roverchito" || s.type === "eleccion";
+
     const store = {
         get(key) { try { return localStorage.getItem(key); } catch (e) { return null; } },
         set(key, value) { try { localStorage.setItem(key, value); } catch (e) { /* sin almacenamiento */ } }
@@ -86,6 +92,7 @@ const Cinematica = (() => {
                 stamp: d.stamp || "ACCESO RESTRINGIDO",
                 tone: d.tone || "alert",
                 key: d.key || "",
+                audio: d.audio || "",
                 text: clean(copy.textContent),
                 rows: [...li.querySelectorAll("[data-label]")].map(s => ({
                     label: s.dataset.label, value: clean(s.textContent), alert: s.hasAttribute("data-alert")
@@ -106,6 +113,7 @@ const Cinematica = (() => {
         let busy = false;        /* escena con animación propia en curso (memoria / nota) */
         let waiting = false;     /* esperando una elección del usuario */
         let paused = false, isOpen = false, lastFocus = null;
+        let waitingVoice = false; /* el texto terminó pero Roverchito sigue hablando */
 
         const later = (fn, ms) => timers.push(setTimeout(fn, ms));
         const setMood = mood => { if (typeof Roverchito !== "undefined" && els.avatar) Roverchito.setMood(els.avatar, mood); };
@@ -177,6 +185,7 @@ const Cinematica = (() => {
                     <div class="cine-progress"></div>
                     <div class="cine-controls">
                         <span class="cine-hint">Clic o espacio para avanzar</span>
+                        <button class="cine-btn cine-voice" type="button">🔊 VOZ</button>
                         <button class="cine-btn cine-prev" type="button">◀ ANTERIOR</button>
                         <button class="cine-btn cine-pause" type="button">❚❚ PAUSA</button>
                         <button class="cine-btn cine-skip" type="button">SALTAR ▶▶</button>
@@ -199,6 +208,8 @@ const Cinematica = (() => {
             };
 
             if (typeof Roverchito !== "undefined") Roverchito.mount(els.avatar, "neutral");
+            const voiceBtn = root.querySelector(".cine-voice");
+            if (voz()) voz().boton(voiceBtn); else voiceBtn.hidden = true;
             if (opts.guest) {
                 const tpl = document.getElementById(opts.guest);
                 if (tpl) els.guest.innerHTML = tpl.innerHTML;
@@ -297,9 +308,11 @@ const Cinematica = (() => {
 
         function play(n) {
             clearTimers();
+            if (voz()) voz().callar();
             index = n;
             busy = false;
             waiting = false;
+            waitingVoice = false;
             const s = scenes[index];
 
             root.dataset.type = s.type;
@@ -350,9 +363,28 @@ const Cinematica = (() => {
             if (s.type === "memoria") { playMemory(s); return; }
             if (s.type === "nota") { playNote(s); return; }
 
+            if (speaksRover(s)) speak(s);
             if (reduceMotion) finishTyping();
             else if (!paused) startTyping();
         }
+
+        /* Roverchito lee su frase; al terminar de hablar se pasa a la siguiente escena */
+        function speak(s) {
+            const v = voz();
+            if (!v) return;
+            const mine = index;
+            v.decir(s.text, {
+                audio: s.audio,
+                onEnd: () => {
+                    if (index !== mine || !waitingVoice || paused) return;
+                    waitingVoice = false;
+                    clearTimeout(holdTimer);
+                    if (!isLast()) scheduleNext(700);
+                }
+            });
+        }
+
+        const voiceBusy = () => !!(voz() && voz().hablando());
 
         function startTyping() {
             const text = scenes[index].text;
@@ -375,7 +407,14 @@ const Cinematica = (() => {
 
             if (s.type === "eleccion") { showOptions(s); return; }
             if (isLast()) { showEnd(); return; }
-            if (!paused) scheduleNext(holdFor(s.text));
+            if (paused) return;
+            if (voiceBusy()) {
+                /* espera a que Roverchito termine; con un límite por si la voz se traba */
+                waitingVoice = true;
+                scheduleNext(holdFor(s.text) + 10000);
+            } else {
+                scheduleNext(holdFor(s.text));
+            }
         }
 
         function scheduleNext(ms) {
@@ -520,9 +559,15 @@ const Cinematica = (() => {
             const bar = els.progress.children[index] && els.progress.children[index].firstElementChild;
             if (bar) bar.style.animationPlayState = paused ? "paused" : "running";
 
-            if (paused) clearTimers();
-            else if (s.type === "memoria" || s.type === "nota") scheduleNext(2000);
+            if (paused) {
+                clearTimers();
+                if (voz()) voz().pausar();
+                return;
+            }
+            if (voz()) voz().seguir();
+            if (s.type === "memoria" || s.type === "nota") scheduleNext(2000);
             else if (typed < s.text.length) startTyping();
+            else if (voiceBusy()) { waitingVoice = true; scheduleNext(holdFor(s.text) + 10000); }
             else scheduleNext(1800);
         }
 
@@ -567,6 +612,7 @@ const Cinematica = (() => {
 
         function close() {
             clearTimers();
+            if (voz()) voz().callar();
             isOpen = false;
             root.classList.remove("is-open");
             document.documentElement.classList.remove("cine-open");

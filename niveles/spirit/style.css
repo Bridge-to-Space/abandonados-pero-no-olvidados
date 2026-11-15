@@ -3792,3 +3792,8 @@ main {
         animation: none;
     }
 }
+
+/* Botón de voz de Roverchito en el encabezado */
+.voice-toggle {
+    white-space: nowrap;
+}

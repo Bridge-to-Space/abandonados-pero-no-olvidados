@@ -4110,3 +4110,18 @@ nav button:hover {
         max-width: 100%;
     }
 }
+
+/* Escenas del pasado (data-solo): solo la nave, iluminada como un recuerdo */
+.cine-avatar-wrap {
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.cine.is-solo .cine-avatar-wrap {
+    opacity: 0;
+    transform: translateX(-24px);
+}
+
+.cine.is-solo .cine-stage.has-guest .cine-guest {
+    filter: drop-shadow(0 0 18px var(--voz-nave));
+    transform: scale(1.08);
+}

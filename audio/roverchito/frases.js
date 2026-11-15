@@ -21,18 +21,36 @@ window.ROVERCHITO_FRASES = [
   },
   {
     "archivo": "origen-cine-script-01.mp3",
-    "texto": "¡Todos los robots del laboratorio tienen en su ficha el nombre de quien los construyó! Voy a revisar mi memoria…",
+    "texto": "¡Hola! ¿Tú me vas a cuidar? ¡Genial!",
     "origen": "index.html · cine-script",
     "listo": false
   },
   {
     "archivo": "origen-cine-script-02.mp3",
-    "texto": "Oye… ¿tú sabes quiénes son mis papás?",
+    "texto": "Todos los robots guardan en su memoria quién los construyó. Voy a ver la mía…",
     "origen": "index.html · cine-script",
     "listo": false
   },
   {
     "archivo": "origen-cine-script-03.mp3",
+    "texto": "Oye… ¿tú sabes quiénes son mis papás?",
+    "origen": "index.html · cine-script",
+    "listo": false
+  },
+  {
+    "archivo": "origen-cine-script-04.mp3",
+    "texto": "¿Juntos? ¡Trato hecho!",
+    "origen": "index.html · cine-script",
+    "listo": false
+  },
+  {
+    "archivo": "origen-cine-script-05.mp3",
+    "texto": "¡Buena idea! Mañana les preguntamos.",
+    "origen": "index.html · cine-script",
+    "listo": false
+  },
+  {
+    "archivo": "origen-cine-script-06.mp3",
     "texto": "¿Vienes conmigo? ¡Te ayudo si me ayudas!",
     "origen": "index.html · cine-script",
     "listo": false

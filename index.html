@@ -205,7 +205,7 @@
             <h3>El origen de Roverchito</h3>
             <p>
                 Un laboratorio de la NASA, un robot muy curioso y un archivo
-                que nadie quiere abrir. Dura alrededor de un minuto y medio.
+                que nadie quiere abrir. Dura un par de minutos y tiene tres retos para ayudar a Roverchito.
             </p>
             <div class="cine-poster-actions">
                 <button class="primary-btn cine-play" type="button" onclick="Cinematica.abrir()">
@@ -221,20 +221,33 @@
 
     <!-- GUION de la cinemática. Sin JavaScript se lee aquí mismo;
          con JavaScript, cinematica.js lo reproduce a pantalla completa.
-         data-type: narrador | roverchito | control | memoria
-         data-place: dónde ocurre la escena · data-note: a quién se dirige -->
+         Tiene tres retos (minijuegos cortos) para que el usuario participe:
+         encender a Roverchito, abrir su memoria y sintonizar a Control de Misión. -->
     <ol class="cine-script" id="cine-script">
 
-        <li data-type="narrador" data-mood="neutral" data-scene="lab" data-place="LABORATORIO DE LA NASA · 2040">
+        <li data-type="narrador" data-off data-mood="neutral" data-scene="lab" data-place="LABORATORIO DE LA NASA · 2040">
             <strong>Narrador:</strong>
-            Roverchito es un robot con pocos meses de vida, todavía en
-            desarrollo y muy curioso. Tú eres la científica o el científico que lo cuida.
+            En un laboratorio de la NASA, un pequeño robot espera a que alguien lo encienda.
+        </li>
+
+        <li data-type="reto" data-reto="encender" data-off data-mood="neutral" data-scene="lab" data-place="LABORATORIO DE LA NASA · 2040">
+            <strong>Reto:</strong>
+            Mantén presionado el botón para encender a Roverchito.
         </li>
 
         <li data-type="roverchito" data-mood="happy" data-scene="lab" data-place="LABORATORIO DE LA NASA · 2040">
             <strong>Roverchito:</strong>
-            ¡Todos los robots del laboratorio tienen en su ficha el nombre
-            de quien los construyó! Voy a revisar mi memoria…
+            ¡Hola! ¿Tú me vas a cuidar? ¡Genial!
+        </li>
+
+        <li data-type="roverchito" data-mood="neutral" data-scene="lab" data-place="LABORATORIO DE LA NASA · 2040">
+            <strong>Roverchito:</strong>
+            Todos los robots guardan en su memoria quién los construyó. Voy a ver la mía…
+        </li>
+
+        <li data-type="reto" data-reto="secuencia" data-mood="neutral" data-scene="file" data-place="MEMORIA INTERNA DE ROVERCHITO">
+            <strong>Reto:</strong>
+            Ayúdalo a abrir su memoria: repite la secuencia de luces.
         </li>
 
         <li data-type="memoria" data-mood="neutral" data-scene="file" data-place="MEMORIA INTERNA DE ROVERCHITO">
@@ -244,22 +257,32 @@
             <span data-label="ORIGEN" data-alert>MÚLTIPLES FUENTES — ACCESO RESTRINGIDO</span>
         </li>
 
-        <li data-type="roverchito" data-mood="sad" data-scene="night" data-place="LABORATORIO DE LA NASA · ESA NOCHE" data-note="TE PREGUNTA A TI">
+        <li data-type="eleccion" data-key="origen_respuesta" data-mood="sad" data-scene="night" data-place="LABORATORIO DE LA NASA · ESA NOCHE" data-note="TE PREGUNTA A TI">
             <strong>Roverchito:</strong>
             Oye… ¿tú sabes quiénes son mis papás?
+            <span data-option="a">No lo sé… pero lo vamos a averiguar.</span>
+            <span data-option="b">Tal vez en Control de Misión lo sepan.</span>
         </li>
 
-        <li data-type="narrador" data-mood="neutral" data-scene="control" data-place="CONTROL DE MISIÓN · AL DÍA SIGUIENTE">
-            <strong>Narrador:</strong>
-            Al día siguiente, Roverchito y tú van juntos a Control de Misión
-            a buscar respuestas.
+        <li data-type="roverchito" data-if="origen_respuesta=a" data-mood="happy" data-scene="night" data-place="LABORATORIO DE LA NASA · ESA NOCHE">
+            <strong>Roverchito:</strong>
+            ¿Juntos? ¡Trato hecho!
+        </li>
+
+        <li data-type="roverchito" data-if="origen_respuesta=b" data-mood="happy" data-scene="night" data-place="LABORATORIO DE LA NASA · ESA NOCHE">
+            <strong>Roverchito:</strong>
+            ¡Buena idea! Mañana les preguntamos.
+        </li>
+
+        <li data-type="reto" data-reto="sintonizar" data-mood="neutral" data-scene="control" data-place="CONTROL DE MISIÓN · AL DÍA SIGUIENTE">
+            <strong>Reto:</strong>
+            Sintoniza la señal de Control de Misión.
         </li>
 
         <li data-type="control" data-mood="neutral" data-scene="control" data-place="CONTROL DE MISIÓN · AL DÍA SIGUIENTE">
             <strong>Control de Misión:</strong>
-            No podemos abrir tu archivo todavía. Pero las naves que enviamos
-            a Marte y al espacio profundo podrían saber de dónde vienes.
-            Muchas siguen allá, en silencio. Ve a visitarlas.
+            No podemos abrir tu archivo todavía. Pero las naves que enviamos a Marte
+            y al espacio profundo podrían saber de dónde vienes. Ve a visitarlas.
         </li>
 
         <li data-type="roverchito" data-mood="happy" data-scene="space" data-place="RUMBO A LA MISIÓN" data-note="TE PREGUNTA A TI">

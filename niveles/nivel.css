@@ -326,3 +326,8 @@ body.level::after {
         letter-spacing: 0.08em;
     }
 }
+
+.level-step button:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}

@@ -1,5 +1,6 @@
 /* =========================================
    ROVERCHITO — personaje guía
+   Diseño original: Yanni Aglaee Perales Renteria (dibujado a mano, vectorizado)
    Vector (SVG) en estilo pixel art, dibujado sobre
    una cuadrícula de 16 × 22 unidades.
 

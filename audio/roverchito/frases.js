@@ -51,7 +51,7 @@ window.ROVERCHITO_FRASES = [
   },
   {
     "archivo": "origen-cine-script-06.mp3",
-    "texto": "¿Vienes conmigo? ¡Te ayudo si me ayudas!",
+    "texto": "¿Vienes conmigo?",
     "origen": "index.html · cine-script",
     "listo": false
   },

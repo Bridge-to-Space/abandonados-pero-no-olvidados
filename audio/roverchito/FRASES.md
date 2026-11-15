@@ -30,7 +30,7 @@ las frases cuyo texto cambió pierden su marca y hay que regrabarlas.
 | ⬜ | `origen-cine-script-03.mp3` | Oye… ¿tú sabes quiénes son mis papás? |
 | ⬜ | `origen-cine-script-04.mp3` | ¿Juntos? ¡Trato hecho! |
 | ⬜ | `origen-cine-script-05.mp3` | ¡Buena idea! Mañana les preguntamos. |
-| ⬜ | `origen-cine-script-06.mp3` | ¿Vienes conmigo? ¡Te ayudo si me ayudas! |
+| ⬜ | `origen-cine-script-06.mp3` | ¿Vienes conmigo? |
 | ⬜ | `spirit-escena-01.mp3` | ¡Hola! Soy Roverchito y hoy te voy a contar la historia de Spirit, un rover que viajó hasta Marte. Estamos en 2003: tras años de trabajo, está listo para despegar. Antes de irnos, ¿qué hacemos? |
 | ⬜ | `spirit-escena-02.mp3` | ¡Siete meses después, llegamos! Spirit entra en la atmósfera de Marte a toda velocidad. Para aterrizar entero en el cráter Gusev necesito tu ayuda: paracaídas, bolsas de aire y retrocohetes, cada uno en el momento exacto. ¿Listo? |
 | ⬜ | `spirit-escena-03.mp3` | ¡Lo logramos! Spirit ya manda sus primeras fotos a la Tierra. Su misión debía durar solo 90 soles, así que cada día cuenta. ¿Por dónde empezamos? |

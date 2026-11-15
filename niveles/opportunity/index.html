@@ -34,7 +34,7 @@
             <p class="level-sub">El gemelo de Spirit · Meridiani Planum · 2004 – 2018</p>
             <p class="level-lead">
                 Tenía una misión de apenas 90 días marcianos… ¡y terminó trabajando
-                casi 15 años terrestres! Roverchito te cuenta la historia del rover
+                casi 15 años terrestres! Acompaña a Roverchito a conocer al rover
                 que superó todas las expectativas.
             </p>
         </div>
@@ -54,7 +54,7 @@
             <div>
                 <span class="level-step-kind">CINEMÁTICA</span>
                 <h2>Una misión de 90 días</h2>
-                <p>Quién fue Opportunity, dónde aterrizó, qué descubrió… y cómo se atascó en la arena en 2005.</p>
+                <p>Roverchito encuentra a Opportunity en Meridiani Planum y revive con él sus descubrimientos… hasta que la arena lo atrapa en 2005.</p>
             </div>
             <button class="primary-btn" type="button" onclick="Cinematica.abrir('op-llegada')">▶ VER</button>
         </article>
@@ -74,7 +74,7 @@
             <div>
                 <span class="level-step-kind">CINEMÁTICA · DESPUÉS DEL MINIJUEGO</span>
                 <h2>Casi 15 años en Marte</h2>
-                <p>Tormentas, récords, su última comunicación y su legado. Al final, Roverchito guarda la nota 3 de la melodía.</p>
+                <p>Tormentas, récords y su última señal. Al final, Opportunity le entrega a Roverchito la nota 3 de la melodía.</p>
             </div>
             <button class="secondary-btn" type="button" onclick="Cinematica.abrir('op-despedida')">▶ VER</button>
         </article>
@@ -92,7 +92,7 @@
             <li>Su última comunicación fue el 10 de junio de 2018, durante una enorme tormenta de polvo. La NASA anunció el final de la misión el 13 de febrero de 2019.</li>
         </ul>
         <p class="level-sources">
-            Historia de las cinemáticas: Joel Vazquez Juarez ·
+            Historia original: Joel Vazquez Juarez ·
             Fuentes:
             <a href="https://science.nasa.gov/mission/mer-opportunity/" target="_blank" rel="noopener noreferrer">NASA Science — Opportunity</a> ·
             <a href="https://www.nasa.gov/news-release/nasas-record-setting-opportunity-rover-mission-on-mars-comes-to-end/" target="_blank" rel="noopener noreferrer">NASA — Fin de la misión</a> ·
@@ -209,192 +209,121 @@
 
 <!-- =========================================
      CINEMÁTICA 1 · UNA MISIÓN DE 90 DÍAS
-     Historia: Joel Vazquez Juarez (Diálogo 1, primera parte)
+     Basada en la historia de Joel Vazquez Juarez (Diálogo 1),
+     contada como escena: Opportunity narra su propia historia.
 ========================================= -->
 <ol class="cine-script" id="op-script-1">
 
-    <li data-type="roverchito" data-mood="happy" data-scene="lab" data-place="LABORATORIO DE LA NASA">
-        <strong>Roverchito:</strong>
-        ¡Holaaaa, explorador! ¡Qué gusto tenerte por aquí! Soy Roverto, pero mis
-        circuitos prefieren que me digas Roverchito. Seré tu compañero durante esta
-        aventura por Marte.
+    <li data-type="narrador" data-solo data-scene="space" data-place="TIERRA · 7 DE JULIO DE 2003">
+        <strong>Narrador:</strong>
+        El 7 de julio de 2003, un rover del tamaño de un carrito de golf despega
+        rumbo a Marte. Su nombre es Opportunity: «oportunidad» en inglés.
     </li>
 
-    <li data-type="roverchito" data-mood="happy" data-scene="lab" data-place="LABORATORIO DE LA NASA">
-        <strong>Roverchito:</strong>
-        Hoy conoceremos la historia de un explorador espacial que hizo algo
-        impresionante: tenía una misión de apenas 90 días marcianos, ¡pero terminó
-        trabajando durante casi 15 años terrestres! ¿Estás listo para conocerlo?
+    <li data-type="narrador" data-solo data-scene="mars-day" data-place="CRÁTER EAGLE, MERIDIANI PLANUM · 24 DE ENERO DE 2004">
+        <strong>Narrador:</strong>
+        El 24 de enero de 2004 aterriza en Meridiani Planum, dentro de un pequeño
+        cráter llamado Eagle. Tiene una misión de apenas 90 días marcianos.
     </li>
 
-    <li data-type="jugador" data-mood="happy" data-scene="lab" data-place="LABORATORIO DE LA NASA">
+    <li data-type="narrador" data-scene="mars-dusk" data-place="MERIDIANI PLANUM · MUCHOS AÑOS DESPUÉS">
+        <strong>Narrador:</strong>
+        Muchos años después, Roverchito llega a esa misma llanura. Opportunity
+        sigue ahí, cubierto de polvo.
+    </li>
+
+    <li data-type="roverchito" data-mood="happy" data-scene="mars-dusk" data-place="MERIDIANI PLANUM · MUCHOS AÑOS DESPUÉS">
+        <strong>Roverchito:</strong>
+        ¡Ahí está! … ¿Hola? ¿Opportunity?
+    </li>
+
+    <li data-type="memoria" data-scene="file" data-place="ESCANEO DE OPPORTUNITY"
+        data-name="ESCANEO DE OPPORTUNITY" data-file="REGISTRO · OPPORTUNITY"
+        data-loading="ESCANEANDO A OPPORTUNITY…" data-stamp="SIN SEÑAL" data-tone="alert">
+        <strong>Escaneo:</strong>
+        <span data-label="MISIÓN">MARS EXPLORATION ROVER</span> ·
+        <span data-label="GEMELO">SPIRIT</span> ·
+        <span data-label="PLANEADA">90 DÍAS MARCIANOS</span> ·
+        <span data-label="ÚLTIMA SEÑAL" data-alert>10 JUN 2018</span>
+    </li>
+
+    <li data-type="nave" data-name="OPPORTUNITY" data-weak data-mood="neutral" data-scene="mars-dusk" data-place="MERIDIANI PLANUM · MUCHOS AÑOS DESPUÉS">
+        <strong>Opportunity:</strong>
+        …¿Un visitante? ¡Vaya! Hace mucho que nadie pasaba por aquí. Aunque hay que
+        admitirlo: elegí un gran lugar para estacionarme. ¡Dentro de un cráter!
+    </li>
+
+    <li data-type="roverchito" data-mood="happy" data-scene="mars-dusk" data-place="MERIDIANI PLANUM · MUCHOS AÑOS DESPUÉS">
+        <strong>Roverchito:</strong>
+        Vengo a conocer tu historia. ¿Es cierto que tu misión era de solo 90 días?
+    </li>
+
+    <li data-type="nave" data-name="OPPORTUNITY" data-mood="happy" data-scene="mars-dusk" data-place="MERIDIANI PLANUM · MUCHOS AÑOS DESPUÉS">
+        <strong>Opportunity:</strong>
+        Noventa días marcianos, unos tres meses terrestres. Pero yo no estaba de
+        acuerdo con jubilarme tan pronto… ¡así que trabajé casi 15 años!
+    </li>
+
+    <li data-type="jugador" data-mood="happy" data-scene="mars-dusk" data-place="MERIDIANI PLANUM · MUCHOS AÑOS DESPUÉS">
         <strong>Tú:</strong>
-        ¡Por supuesto! ¡Vamos a explorar Marte!
+        ¡Casi 15 años! ¿Y qué hacías todo ese tiempo?
     </li>
 
-    <li data-type="roverchito" data-mood="happy" data-scene="mars-day" data-place="MARTE">
-        <strong>Roverchito:</strong>
-        ¡Esa es la actitud! Nuestro protagonista se llama Opportunity. Su nombre
-        significa «oportunidad» en inglés.
+    <li data-type="nave" data-name="OPPORTUNITY" data-mood="neutral" data-scene="mars-day" data-place="MERIDIANI PLANUM, MARTE">
+        <strong>Opportunity:</strong>
+        Exploraba la superficie, estudiaba rocas y suelos, y buscaba pruebas de que
+        el agua líquida estuvo en Marte hace muchísimo tiempo. Mi gemelo Spirit
+        hacía lo mismo, pero en otra región del planeta.
     </li>
 
-    <li data-type="roverchito" data-mood="neutral" data-scene="mars-day" data-place="MARTE">
-        <strong>Roverchito:</strong>
-        Fue un rover de la NASA diseñado para explorar la superficie de Marte,
-        estudiar sus rocas y suelos y buscar pruebas de que el agua líquida estuvo
-        presente en el planeta hace muchísimo tiempo.
+    <li data-type="nave" data-name="OPPORTUNITY" data-mood="neutral" data-scene="mars-day" data-place="MERIDIANI PLANUM, MARTE">
+        <strong>Opportunity:</strong>
+        Queríamos saber si existieron ambientes que pudieron favorecer la vida
+        microbiana. Ojo: no encontré vida… pero sí pistas de lugares que pudieron
+        favorecerla.
     </li>
 
-    <li data-type="roverchito" data-mood="happy" data-scene="mars-day" data-place="MARTE">
-        <strong>Roverchito:</strong>
-        Los científicos querían descubrir si existieron ambientes que pudieron
-        favorecer la vida microbiana. ¡Una misión bastante importante!
+    <li data-type="memoria" data-scene="file" data-place="CAJA DE RECUERDOS DE OPPORTUNITY"
+        data-name="RECUERDOS DE OPPORTUNITY" data-file="CAJA DE RECUERDOS · OPPORTUNITY"
+        data-loading="ABRIENDO RECUERDOS…" data-stamp="PISTAS DE AGUA ANTIGUA" data-tone="ok">
+        <strong>Recuerdos:</strong>
+        <span data-label="HALLAZGO">HEMATITA, UN MINERAL QUE PUEDE FORMARSE EN PRESENCIA DE AGUA</span> ·
+        <span data-label="ROCAS Y SUELOS">EVIDENCIAS DE ANTIGUOS AMBIENTES HÚMEDOS</span> ·
+        <span data-label="CRÁTERES">EAGLE · ENDURANCE · VICTORIA · ENDEAVOUR</span>
     </li>
 
-    <li data-type="jugador" data-mood="happy" data-scene="mars-day" data-place="MARTE">
-        <strong>Tú:</strong>
-        ¡Entonces Opportunity buscaba pistas sobre el pasado de Marte!
+    <li data-type="nave" data-name="OPPORTUNITY" data-mood="happy" data-scene="mars-day" data-place="CRÁTERES DE MERIDIANI PLANUM">
+        <strong>Opportunity:</strong>
+        En cada cráter estudié sus rocas y sus capas. Así los científicos pudieron
+        reconstruir cómo cambió la superficie de Marte con el tiempo.
     </li>
 
-    <li data-type="roverchito" data-mood="happy" data-scene="space" data-place="TIERRA · 7 DE JULIO DE 2003">
-        <strong>Roverchito:</strong>
-        ¡Exactamente! Y todo comenzó el 7 de julio de 2003, cuando fue lanzado desde la Tierra.
+    <li data-type="narrador" data-solo data-scene="mars-day" data-place="MERIDIANI PLANUM · 20 DE MARZO DE 2005">
+        <strong>Narrador:</strong>
+        El 20 de marzo de 2005, Opportunity recorre unos 220 metros en un solo día
+        marciano: un récord de distancia diaria para un rover en Marte.
     </li>
 
-    <li data-type="roverchito" data-mood="happy" data-scene="mars-day" data-place="CRÁTER EAGLE, MERIDIANI PLANUM · 24 DE ENERO DE 2004">
-        <strong>Roverchito:</strong>
-        Después de viajar por el espacio, aterrizó el 24 de enero de 2004 en
-        Meridiani Planum, una región de Marte. Para ser más precisos, llegó dentro
-        de un pequeño cráter llamado Eagle. ¡Vaya lugar para estacionarse!
+    <li data-type="nave" data-name="OPPORTUNITY" data-mood="happy" data-scene="mars-day" data-place="MERIDIANI PLANUM · 20 DE MARZO DE 2005">
+        <strong>Opportunity:</strong>
+        ¡Ese día nadie me alcanzaba!
     </li>
 
-    <li data-type="roverchito" data-mood="happy" data-scene="mars-day" data-place="CRÁTER EAGLE, MERIDIANI PLANUM">
-        <strong>Roverchito:</strong>
-        Por cierto, Opportunity tenía aproximadamente el tamaño de un carrito de golf.
+    <li data-type="narrador" data-solo data-scene="mars-day" data-place="MERIDIANI PLANUM · 2005">
+        <strong>Narrador:</strong>
+        Pero ese mismo año, durante uno de sus recorridos, varias de sus ruedas se
+        hunden en una zona de arena blanda. Opportunity queda atrapado.
     </li>
 
-    <li data-type="jugador" data-mood="happy" data-scene="mars-day" data-place="CRÁTER EAGLE, MERIDIANI PLANUM">
-        <strong>Tú:</strong>
-        ¡JAJAJA! ¿Y llegó solo a Marte?
+    <li data-type="nave" data-name="OPPORTUNITY" data-mood="sad" data-scene="mars-day" data-place="MERIDIANI PLANUM · 2005">
+        <strong>Opportunity:</strong>
+        Fue complicado. Los ingenieros de la NASA estudiaron con mucho cuidado cómo
+        liberarme… y tardaron unas seis semanas.
     </li>
 
-    <li data-type="roverchito" data-mood="happy" data-scene="mars-day" data-place="MARTE">
-        <strong>Roverchito:</strong>
-        ¡No exactamente! Opportunity tenía un rover gemelo llamado Spirit. Ambos
-        formaban parte de la misión Mars Exploration Rover de la NASA.
-    </li>
-
-    <li data-type="roverchito" data-mood="neutral" data-scene="mars-day" data-place="MARTE">
-        <strong>Roverchito:</strong>
-        Aunque eran prácticamente hermanos, aterrizaron en regiones diferentes de
-        Marte para investigar sus características. Su objetivo principal era
-        estudiar la historia del agua en el planeta rojo.
-    </li>
-
-    <li data-type="jugador" data-mood="happy" data-scene="mars-day" data-place="MARTE">
-        <strong>Tú:</strong>
-        ¡Qué interesante! ¿Y qué descubrieron durante sus exploraciones?
-    </li>
-
-    <li data-type="roverchito" data-mood="happy" data-scene="mars-day" data-place="MERIDIANI PLANUM, MARTE">
-        <strong>Roverchito:</strong>
-        ¡Aquí viene lo bueno! Opportunity encontró pruebas importantes de que el
-        agua líquida estuvo presente en Marte hace mucho tiempo. Uno de sus
-        descubrimientos fue la hematita, un mineral que puede formarse en presencia de agua.
-    </li>
-
-    <li data-type="roverchito" data-mood="neutral" data-scene="mars-day" data-place="MERIDIANI PLANUM, MARTE">
-        <strong>Roverchito:</strong>
-        También estudió rocas y suelos con minerales que aportaron evidencias de
-        antiguos ambientes húmedos.
-    </li>
-
-    <li data-type="memoria" data-scene="file" data-place="DESCUBRIMIENTOS DE OPPORTUNITY"
-        data-name="DESCUBRIMIENTOS DE OPPORTUNITY" data-file="REGISTRO · OPPORTUNITY"
-        data-loading="CARGANDO DESCUBRIMIENTOS…" data-stamp="PISTAS DE AGUA ANTIGUA" data-tone="ok">
-        <strong>Descubrimientos:</strong>
-        <span data-label="AGUA LÍQUIDA">PRUEBAS DE QUE ESTUVO PRESENTE HACE MUCHO TIEMPO</span> ·
-        <span data-label="HEMATITA">UN MINERAL QUE PUEDE FORMARSE EN PRESENCIA DE AGUA</span> ·
-        <span data-label="ROCAS Y SUELOS">EVIDENCIAS DE ANTIGUOS AMBIENTES HÚMEDOS</span>
-    </li>
-
-    <li data-type="jugador" data-mood="happy" data-scene="mars-day" data-place="MERIDIANI PLANUM, MARTE">
-        <strong>Tú:</strong>
-        ¡Entonces Marte pudo haber tenido condiciones muy diferentes a las actuales!
-    </li>
-
-    <li data-type="roverchito" data-mood="happy" data-scene="mars-day" data-place="MERIDIANI PLANUM, MARTE">
-        <strong>Roverchito:</strong>
-        ¡Así es! Sus investigaciones ayudaron a demostrar que algunas regiones de
-        Marte tuvieron condiciones que podrían haber sido adecuadas para la vida microbiana.
-    </li>
-
-    <li data-type="roverchito" data-mood="neutral" data-scene="mars-day" data-place="MERIDIANI PLANUM, MARTE">
-        <strong>Roverchito:</strong>
-        ¡Ojo! Eso no significa que haya encontrado vida, sino que encontró pistas
-        sobre ambientes que pudieron favorecerla.
-    </li>
-
-    <li data-type="jugador" data-mood="happy" data-scene="mars-day" data-place="MERIDIANI PLANUM, MARTE">
-        <strong>Tú:</strong>
-        ¿Y qué otros lugares pudo explorar?
-    </li>
-
-    <li data-type="roverchito" data-mood="happy" data-scene="mars-day" data-place="CRÁTERES DE MERIDIANI PLANUM">
-        <strong>Roverchito:</strong>
-        ¡Muchísimos! Opportunity estudió varios cráteres, entre ellos Eagle,
-        Endurance, Victoria y Endeavour.
-    </li>
-
-    <li data-type="roverchito" data-mood="neutral" data-scene="mars-day" data-place="CRÁTERES DE MERIDIANI PLANUM">
-        <strong>Roverchito:</strong>
-        Al observar sus rocas y diferentes capas, los científicos pudieron
-        investigar cómo había cambiado la superficie marciana a lo largo del
-        tiempo y reconstruir parte de su historia geológica.
-    </li>
-
-    <li data-type="jugador" data-mood="happy" data-scene="mars-day" data-place="CRÁTERES DE MERIDIANI PLANUM">
-        <strong>Tú:</strong>
-        ¡Vaya que recorrió bastante terreno!
-    </li>
-
-    <li data-type="roverchito" data-mood="happy" data-scene="mars-day" data-place="MERIDIANI PLANUM, MARTE">
-        <strong>Roverchito:</strong>
-        ¡Y eso que su misión estaba planeada para durar solamente 90 días marcianos,
-        equivalentes aproximadamente a tres meses terrestres! Pero Opportunity no
-        parecía estar de acuerdo con jubilarse tan pronto.
-    </li>
-
-    <li data-type="roverchito" data-mood="happy" data-scene="mars-day" data-place="MERIDIANI PLANUM, MARTE">
-        <strong>Roverchito:</strong>
-        Terminó funcionando durante casi 15 años terrestres. ¡Eso sí que es
-        compromiso con el trabajo!
-    </li>
-
-    <li data-type="jugador" data-mood="neutral" data-scene="mars-day" data-place="MERIDIANI PLANUM, MARTE">
-        <strong>Tú:</strong>
-        ¿Y nunca tuvo problemas durante tanto tiempo?
-    </li>
-
-    <li data-type="roverchito" data-mood="sad" data-scene="mars-day" data-place="MERIDIANI PLANUM · 2005">
-        <strong>Roverchito:</strong>
-        ¡JA! ¡Ojalá todo hubiera sido tan sencillo! En 2005 tuvo un problema
-        bastante complicado. Durante sus desplazamientos quedó atrapado en una zona
-        de arena blanda y varias de sus ruedas se hundieron.
-    </li>
-
-    <li data-type="roverchito" data-mood="neutral" data-scene="mars-day" data-place="MERIDIANI PLANUM · 2005">
-        <strong>Roverchito:</strong>
-        Los ingenieros de la NASA tuvieron que estudiar cuidadosamente cómo
-        liberarlo y, después de aproximadamente seis semanas de trabajo,
-        consiguieron sacarlo.
-    </li>
-
-    <!-- Puente al minijuego (agregado para conectar con el juego) -->
     <li data-type="roverchito" data-mood="happy" data-scene="mars-day" data-place="MERIDIANI PLANUM · 2005" data-note="TE PREGUNTA A TI">
         <strong>Roverchito:</strong>
-        ¿Y si intentamos lo mismo que los ingenieros? ¡Ayúdame a sacar a
-        Opportunity de la arena!
+        ¿Y si lo revivimos? ¡Ayúdame a sacar a Opportunity de la arena!
     </li>
 
 </ol>
@@ -402,72 +331,44 @@
 
 <!-- =========================================
      CINEMÁTICA 2 · CASI 15 AÑOS EN MARTE
-     Historia: Joel Vazquez Juarez (Diálogo 1, segunda parte)
+     Basada en la historia de Joel Vazquez Juarez (Diálogo 1)
      (se ve después del minijuego)
 ========================================= -->
 <ol class="cine-script" id="op-script-2">
 
-    <li data-type="jugador" data-mood="happy" data-scene="mars-day" data-place="MERIDIANI PLANUM · 2005">
-        <strong>Tú:</strong>
-        ¡Seis semanas! ¿Y pudo continuar explorando?
+    <li data-type="narrador" data-scene="mars-day" data-place="MERIDIANI PLANUM · 2005">
+        <strong>Narrador:</strong>
+        ¡Lo lograste! Opportunity sale de la arena y sigue su camino.
     </li>
 
-    <li data-type="roverchito" data-mood="neutral" data-scene="storm" data-place="MERIDIANI PLANUM · 2007">
-        <strong>Roverchito:</strong>
-        ¡Claro que sí! Pero en 2007 apareció otro obstáculo: las tormentas de
-        polvo. Estas redujeron la cantidad de luz solar que llegaba a sus paneles
-        solares, disminuyendo la energía disponible para funcionar.
+    <li data-type="nave" data-name="OPPORTUNITY" data-mood="happy" data-scene="mars-day" data-place="MERIDIANI PLANUM · 2005">
+        <strong>Opportunity:</strong>
+        ¡Libre otra vez! Aunque no fue la última vez que me tocó resistir…
     </li>
 
-    <li data-type="roverchito" data-mood="sad" data-scene="storm" data-place="MERIDIANI PLANUM · 2007">
-        <strong>Roverchito:</strong>
-        Por eso, el equipo tuvo que suspender temporalmente las actividades
-        científicas hasta que las condiciones mejoraran.
+    <li data-type="narrador" data-solo data-scene="storm" data-place="MERIDIANI PLANUM · 2007">
+        <strong>Narrador:</strong>
+        En 2007, grandes tormentas de polvo reducen la luz que llega a sus paneles
+        solares. Con menos energía, el equipo suspende por un tiempo sus
+        actividades científicas.
     </li>
 
-    <li data-type="jugador" data-mood="neutral" data-scene="storm" data-place="MERIDIANI PLANUM · 2007">
-        <strong>Tú:</strong>
-        ¡Eso debió complicar muchísimo la misión!
+    <li data-type="nave" data-name="OPPORTUNITY" data-mood="neutral" data-scene="storm" data-place="MERIDIANI PLANUM · 2007">
+        <strong>Opportunity:</strong>
+        Con los años también tuve problemas con algunas ruedas y componentes
+        electrónicos. Pero los ingenieros siempre encontraban una solución para
+        mantenerme funcionando.
     </li>
 
-    <li data-type="roverchito" data-mood="neutral" data-scene="mars-day" data-place="MERIDIANI PLANUM, MARTE">
-        <strong>Roverchito:</strong>
-        ¡Ni te imaginas! Además, durante los años de exploración también presentó
-        problemas con algunas de sus ruedas y componentes electrónicos. Sin
-        embargo, los ingenieros encontraron soluciones para mantenerlo funcionando.
-    </li>
-
-    <li data-type="roverchito" data-mood="happy" data-scene="mars-day" data-place="MERIDIANI PLANUM, MARTE">
-        <strong>Roverchito:</strong>
-        Y aquí viene un dato curioso: en ocasiones, los propios vientos marcianos
-        limpiaban el polvo acumulado en sus paneles solares, permitiéndole recibir
-        más luz y recuperar parte de su capacidad energética. ¡Hasta el viento le
-        echaba una mano!
+    <li data-type="nave" data-name="OPPORTUNITY" data-mood="happy" data-scene="mars-day" data-place="MERIDIANI PLANUM, MARTE">
+        <strong>Opportunity:</strong>
+        ¿Y sabes qué? A veces el viento marciano limpiaba el polvo de mis paneles,
+        y así recuperaba energía. ¡Hasta el viento me echaba una mano!
     </li>
 
     <li data-type="jugador" data-mood="happy" data-scene="mars-day" data-place="MERIDIANI PLANUM, MARTE">
         <strong>Tú:</strong>
-        ¡JAJAJA! ¿Y cuál fue uno de sus mayores logros?
-    </li>
-
-    <li data-type="roverchito" data-mood="happy" data-scene="mars-day" data-place="MERIDIANI PLANUM · 20 DE MARZO DE 2005">
-        <strong>Roverchito:</strong>
-        ¡Prepárate para este dato! El 20 de marzo de 2005, Opportunity recorrió
-        aproximadamente 220 metros en un solo día marciano. ¡Estableció un récord
-        de desplazamiento diario para un rover en Marte!
-    </li>
-
-    <li data-type="jugador" data-mood="happy" data-scene="mars-day" data-place="MERIDIANI PLANUM, MARTE">
-        <strong>Tú:</strong>
-        ¡Eso es muchísimo para un robot explorador!
-    </li>
-
-    <li data-type="roverchito" data-mood="happy" data-scene="mars-day" data-place="MERIDIANI PLANUM, MARTE">
-        <strong>Roverchito:</strong>
-        ¡Y hay más! Durante toda su misión recorrió aproximadamente 45.16
-        kilómetros. ¡Superó la distancia de una maratón! También envió más de
-        217,000 imágenes a la Tierra, permitiendo que los científicos estudiaran
-        Marte con muchísimo detalle.
+        ¡JAJAJA! ¡Qué buena suerte!
     </li>
 
     <li data-type="memoria" data-scene="file" data-place="RÉCORDS DE OPPORTUNITY"
@@ -479,138 +380,82 @@
         <span data-label="IMÁGENES">MÁS DE 217,000 ENVIADAS A LA TIERRA</span>
     </li>
 
-    <li data-type="jugador" data-mood="happy" data-scene="mars-day" data-place="MERIDIANI PLANUM, MARTE">
-        <strong>Tú:</strong>
-        ¡Increíble! ¿Y todavía pudo seguir trabajando después de tantos récords?
+    <li data-type="nave" data-name="OPPORTUNITY" data-mood="happy" data-scene="mars-day" data-place="MERIDIANI PLANUM, MARTE">
+        <strong>Opportunity:</strong>
+        Más de 45 kilómetros, más que una maratón. Y más de 217,000 imágenes para
+        que los científicos estudiaran Marte con muchísimo detalle. ¡Vaya
+        currículum!, ¿no?
     </li>
 
-    <li data-type="roverchito" data-mood="sad" data-scene="storm" data-place="MARTE · JUNIO DE 2018">
+    <li data-type="roverchito" data-mood="happy" data-scene="mars-day" data-place="MERIDIANI PLANUM, MARTE">
         <strong>Roverchito:</strong>
-        ¡Sí! Pero en junio de 2018 ocurrió uno de los acontecimientos más difíciles
-        de su historia. Una enorme tormenta de polvo cubrió gran parte de Marte y
-        bloqueó la luz solar que Opportunity necesitaba para generar electricidad.
+        ¡Creo que hasta yo necesito actualizar mi programación para estar a tu altura!
     </li>
 
-    <li data-type="roverchito" data-mood="sad" data-scene="storm" data-place="MARTE · JUNIO DE 2018">
-        <strong>Roverchito:</strong>
-        Sin suficiente energía, sus operaciones se vieron afectadas y dejó de
-        comunicarse con la Tierra.
+    <li data-type="narrador" data-solo data-scene="storm" data-place="MARTE · JUNIO DE 2018">
+        <strong>Narrador:</strong>
+        En junio de 2018, una enorme tormenta de polvo cubre gran parte de Marte y
+        bloquea la luz que Opportunity necesita para generar electricidad.
     </li>
 
-    <li data-type="jugador" data-mood="sad" data-scene="storm" data-place="MARTE · JUNIO DE 2018">
-        <strong>Tú:</strong>
-        ¿Y esa fue su última comunicación?
+    <li data-type="nave" data-name="OPPORTUNITY" data-weak data-mood="sad" data-scene="storm" data-place="MARTE · JUNIO DE 2018">
+        <strong>Opportunity:</strong>
+        Todo se fue oscureciendo… y, sin energía, ya no pude hablar con la Tierra.
     </li>
 
-    <li data-type="roverchito" data-mood="sad" data-scene="mars-night" data-place="MARTE · 10 DE JUNIO DE 2018">
-        <strong>Roverchito:</strong>
-        Así es. El 10 de junio de 2018, Opportunity envió su última comunicación a
-        la Tierra. Después, la NASA intentó recuperar el contacto enviándole más de
-        mil comandos, pero nunca obtuvo respuesta.
+    <li data-type="narrador" data-solo data-scene="mars-night" data-place="MARTE · 10 DE JUNIO DE 2018">
+        <strong>Narrador:</strong>
+        El 10 de junio de 2018, Opportunity envía su última comunicación. Desde la
+        Tierra le mandan más de mil comandos, pero nunca obtienen respuesta.
     </li>
 
-    <li data-type="jugador" data-mood="sad" data-scene="mars-night" data-place="MARTE · 10 DE JUNIO DE 2018">
-        <strong>Tú:</strong>
-        ¡Qué triste! ¿Entonces ya no pudieron recuperarlo?
+    <li data-type="control" data-mood="sad" data-scene="control" data-place="CONTROL DE MISIÓN · 13 DE FEBRERO DE 2019">
+        <strong>Control de Misión:</strong>
+        Hoy, 13 de febrero de 2019, anunciamos oficialmente el final de la misión
+        Opportunity. La gran tormenta de 2018 le quitó su energía. Después de casi
+        15 años de exploración, su aventura llegó a su fin.
+    </li>
+
+    <li data-type="nave" data-name="OPPORTUNITY" data-mood="neutral" data-scene="mars-night" data-place="VALLE PERSEVERANCE, MARTE">
+        <strong>Opportunity:</strong>
+        Mi última parada fue el valle Perseverance. Lo estudiaban para entender
+        cómo pudo formarse con fluidos en el antiguo Marte. Y el frío que vino
+        después… no me dejó volver a despertar.
     </li>
 
     <li data-type="roverchito" data-mood="sad" data-scene="mars-night" data-place="VALLE PERSEVERANCE, MARTE">
         <strong>Roverchito:</strong>
-        Lamentablemente, no. Las condiciones ambientales posteriores, incluido el
-        frío marciano, probablemente contribuyeron a que no pudiera recuperarse.
+        Opportunity… ¿no te pone triste?
     </li>
 
-    <li data-type="roverchito" data-mood="neutral" data-scene="mars-night" data-place="VALLE PERSEVERANCE, MARTE">
-        <strong>Roverchito:</strong>
-        Su última zona de exploración fue Perseverance Valley, un valle que los
-        científicos estudiaron para comprender cómo pudo haberse formado mediante
-        procesos relacionados con fluidos en el antiguo Marte.
+    <li data-type="nave" data-name="OPPORTUNITY" data-mood="happy" data-scene="mars-dusk" data-place="VALLE PERSEVERANCE, MARTE">
+        <strong>Opportunity:</strong>
+        ¿Triste? Demostré que un rover puede seguir investigando mucho después del
+        tiempo para el que fue diseñado. Y mi récord de distancia duró años… hasta
+        que lo superó Perseverance, en octubre de 2026.
     </li>
 
-    <li data-type="jugador" data-mood="neutral" data-scene="mars-night" data-place="VALLE PERSEVERANCE, MARTE">
-        <strong>Tú:</strong>
-        ¿Y cuándo terminó oficialmente su misión?
+    <li data-type="nave" data-name="OPPORTUNITY" data-mood="happy" data-scene="mars-dusk" data-place="DEL CRÁTER EAGLE AL VALLE PERSEVERANCE">
+        <strong>Opportunity:</strong>
+        Del cráter Eagle al valle Perseverance, cada roca, cada cráter y cada imagen
+        escondían una pista sobre el pasado de Marte. Toma, amigo: es la última
+        señal que envié.
     </li>
 
-    <li data-type="roverchito" data-mood="neutral" data-scene="mars-night" data-place="13 DE FEBRERO DE 2019">
-        <strong>Roverchito:</strong>
-        El 13 de febrero de 2019, la NASA anunció oficialmente el final de la misión
-        Opportunity. Se considera que la gran tormenta de polvo de 2018 provocó la
-        pérdida de energía del rover. Después de casi 15 años de exploración, su
-        aventura había llegado a su fin.
-    </li>
-
-    <li data-type="jugador" data-mood="neutral" data-scene="mars-dusk" data-place="MERIDIANI PLANUM, MARTE">
-        <strong>Tú:</strong>
-        Aunque terminó su misión, dejó muchos descubrimientos importantes.
-    </li>
-
-    <li data-type="roverchito" data-mood="happy" data-scene="mars-dusk" data-place="MERIDIANI PLANUM, MARTE">
-        <strong>Roverchito:</strong>
-        ¡Exactamente, explorador! Su legado fue enorme. Gracias a Opportunity, los
-        científicos obtuvieron evidencias de que el agua líquida estuvo presente en
-        Marte hace muchísimo tiempo.
-    </li>
-
-    <li data-type="roverchito" data-mood="happy" data-scene="mars-dusk" data-place="MERIDIANI PLANUM, MARTE">
-        <strong>Roverchito:</strong>
-        Sus investigaciones sobre cráteres, minerales, rocas y suelos ayudaron a
-        comprender mejor la historia geológica del planeta.
-    </li>
-
-    <li data-type="roverchito" data-mood="happy" data-scene="mars-dusk" data-place="MERIDIANI PLANUM, MARTE">
-        <strong>Roverchito:</strong>
-        Además, su larga duración demostró que los rovers podían seguir realizando
-        investigaciones científicas mucho después del tiempo para el que habían sido
-        diseñados. Su recorrido de más de 45 kilómetros fue un récord de exploración
-        que posteriormente fue superado por el rover Perseverance en octubre de 2026.
-    </li>
-
-    <li data-type="jugador" data-mood="happy" data-scene="mars-dusk" data-place="MERIDIANI PLANUM, MARTE">
-        <strong>Tú:</strong>
-        ¡Definitivamente Opportunity hizo historia en Marte!
-    </li>
-
-    <li data-type="roverchito" data-mood="happy" data-scene="mars-dusk" data-place="DEL CRÁTER EAGLE AL VALLE PERSEVERANCE">
-        <strong>Roverchito:</strong>
-        ¡Y vaya historia! Desde su aterrizaje en el cráter Eagle hasta sus últimas
-        exploraciones en Perseverance Valley, Opportunity demostró que una misión
-        podía superar todas las expectativas. Fue un explorador que ayudó a cambiar
-        lo que sabíamos sobre Marte.
-    </li>
-
-    <li data-type="roverchito" data-mood="happy" data-scene="mars-dusk" data-place="MERIDIANI PLANUM, MARTE">
-        <strong>Roverchito:</strong>
-        Y bueno, explorador, antes de terminar quiero contarte algo: Opportunity y
-        Spirit eran gemelos, tenía el tamaño de un carrito de golf, su nombre
-        significaba «oportunidad» y hasta consiguió recorrer 220 metros en un solo
-        día marciano. ¡Vaya currículum! Creo que hasta yo necesito actualizar mi
-        programación para estar a su altura.
-    </li>
-
-    <li data-type="jugador" data-mood="happy" data-scene="mars-dusk" data-place="MERIDIANI PLANUM, MARTE">
-        <strong>Tú:</strong>
-        ¡Gracias por contarme su historia, Roverchito!
-    </li>
-
-    <!-- Nota de la melodía (agregada para conectar con la historia general) -->
     <li data-type="nota" data-scene="space" data-place="NOTA DE LA MELODÍA">
         <strong>Nota:</strong>
-        La última señal de Opportunity se guarda en la memoria de Roverchito:
-        nota 3 de 5 de la melodía.
+        Roverchito recibió la nota 3 de 5 de la melodía.
     </li>
 
-    <li data-type="roverchito" data-mood="happy" data-scene="space" data-place="FIN DE LA TRANSMISIÓN">
+    <li data-type="roverchito" data-mood="happy" data-scene="mars-dusk" data-place="MERIDIANI PLANUM, MARTE">
         <strong>Roverchito:</strong>
-        ¡Ha sido un placer, explorador! Recuerda que cada roca, cada cráter y cada
-        imagen pueden esconder una pista sobre el pasado de otro mundo.
+        Gracias, Opportunity. Terminaste tu misión… pero tus descubrimientos nos
+        siguen ayudando a explorar el universo.
     </li>
 
-    <li data-type="roverchito" data-mood="happy" data-scene="space" data-place="FIN DE LA TRANSMISIÓN">
-        <strong>Roverchito:</strong>
-        Opportunity terminó su misión, pero sus descubrimientos siguen ayudándonos a
-        explorar el universo. ¡Fin de la transmisión! ¡Nos vemos en la próxima
-        aventura espacial!
+    <li data-type="narrador" data-scene="mars-night" data-place="MERIDIANI PLANUM, MARTE">
+        <strong>Narrador:</strong>
+        Opportunity vuelve a dormir bajo el cielo de Marte. Abandonado, pero no olvidado.
     </li>
 
 </ol>

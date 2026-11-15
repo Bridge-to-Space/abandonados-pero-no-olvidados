@@ -16,6 +16,7 @@
      data-place  dónde ocurre (barra superior)
      data-note   etiqueta junto al nombre (por ejemplo "TE PREGUNTA A TI")
      data-if     "clave=valor": la escena solo aparece si el usuario eligió ese valor
+     data-solo   escena del pasado: Roverchito no aparece y la nave invitada se ilumina
      nave:      data-name (nombre), data-weak (señal débil)
      memoria:   data-name, data-file, data-loading, data-stamp, data-tone (alert | ok),
                 y dentro <span data-label="…" data-alert>valor</span> por dato
@@ -78,6 +79,7 @@ const Cinematica = (() => {
                 note: d.note || "",
                 name: d.name || "",
                 weak: "weak" in d,
+                solo: "solo" in d,
                 cond: d.if || "",
                 file: d.file || "ARCHIVO · ROVERCHITO.SYS",
                 loading: d.loading || "ACCEDIENDO A LA MEMORIA…",
@@ -304,6 +306,7 @@ const Cinematica = (() => {
             root.dataset.scene = s.scene;
             root.classList.remove("is-alert", "is-ok", "is-weak");
             if (s.weak) root.classList.add("is-weak");
+            root.classList.toggle("is-solo", s.solo);
             els.bg.dataset.scene = s.scene;
 
             if (els.place.textContent !== s.place) {

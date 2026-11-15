@@ -1,6 +1,6 @@
 /* =========================================
    PARADA 3 · OPPORTUNITY
-   Historia de las cinemáticas: Joel Vazquez Juarez
+   Historia original: Joel Vazquez Juarez (adaptada como escenas)
    Registra las cinemáticas del nivel y guarda el progreso.
    (El minijuego se agregará en la siguiente etapa.)
 ========================================= */

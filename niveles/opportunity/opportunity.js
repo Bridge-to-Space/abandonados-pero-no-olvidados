@@ -2,12 +2,13 @@
    PARADA 3 · OPPORTUNITY
    Historia original: Joel Vazquez Juarez (adaptada como escenas)
    Registra las cinemáticas del nivel y guarda el progreso.
-   (El minijuego se agregará en la siguiente etapa.)
+   El minijuego está en juego.js; la cinemática final se desbloquea al ganarlo.
 ========================================= */
 (() => {
     const KEYS = {
         llegada: "opportunity_llegada_vista",
         nota: "opportunity_nota",                 /* lo lee el mapa de la misión */
+        juego: "opportunity_juego",               /* estrellas del minijuego */
         despedida: "opportunity_despedida_vista"
     };
 
@@ -22,7 +23,30 @@
             if (step) step.classList.toggle("is-done", !!on);
         };
         done("step-1", store.get(KEYS.llegada));
+        done("step-2", store.get(KEYS.juego));
         done("step-3", store.get(KEYS.despedida));
+
+        /* La cinemática final se ve después de ganar el minijuego */
+        const won = !!store.get(KEYS.juego);
+        const final = document.getElementById("play-final");
+        const step3 = document.getElementById("step-3");
+        if (final) {
+            final.disabled = !won;
+            final.textContent = won ? "▶ VER" : "🔒 GANA EL MINIJUEGO";
+        }
+        if (step3) step3.classList.toggle("is-locked", !won);
+
+        const play = document.getElementById("play-game");
+        if (play) play.textContent = won ? "↻ JUGAR DE NUEVO" : "▶ JUGAR";
+    }
+
+    function openGame() {
+        OpportunityJuego.abrir({
+            onWin: () => {
+                markSteps();
+                Cinematica.abrir("op-despedida");
+            }
+        });
     }
 
     function init() {
@@ -38,17 +62,7 @@
             guest: "op-sprite",
             guestColor: "#fb923c",
             endActions: [
-                {
-                    label: "IR AL MINIJUEGO", primary: true,
-                    onClick: () => {
-                        const step = document.getElementById("step-2");
-                        if (!step) return;
-                        step.scrollIntoView({ behavior: "smooth", block: "center" });
-                        step.classList.remove("is-flash");
-                        void step.offsetWidth;
-                        step.classList.add("is-flash");
-                    }
-                },
+                { label: "IR AL MINIJUEGO", primary: true, onClick: openGame },
                 { label: "VER DE NUEVO", replay: true }
             ],
             onEnd: markSteps
@@ -67,6 +81,9 @@
             ],
             onEnd: markSteps
         });
+
+        const play = document.getElementById("play-game");
+        if (play) play.addEventListener("click", openGame);
 
         markSteps();
     }

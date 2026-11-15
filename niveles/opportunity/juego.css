@@ -1,0 +1,537 @@
+/* =========================================
+   MINIJUEGO · SALVAR A OPPORTUNITY
+========================================= */
+
+.opg {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto auto;
+
+    color: var(--foreground);
+    background: #05060a;
+
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.opg[hidden] {
+    display: none;
+}
+
+.opg.is-open {
+    opacity: 1;
+}
+
+/* ---------- Barra superior ---------- */
+.opg-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+
+    padding: 14px clamp(16px, 4vw, 40px);
+
+    background: #000;
+}
+
+.opg-title {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    color: #fb923c;
+}
+
+.opg-close {
+    flex: none;
+    width: 36px;
+    height: 36px;
+
+    color: #fff;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* ---------- Escena ---------- */
+.opg-stage {
+    position: relative;
+    overflow: hidden;
+    min-height: 180px;
+}
+
+.opg-sky {
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at 78% 22%, rgba(253, 186, 116, 0.4), transparent 26%),
+        linear-gradient(180deg, #7c2d12 0%, #c2410c 55%, #9a3412 100%);
+    transition: filter 0.6s ease;
+}
+
+.opg[data-phase="tormenta"] .opg-sky {
+    filter: brightness(0.55) saturate(0.8);
+}
+
+/* Capa de polvo (más espesa en la tormenta) */
+.opg-dust {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    opacity: 0;
+    pointer-events: none;
+
+    background:
+        repeating-linear-gradient(100deg, rgba(251, 146, 60, 0.12) 0 2px, transparent 2px 24px),
+        radial-gradient(circle at 50% 40%, rgba(180, 83, 9, 0.55), rgba(124, 45, 18, 0.75));
+    background-size: 240px 100%, 100% 100%;
+    animation: opgDust 1.4s linear infinite;
+}
+
+.opg[data-phase="arena"] .opg-dust {
+    opacity: 0 !important;
+}
+
+.opg-ground {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 34%;
+    z-index: 1;
+
+    background: linear-gradient(180deg, #92400e, #451a03);
+    border-top: 2px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Duna de arena blanda (fase 1) */
+.opg-sand {
+    position: absolute;
+    left: 6%;
+    bottom: 22%;
+    width: 46%;
+    height: 22%;
+    z-index: 4;
+
+    background: radial-gradient(ellipse at 50% 100%, #d97706 0%, #b45309 55%, transparent 72%);
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+    transition: opacity 0.6s ease;
+}
+
+.opg[data-phase="tormenta"] .opg-sand {
+    opacity: 0;
+}
+
+/* El rover: se mueve con --x y se hunde con --sink */
+.opg-rover {
+    --x: 0%;
+    --sink: 0.35;
+
+    position: absolute;
+    left: calc(8% + var(--x));
+    bottom: calc(26% - var(--sink) * 9%);
+    z-index: 3;
+
+    width: clamp(160px, 26vw, 300px);
+
+    transition: left 0.5s cubic-bezier(0.2, 0.8, 0.3, 1), bottom 0.5s ease;
+    filter: sepia(0.35) saturate(0.85);
+}
+
+.opg-rover svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+}
+
+.opg-rover.is-push svg {
+    animation: opgPush 0.35s ease-out;
+}
+
+.opg.is-fallo .opg-rover svg {
+    animation: opgSlip 0.4s ease-in-out;
+}
+
+/* Ráfagas de viento (fase 2) */
+.opg-gusts {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+}
+
+.opg-gust {
+    position: absolute;
+
+    width: 64px;
+    height: 64px;
+
+    font-size: 40px;
+    line-height: 1;
+
+    background: rgba(255, 255, 255, 0.12);
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    cursor: pointer;
+
+    animation: opgGust 2.6s ease-in-out forwards;
+}
+
+.opg-gust:hover,
+.opg-gust:focus-visible {
+    background: rgba(239, 255, 105, 0.25);
+    border-color: var(--primary);
+}
+
+.opg-gust.is-caught {
+    animation: opgCaught 0.4s ease-out forwards;
+}
+
+/* ---------- Indicadores ---------- */
+.opg-hud {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px;
+
+    padding: 12px clamp(16px, 4vw, 40px);
+
+    background: #0a0c12;
+    border-top: 1px solid var(--border);
+}
+
+.opg-stat {
+    display: grid;
+    gap: 6px;
+}
+
+.opg-stat > span {
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    color: var(--muted-foreground);
+}
+
+.opg-days strong {
+    font-family: var(--font-mono);
+    font-size: 20px;
+    font-variant-numeric: tabular-nums;
+    color: #fff;
+}
+
+.opg-bar {
+    height: 10px;
+    overflow: hidden;
+
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 999px;
+}
+
+.opg-bar i {
+    display: block;
+    width: 0;
+    height: 100%;
+    border-radius: 999px;
+    transition: width 0.3s ease;
+}
+
+.opg-bar.is-good i { background: var(--primary); }
+.opg-bar.is-bad i { background: #f87171; }
+.opg-bar.is-energy i { background: #38bdf8; }
+
+.opg.is-low .opg-bar.is-energy i {
+    background: #f87171;
+    animation: cineBlink 0.8s steps(2, end) infinite;
+}
+
+/* ---------- Panel inferior ---------- */
+.opg-panel {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+    align-items: center;
+    gap: 20px;
+
+    padding: 16px clamp(16px, 4vw, 40px) 22px;
+
+    background: #0a0c12;
+}
+
+.opg-guide {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.opg-guide-face {
+    flex: none;
+    width: 56px;
+}
+
+.opg-guide-face svg {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.opg-guide-text {
+    margin: 0;
+    padding: 10px 14px;
+
+    font-size: 14px;
+    line-height: 1.45;
+
+    background: #15190b;
+    border: 1px solid rgba(239, 255, 105, 0.45);
+    border-radius: 14px;
+}
+
+.opg-controls {
+    display: grid;
+    gap: 10px;
+    justify-items: center;
+}
+
+.opg-help {
+    margin: 0;
+    font-size: 12px;
+    color: var(--muted-foreground);
+    text-align: center;
+}
+
+/* Medidor de tracción (fase 1) */
+.opg-meter {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    height: 26px;
+
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 999px;
+}
+
+.opg-zone {
+    position: absolute;
+    top: 2px;
+    bottom: 2px;
+
+    background: rgba(132, 204, 22, 0.35);
+    border: 1px solid #84cc16;
+    border-radius: 999px;
+    transition: left 0.3s ease, width 0.3s ease;
+}
+
+.opg-zone b {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 18%;
+
+    background: rgba(239, 255, 105, 0.6);
+    transform: translateX(-50%);
+    border-radius: 999px;
+}
+
+.opg-needle {
+    position: absolute;
+    top: -6px;
+    bottom: -6px;
+    width: 4px;
+
+    background: #fff;
+    border-radius: 2px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    transform: translateX(-50%);
+}
+
+.opg-action {
+    padding: 14px 28px;
+    font-size: 14px;
+}
+
+.opg.is-perfecto .opg-meter { box-shadow: 0 0 0 3px rgba(239, 255, 105, 0.5); }
+.opg.is-fallo .opg-meter { animation: cineShake 0.4s ease-in-out; }
+
+/* Modos (fase 2) */
+.opg-modes {
+    display: flex;
+    gap: 10px;
+}
+
+.opg-mode {
+    padding: 12px 20px;
+
+    color: #fff;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+
+    background: rgba(255, 255, 255, 0.06);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.opg-mode.is-on[data-mode="ahorro"] {
+    border-color: #38bdf8;
+    background: rgba(56, 189, 248, 0.15);
+}
+
+.opg-mode.is-on[data-mode="ciencia"] {
+    border-color: var(--primary);
+    background: rgba(239, 255, 105, 0.15);
+}
+
+/* ---------- Tarjetas (inicio, fases, resultado) ---------- */
+.opg-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 20;
+
+    display: grid;
+    place-items: center;
+    padding: 20px;
+
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+}
+
+.opg-overlay[hidden] {
+    display: none;
+}
+
+.opg-card {
+    width: min(520px, 100%);
+    padding: 28px;
+
+    text-align: center;
+
+    background: var(--popover);
+    border: 1px solid rgba(251, 146, 60, 0.5);
+    border-radius: var(--radius-xl);
+    box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.9);
+
+    animation: cineCaptionIn 0.4s ease-out;
+}
+
+.opg-kicker {
+    display: block;
+    margin-bottom: 8px;
+
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    color: #fb923c;
+}
+
+.opg-card h3 {
+    margin: 0 0 10px;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.opg-card p {
+    margin: 0;
+    color: var(--muted-foreground);
+    line-height: 1.6;
+}
+
+.opg-card p strong {
+    color: #fff;
+}
+
+.opg-card-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+
+    margin-top: 20px;
+}
+
+.opg-card-actions button {
+    padding: 12px 20px;
+}
+
+.opg-stars {
+    margin-bottom: 8px;
+    font-size: 40px;
+    letter-spacing: 6px;
+    color: var(--primary);
+}
+
+/* ---------- Animaciones ---------- */
+@keyframes opgDust {
+    from { background-position: 0 0, 0 0; }
+    to { background-position: 240px 0, 0 0; }
+}
+
+@keyframes opgPush {
+    0% { transform: translateX(0); }
+    40% { transform: translateX(6px) rotate(-1deg); }
+    100% { transform: translateX(0); }
+}
+
+@keyframes opgSlip {
+    0%, 100% { transform: translateX(0) rotate(0); }
+    25% { transform: translateX(-5px) rotate(1.5deg); }
+    75% { transform: translateX(5px) rotate(-1.5deg); }
+}
+
+@keyframes opgGust {
+    0% { opacity: 0; transform: scale(0.4) rotate(0deg); }
+    15% { opacity: 1; transform: scale(1) rotate(90deg); }
+    80% { opacity: 1; transform: scale(1) rotate(540deg); }
+    100% { opacity: 0; transform: scale(0.6) rotate(720deg); }
+}
+
+@keyframes opgCaught {
+    to { opacity: 0; transform: scale(1.8); }
+}
+
+/* ---------- Pantallas angostas ---------- */
+@media (max-width: 760px) {
+    .opg-hud {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .opg-panel {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .opg-guide-text {
+        font-size: 13px;
+    }
+
+    .opg-title {
+        font-size: 9px;
+        letter-spacing: 0.1em;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .opg-dust,
+    .opg-rover.is-push svg,
+    .opg.is-fallo .opg-rover svg,
+    .opg-gust {
+        animation: none;
+    }
+}
+
+/* Celular: rover más grande y duna más baja para que se vea hundido, no tapado */
+@media (max-width: 760px) {
+    .opg-rover {
+        width: 54vw;
+        left: calc(4% + var(--x) * 0.9);
+    }
+
+    .opg-sand {
+        left: 0;
+        width: 70%;
+        height: 12%;
+        bottom: 27%;
+    }
+}
